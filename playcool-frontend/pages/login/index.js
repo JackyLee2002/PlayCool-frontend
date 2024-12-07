@@ -70,7 +70,7 @@ const LoginPage = () => {
         </form>
         <Link href="/register">
           <Button color="secondary" sx={{ mt: 2 }}>
-            Don't have an account? Register
+            Don&apos;t have an account? Register
           </Button>
         </Link>
       </Box>
