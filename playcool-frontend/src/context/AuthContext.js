@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { Alert, Snackbar } from "@mui/material";
 
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,51 +20,73 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const fetchUserInfo = async (token) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch user info");
       }
-    );
-    const data = await response.json();
-    setUser(data);
+      const data = await response.json();
+      setUser(data);
+    } catch (err) {
+      setError(err.message);
+      setOpen(true);
+    }
   };
 
   const login = async (username, password) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Login failed");
       }
-    );
-    const data = await response.json();
-    if (data.token) {
-      setToken(data.token);
-      localStorage.setItem("token", data.token);
-      await fetchUserInfo(data.token);
-      router.push("/");
+      const data = await response.json();
+      if (data.token) {
+        setToken(data.token);
+        localStorage.setItem("token", data.token);
+        await fetchUserInfo(data.token);
+        router.push("/");
+      }
+    } catch (err) {
+      setError(err.message);
+      setOpen(true);
     }
   };
 
   const register = async (username, password) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Registration failed");
       }
-    );
-    if (response.ok) {
       await login(username, password);
+    } catch (err) {
+      setError(err.message);
+      setOpen(true);
     }
   };
 
@@ -72,9 +97,20 @@ const AuthProvider = ({ children }) => {
     router.push("/login");
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, token, error, login, register, logout }}
+    >
       {children}
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {error}
+        </Alert>
+      </Snackbar>
     </AuthContext.Provider>
   );
 };

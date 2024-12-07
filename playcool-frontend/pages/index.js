@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../src/context/AuthContext";
 import Link from "next/link";
+import { Button } from "@mui/material";
 
 export default function MainPage() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <div>
@@ -11,6 +12,9 @@ export default function MainPage() {
       {user ? (
         <div>
           <p>Hello, {user.name}!</p>
+          <Button variant="contained" color="primary" onClick={logout}>
+            Logout
+          </Button>
         </div>
       ) : (
         <div>

@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../src/context/AuthContext";
+import RedirectIfLoggedIn from "../../src/components/RedirectIfLoggedIn";
 
-export default function Register() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { register } = useContext(AuthContext);
@@ -32,3 +33,5 @@ export default function Register() {
     </div>
   );
 }
+
+export default RedirectIfLoggedIn(Register);
