@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
 
   const fetchUserInfo = async (token) => {
     try {
+      console.log(token);
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
         {
@@ -30,13 +31,17 @@ const AuthProvider = ({ children }) => {
         }
       );
       if (!response.ok) {
+        setToken(null);
+        setUser(null);
+        localStorage.removeItem("token");
         throw new Error("Failed to fetch user info");
       }
       const data = await response.json();
+      console.log(data);
       setUser(data);
     } catch (err) {
-      setError(err.message);
-      setOpen(true);
+      setError(null);
+      setOpen(false);
     }
   };
 
@@ -68,7 +73,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const register = async (username, password) => {
+  const register = async (username, email, password) => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
@@ -77,7 +82,7 @@ const AuthProvider = ({ children }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username, password, email }),
         }
       );
       if (!response.ok) {
