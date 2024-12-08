@@ -2,9 +2,9 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../src/context/AuthContext";
 import Link from "next/link";
 import { Button, Modal, Box } from "@mui/material";
-import NavBar from './components/NavBar';
-import Banner from "@/pages/components/Banner";
-import LoginPage from './components/login';
+import NavBar from '../src/components/NavBar';
+import Banner from "../src/components/Banner";
+import LoginPage from '../src/components/login';
 
 export default function MainPage() {
     const { user, logout } = useContext(AuthContext);

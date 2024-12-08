@@ -1,14 +1,14 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import { useContext } from "react";
-import { AuthContext } from "../../../src/context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
 import './NavBar.css';
 import PersonIcon from '@mui/icons-material/Person';
-import playCoolLogo from '../../statics/playCoolLogo.png';
+import playCoolLogo from '../../../pages/statics/playCoolLogo.png';
 import Image from 'next/image';
 const NavBar = ({ handleOpen }) => {
     return (
