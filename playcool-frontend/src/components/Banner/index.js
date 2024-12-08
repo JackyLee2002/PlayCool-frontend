@@ -1,10 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
 import './Banner.css';
-import bannerBg from '../../statics/BannerBG.png';
-import fourGuy from '../../statics/4guy.png';
-import concertTitle from '../../statics/ColdPlayConcertTitle.png';
-import yearTitle from '../../statics/2025.png';
+import bannerBg from '../../../pages/statics/BannerBG.png';
+import fourGuy from '../../../pages/statics/4guy.png';
+import concertTitle from '../../../pages/statics/ColdPlayConcertTitle.png';
+import yearTitle from '../../../pages/statics/2025.png';
 
 const Banner = () => {
     return (
