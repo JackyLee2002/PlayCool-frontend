@@ -4,14 +4,16 @@ import Link from "next/link";
 import { Button } from "@mui/material";
 import NavBar from './components/NavBar';
 import homepage from './Homepage';
+import Banner from "@/pages/components/Banner";
 export default function MainPage() {
   const { user, logout } = useContext(AuthContext);
 
   return (
     <div>
-      <h1>Welcome to the Main Page</h1>
+
 
         <NavBar/>
+        <Banner/>
       <homepage/>
       {/*{user ? (*/}
       {/*  <div>*/}

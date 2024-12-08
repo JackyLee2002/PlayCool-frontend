@@ -4,15 +4,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Link from 'next/link';
-import styles from './NavBar.css';
-
+import './NavBar.css';
+import PersonIcon from '@mui/icons-material/Person';
+import playCoolLogo from '../../statics/playCoolLogo.png';
+import Image from 'next/image';
 const NavBar = () => {
     return (
-        <AppBar position="static" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+        <AppBar  position="static" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
             <Toolbar className="toolbar">
-                <Typography variant="h6" className="logo">
-                    Word-like Logo
-                </Typography>
+                <Image src={playCoolLogo} alt="PlayCool Logo" width={150} height={50} />
                 <div className="navItems">
                     <Link href="/events" passHref>
                         <Button className="navButton">Vote Song List</Button>
@@ -21,7 +21,9 @@ const NavBar = () => {
                         <Button className="navButton">My Ticket</Button>
                     </Link>
                 </div>
-                <Button className="loginButton">Login/Register</Button>
+                <Button variant="outlined" startIcon={<PersonIcon />}>
+                    Login / Register
+                </Button>
             </Toolbar>
         </AppBar>
     );
