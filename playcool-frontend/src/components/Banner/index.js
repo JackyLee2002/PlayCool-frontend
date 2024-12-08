@@ -1,11 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-<<<<<<< HEAD
-import './Banner.css';
-=======
+
 import styles from './Banner.module.css';
-import './Banner.module.css'
->>>>>>> homepage
+
 import bannerBg from '../../../pages/statics/BannerBG.png';
 import fourGuy from '../../../pages/statics/4guy.png';
 import concertTitle from '../../../pages/statics/ColdPlayConcertTitle.png';
