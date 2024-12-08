@@ -1,0 +1,28 @@
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+}
+
+.navItems {
+    display: flex;
+    gap: 16px; /* Adjust the gap as needed */
+}
+
+.navButton {
+    color: black;
+    text-transform: none;
+}
+
+.loginButton {
+    color: black;
+    text-transform: none;
+    border: 1px solid black;
+}
