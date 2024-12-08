@@ -1,17 +1,18 @@
-// pages/login.js
+// pages/register.js
 import { useState, useContext } from "react";
-import { AuthContext } from "../../src/context/AuthContext";
+import { AuthContext } from "../../../src/context/AuthContext";
 import { TextField, Button, Typography, Container, Box } from "@mui/material";
 import Link from "next/link";
 
-const LoginPage = () => {
-  const { login, error } = useContext(AuthContext);
+const RegisterPage = () => {
+  const { register, error } = useContext(AuthContext);
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    await login(username, password);
+    register(username, email, password);
   };
 
   return (
@@ -33,7 +34,7 @@ const LoginPage = () => {
           Music of the SPHERES World Tour
         </Typography>
         <Typography variant="h5" gutterBottom>
-          Login
+          Register
         </Typography>
         {error && (
           <Typography color="error" gutterBottom>
@@ -48,6 +49,15 @@ const LoginPage = () => {
             margin="normal"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            label="Email"
+            type="email"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="Password"
@@ -65,12 +75,12 @@ const LoginPage = () => {
             fullWidth
             sx={{ mt: 2 }}
           >
-            Login
+            Register
           </Button>
         </form>
-        <Link href="/register">
+        <Link href="/components/login">
           <Button color="secondary" sx={{ mt: 2 }}>
-            Don&apos;t have an account? Register
+            Already have an account? Login
           </Button>
         </Link>
       </Box>
@@ -78,4 +88,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
