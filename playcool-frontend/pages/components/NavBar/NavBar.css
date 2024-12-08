@@ -1,22 +1,23 @@
-
+.appBar{
+    backgroundColor: 'transparent';
+    boxShadow: 'none'
+}
 .toolbar {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
     z-index: 10;
+    position: absolute;
+    background-color: transparent;
+    top: 0;
 }
 
-.logo {
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    color: black;
-}
 
 .navItems {
     display: flex;
     gap: 16px; /* Adjust the gap as needed */
+    margin-left: 40%;
 }
 
 .navButton {
