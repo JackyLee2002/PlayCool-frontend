@@ -1,10 +1,11 @@
-import { useState, useContext } from "react";
-import { AuthContext } from "../src/context/AuthContext";
-import Link from "next/link";
-import { Button, Modal, Box } from "@mui/material";
+import {useContext, useState} from "react";
+import {AuthContext} from "../src/context/AuthContext";
+import {Box, Modal} from "@mui/material";
 import NavBar from '../src/components/NavBar';
 import Banner from "../src/components/Banner";
 import LoginPage from '../src/components/login';
+import Footer from "@/src/components/Footer";
+import ConcertList from "@/src/components/ConcertList";
 
 export default function MainPage() {
     const { user, logout } = useContext(AuthContext);
@@ -22,6 +23,8 @@ export default function MainPage() {
                     <LoginPage />
                 </Box>
             </Modal>
+            <ConcertList />
+            <Footer />
         </div>
 
     );
