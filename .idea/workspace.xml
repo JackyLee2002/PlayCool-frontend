@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3caf8103-ad55-4721-918b-212feff274f7" name="Changes" comment="refactor: move component back to src/components folder">
-      <change afterPath="$PROJECT_DIR$/playcool-frontend/pages/MyTickets/MyTickets.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playcool-frontend/src/components/Footer/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playcool-frontend/src/components/Layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/pages/Homepage/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/Banner/Banner.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/Banner/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/src/components/Banner/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/NavBar/NavBar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/NavBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/src/components/NavBar/index.js" afterDir="false" />
+    <list default="true" id="872dc052-14e9-485e-9c9d-5ba6dba086d5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/playcool-frontend/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/src/components/Login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playcool-frontend/src/components/register/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/playcool-frontend/src/components/Register/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,21 +46,6 @@
       <recent name="$PROJECT_DIR$/playcool-frontend/pages/components" />
       <recent name="$PROJECT_DIR$/playcool-frontend/pages/statics" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="PlayCool-frontend" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="PlayCool-frontend" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

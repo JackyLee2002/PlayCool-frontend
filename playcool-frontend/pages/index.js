@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button, Modal, Box } from "@mui/material";
 import NavBar from '../src/components/NavBar';
 import Banner from "../src/components/Banner";
-import LoginPage from '../src/components/login';
+import LoginPage from '../src/components/Login';
 
 export default function MainPage() {
     const { user, logout } = useContext(AuthContext);
