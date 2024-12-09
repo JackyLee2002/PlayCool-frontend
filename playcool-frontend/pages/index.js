@@ -3,14 +3,12 @@ import {AuthContext} from "../src/context/AuthContext";
 import {Box, Modal} from "@mui/material";
 import NavBar from '../src/components/NavBar';
 import Banner from "../src/components/Banner";
-<<<<<<< HEAD
+
 import LoginPage from '../src/components/Login';
-=======
-import LoginPage from '../src/components/login';
 import Footer from "@/src/components/Footer";
 import ConcertList from "@/src/components/ConcertList";
 import VotePoster from "@/src/components/VotePoster";
->>>>>>> origin/qa
+
 
 export default function MainPage() {
     const [open, setOpen] = useState(false);

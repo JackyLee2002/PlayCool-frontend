@@ -29,6 +29,9 @@ const NavBar = ({handleOpen}) => {
                     <Link href="/my-tickets" passHref>
                         <Button className={styles.navButton} sx={{'color': 'white'}}>My Ticket</Button>
                     </Link>
+                    <Link href="/testing" passHref>
+                        <Button className={styles.navButton} sx={{'color': 'white'}}>Testing</Button>
+                    </Link>
                 </div>
                 {user ? (
                     <div>
