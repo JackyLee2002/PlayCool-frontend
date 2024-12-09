@@ -1,0 +1,44 @@
+.footer {
+    background-color: #0F1139;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    bottom: 0;
+    width: 100%;
+}
+
+.info {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 100px;
+}
+.infoColumn {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 10%;
+}
+
+.helpSupport {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 5%;
+}
+
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footerCopyright {
+    margin-top: 10px;
+    font-size: 10px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    padding-left: 10px;
+}

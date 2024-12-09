@@ -1,27 +1,39 @@
-import { useState, useContext } from "react";
-import { AuthContext } from "../src/context/AuthContext";
-import Link from "next/link";
-import { Button, Modal, Box } from "@mui/material";
+import {useContext, useState} from "react";
+import {AuthContext} from "../src/context/AuthContext";
+import {Box, Modal} from "@mui/material";
 import NavBar from '../src/components/NavBar';
 import Banner from "../src/components/Banner";
+<<<<<<< HEAD
 import LoginPage from '../src/components/Login';
+=======
+import LoginPage from '../src/components/login';
+import Footer from "@/src/components/Footer";
+import ConcertList from "@/src/components/ConcertList";
+import VotePoster from "@/src/components/VotePoster";
+>>>>>>> origin/qa
 
 export default function MainPage() {
-    const { user, logout } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
+    const {loginOpen, openLogin} = useContext(AuthContext);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true);
+        openLogin();
+    }
     const handleClose = () => setOpen(false);
 
     return (
         <div>
             <NavBar handleOpen={handleOpen} />
             <Banner />
-            <Modal open={open} onClose={handleClose}>
+            <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
                     <LoginPage />
                 </Box>
             </Modal>
+            <ConcertList />
+            <VotePoster />
+            <Footer />
         </div>
 
     );
