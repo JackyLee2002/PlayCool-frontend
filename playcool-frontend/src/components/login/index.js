@@ -3,15 +3,16 @@ import { AuthContext } from "../../context/AuthContext";
 import { TextField, Button, Typography, Container, Box } from "@mui/material";
 
 const LoginPage = () => {
-    const { login, error } = useContext(AuthContext);
+    const { login, register, error } = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
     const [isRegister, setIsRegister] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isRegister) {
-            // Handle registration logic here
+            await register(username, email, password);
         } else {
             await login(username, password);
         }
@@ -44,6 +45,17 @@ const LoginPage = () => {
                     </Typography>
                 )}
                 <form onSubmit={handleSubmit}>
+                    {isRegister && (
+                        <TextField
+                            label="Email"
+                            type="email"
+                            variant="outlined"
+                            fullWidth
+                            margin="normal"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    )}
                     <TextField
                         label="Username"
                         variant="outlined"

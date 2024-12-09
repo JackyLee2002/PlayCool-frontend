@@ -6,24 +6,29 @@ import Banner from "../src/components/Banner";
 import LoginPage from '../src/components/login';
 import Footer from "@/src/components/Footer";
 import ConcertList from "@/src/components/ConcertList";
+import VotePoster from "@/src/components/VotePoster";
 
 export default function MainPage() {
-    const { user, logout } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
+    const {loginOpen, openLogin} = useContext(AuthContext);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true);
+        openLogin();
+    }
     const handleClose = () => setOpen(false);
 
     return (
         <div>
             <NavBar handleOpen={handleOpen} />
             <Banner />
-            <Modal open={open} onClose={handleClose}>
+            <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
                     <LoginPage />
                 </Box>
             </Modal>
             <ConcertList />
+            <VotePoster />
             <Footer />
         </div>
 
