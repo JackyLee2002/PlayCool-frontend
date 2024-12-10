@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from './ConfirmOrder.module.css';
-import { Button } from '@mui/material';
+import {Button} from '@mui/material';
 import Divider from "@mui/material/Divider";
+import {AuthContext} from "@/src/context/AuthContext";
 
 const ConfirmOrder = () => {
+    const { createOrder } = useContext(AuthContext);
+    const orderDetails = {
+        "concertId": 9,
+        "areaId":1,
+        "venueId":1,
+        "paymentMethod":"AILIPAY"
+    }
+    const confirmOder = () => {
+        createOrder(orderDetails);
+    }
     return (
         <div className={styles.orderSummary}>
             <div className={styles.orderSummaryTitle}>
@@ -40,6 +51,7 @@ const ConfirmOrder = () => {
                         borderRadius: '50px',
                         backgroundColor:"#3337BF"
                     }}
+                    onClick={confirmOder}
                 >
                     Create Order
                 </Button>

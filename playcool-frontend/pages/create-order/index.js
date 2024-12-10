@@ -1,12 +1,9 @@
-import NavBar from "@/src/components/NavBar";
 import StepperBar from "@/src/components/StepperBar";
 import Footer from "@/src/components/Footer";
 import ConfirmOrder from "@/src/components/ConfirmOrder";
 import OrderDetail from "@/src/components/OrderDetail";
 import {useContext, useState} from "react";
 import {AuthContext} from "@/src/context/AuthContext";
-import {Box, Modal} from "@mui/material";
-import LoginPage from "@/src/components/Login";
 
 const CreateOrder = () => {
     const [open, setOpen] = useState(false);
@@ -21,12 +18,6 @@ const CreateOrder = () => {
 
     return (
         <div>
-            {/*<NavBar handleOpen={handleOpen} />*/}
-            {/*<Modal open={open && loginOpen} onClose={handleClose}>*/}
-            {/*    <Box sx={{ ...modalStyle }}>*/}
-            {/*        <LoginPage />*/}
-            {/*    </Box>*/}
-            {/*</Modal>*/}
             <StepperBar/>
             <OrderDetail/>
             <ConfirmOrder/>
