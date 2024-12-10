@@ -17,6 +17,9 @@ const Layout = ({ children }) => {
 
     return (
         <div>
+
+                <title>PlayCool</title>
+
             <NavBar handleOpen={handleOpen} />
             <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
@@ -35,8 +38,8 @@ const modalStyle = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 600,
-    boxShadow: 10,
-    p: 3
+    boxShadow: "1px",
+    p: 4,
 };
 
 export default Layout;

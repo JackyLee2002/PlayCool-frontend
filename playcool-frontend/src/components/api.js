@@ -64,13 +64,13 @@ export const fetchAvailableSeats = async (id) => {
   }
 };
 
-export const fetchOrders = async (token) => {
+export const fetchOrders = async (token, page = 0, size = 10) => {
   if (!token) {
     return { status: "error", data: [] };
   }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/order`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/order?page=${page}&pageSize=${size}`,
       {
         method: "GET",
         headers: {
