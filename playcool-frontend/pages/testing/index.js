@@ -6,7 +6,6 @@ import styles from './testing.module.css';
 const testing = () => {
     return (
         <div>
-            <NavBar />
             <div className={styles.middle}>
                 <TicketCard/>
             </div>

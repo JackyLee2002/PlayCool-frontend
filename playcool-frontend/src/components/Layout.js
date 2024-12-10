@@ -1,13 +1,40 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import NavBar from './NavBar';
+import {AuthContext} from "@/src/context/AuthContext";
+import {Box, Modal} from "@mui/material";
+import LoginPage from "@/src/components/Login";
 
 const Layout = ({ children }) => {
+    const [open, setOpen] = useState(false);
+    const { loginOpen, openLogin } = useContext(AuthContext);
+
+    const handleOpen = () => {
+        setOpen(true);
+        openLogin();
+    };
+    const handleClose = () => setOpen(false);
+
     return (
         <div>
-            <NavBar />
+            <NavBar handleOpen={handleOpen} />
+            <Modal open={open && loginOpen} onClose={handleClose}>
+                <Box sx={{ ...modalStyle }}>
+                    <LoginPage />
+                </Box>
+            </Modal>
             {children}
         </div>
     );
+};
+
+const modalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 700,
+    boxShadow: 24,
+    p: 4,
 };
 
 export default Layout;
