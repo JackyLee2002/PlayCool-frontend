@@ -54,13 +54,33 @@ export default function SongList() {
         }
     };
 
+    const getBackgroundColor = (rank) => {
+        switch (rank) {
+            case 1:
+                return '#FF3000';
+            case 2:
+                return '#FF4500';
+            case 3:
+                return '#FF6347';
+            case 4:
+                return '#FF7F50';
+            case 5:
+                return '#FF8C00';
+            case 6:
+                return '#FFA07A';
+        }
+    };
+
     return (
         <div id={"mainDiv"} className={styles.songListContainer}>
             <h1 className={styles.title}>Vote For Your Favorite Song !</h1>
             <Box display="flex" flexDirection="column" gap={2} sx={{ width: '50vw', marginLeft: '25%' }}>
-                {songs.map((song) => (
+                {songs.map((song, index) => (
                     <Box key={song.id}>
-                        <Card className={styles.songCard}>
+                        <Card
+                            className={styles.songCard}
+                            sx={{ backgroundColor: getBackgroundColor(index + 1) }}
+                        >
                             <CardContent>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     {getImageSrc(song.name) && (
@@ -72,20 +92,23 @@ export default function SongList() {
                                         <Typography variant="h5" component="div">
                                             {song.name}
                                         </Typography>
-                                        <Typography color="text.secondary">
-                                            {song.album || ''}
-                                        </Typography>
-                                        <Typography color="text.secondary">
-                                            {song.releaseDate || ''}
-                                        </Typography>
+                                        {song.album && (
+                                            <Typography color="text.secondary">
+                                                album: {song.album}
+                                            </Typography>
+                                        )}
+                                        {song.releaseDate && (
+                                            <Typography color="text.secondary">
+                                                release date: {song.releaseDate}
+                                            </Typography>
+                                        )}
                                         <Typography variant="body2">
-                                            Votes: {song.votes}
+                                            votes: {song.votes}
                                         </Typography>
                                     </Box>
                                 </Box>
                             </CardContent>
                             <Button
-                                className={styles.voteButton}
                                 variant="contained"
                                 color="primary"
                                 sx={{ alignSelf: 'center' }}
