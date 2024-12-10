@@ -13,7 +13,7 @@ export const fetchConcerts = async () => {
         return data;
     } catch (error) {
         console.error('Error fetching concerts:', error);
-        return { status: 'error', data: [] };
+        return {status: 'error', data: []};
     }
 };
 
@@ -32,7 +32,7 @@ export const fetchConcert = async (id) => {
         return data;
     } catch (error) {
         console.error('Error fetching concerts:', error);
-        return { status: 'error', data: [] };
+        return {status: 'error', data: []};
     }
 };
 
@@ -51,6 +51,25 @@ export const fetchAvailableSeats = async (id) => {
         return data;
     } catch (error) {
         console.error('Error fetching concerts:', error);
-        return { status: 'error', data: [] };
+        return {status: 'error', data: []};
     }
 };
+
+export const fetchSnapTicket = async (orderId, tokens) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/snap/${orderId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${tokens}`,
+            },
+        });
+        if(!response.ok) {
+            throw new Error('Failed to snap ticket');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching concerts:', error);
+        return {status: 'error', data: []};
+    }
+}

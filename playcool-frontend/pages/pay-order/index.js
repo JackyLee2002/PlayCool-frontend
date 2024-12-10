@@ -4,24 +4,9 @@ import OrderDetail from "@/src/components/OrderDetail";
 import {AuthContext} from "@/src/context/AuthContext";
 import {fetchSnapTicket} from "@/src/components/api";
 
-const SnapOrder = ({orderId}) => {
-    const [url, setURL] = useState("");
+const PayOrder = ({orderId}) => {
     const {token} = useContext(AuthContext);
-    const [order, setOrder] = useState({});
-    useEffect(() => {
-        if (typeof window !== undefined) {
-            setURL(window.location.href);
-        }
-    }, []);
 
-    const snapTicket = () => {
-        // Implement the logic to snap a ticket here
-        console.log("Ticket snapped!");
-        const response = fetchSnapTicket(orderId, token);
-        setOrder(response);
-        // navigate to the pay page
-
-    };
 
     return (
         <Box
@@ -135,4 +120,4 @@ const SnapOrder = ({orderId}) => {
     );
 };
 
-export default SnapOrder;
+export default PayOrder;
