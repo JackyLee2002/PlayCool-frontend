@@ -26,29 +26,17 @@ const NavBar = ({handleOpen}) => {
                            style={{backgroundColor: "lightgrey", margin: "10px"}}/>
                 </Link>
                 <div className={styles.navItems}>
-                    <Link href="/events" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Vote Song List</Button>
+                    <Link href="/song-list" passHref>
+                        <Button className={styles.navButton} sx={{ 'color': 'black' }}>Song List</Button>
                     </Link>
                     <Link href="/my-tickets" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>My Ticket</Button>
                     </Link>
-                    <Link href="/create-order" passHref>
+                    <Link href="/create-order/[id]" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>Create Order</Button>
                     </Link>
                     <Link href="/concert" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'white'}}>Concert</Button>
-                    </Link>
-                    <Link href="/snap-order" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Snap</Button>
-                    </Link>
-                    <Link href="/pay-order" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Pay</Button>
-                    </Link>
-                    <Link href="/OrderDetailInfo" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>OrderDetailInfo</Button>
-                    </Link>
-                    <Link href="/testing" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Testing</Button>
+                        <Button className={styles.navButton} sx={{'color': 'black'}}>Concert</Button>
                     </Link>
 
                 </div>
@@ -56,9 +44,11 @@ const NavBar = ({handleOpen}) => {
                     <div>
                         <AccountMenu/>
                     </div>) : (
+
                     <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen}>
                         Login / Register
                     </Button>)}
+
             </Toolbar>
         </AppBar>
     );
