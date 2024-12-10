@@ -20,8 +20,12 @@ export default function SongList() {
 
     useEffect(() => {
         fetchSongs();
+        document.body.style.cssText = 'overflow-x: hidden';
+        if (!token || token == null) {
+            return;
+        }
         checkIfVoted();
-    }, []);
+    }, [token]);
 
     const checkIfVoted = async () => {
         const voted = await isVoted(token);
@@ -51,7 +55,7 @@ export default function SongList() {
     };
 
     return (
-        <div className={styles.songListContainer}>
+        <div id={"mainDiv"} className={styles.songListContainer}>
             <h1 className={styles.title}>Vote For Your Favorite Song !</h1>
             <Box display="flex" flexDirection="column" gap={2} sx={{ width: '50vw', marginLeft: '25%' }}>
                 {songs.map((song) => (
