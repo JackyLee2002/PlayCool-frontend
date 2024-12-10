@@ -5,24 +5,27 @@ import Divider from "@mui/material/Divider";
 import {AuthContext} from "@/src/context/AuthContext";
 import Link from "next/link";
 import {fetchConcert} from "@/src/components/api";
+import {useState} from "react";
 
 const ConfirmOrder = () => {
     const {createOrder} = useContext(AuthContext);
-
+    const [orderId, setOrderId] = useState();
 
     const getVenueId = (concertId) => {
         fetchConcert(concertId).then((data) => {
             return data.venue.venueId;
         });
     }
-    const confirmOder = () => {
+    const confirmOder = async () => {
         let venueId = getVenueId(9);
-        createOrder({
+        const order = await createOrder({
             concertId: 9,
             areaId: 1,
             venueId: venueId
+        });
+        setOrderId(order.orderId);
+        router.push(`/snap-order/${orderId}`)
 
-        })
     }
     return (
         <div className={styles.orderSummary}>
