@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Alert, Snackbar } from "@mui/material";
-
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
@@ -9,6 +8,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
     try {
       console.log(token);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,6 +45,10 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const openLogin = () => {
+    setLoginOpen(true);
+  }
+
   const login = async (username, password) => {
     try {
       const response = await fetch(
@@ -57,6 +61,7 @@ const AuthProvider = ({ children }) => {
           body: JSON.stringify({ username, password }),
         }
       );
+      setLoginOpen(false);
       if (!response.ok) {
         throw new Error("Login failed");
       }
@@ -76,7 +81,7 @@ const AuthProvider = ({ children }) => {
   const register = async (username, email, password) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
         {
           method: "POST",
           headers: {
@@ -85,6 +90,7 @@ const AuthProvider = ({ children }) => {
           body: JSON.stringify({ username, password, email }),
         }
       );
+      setLoginOpen(false);
       if (!response.ok) {
         throw new Error("Registration failed");
       }
@@ -99,7 +105,8 @@ const AuthProvider = ({ children }) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
-    router.push("/login");
+    setLoginOpen(false);
+    router.push("/");
   };
 
   const handleClose = () => {
@@ -108,7 +115,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, error, login, register, logout }}
+      value={{ user, token, error, login, register, logout, loginOpen,openLogin }}
     >
       {children}
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

@@ -22,9 +22,6 @@ const NavBar = ({ handleOpen }) => {
                     <Link href="/my-tickets" passHref>
                         <Button className="navButton" sx={{ 'color': 'white' }}>My Ticket</Button>
                     </Link>
-                    <Link href="/concert" passHref>
-                        <Button className="navButton" sx={{ 'color': 'white' }}>Concert</Button>
-                    </Link>
                 </div>
                 <Button variant="outlined" startIcon={<PersonIcon />} onClick={handleOpen}>
                     Login / Register
