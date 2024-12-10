@@ -11,7 +11,9 @@ const CreateOrder = () => {
     const [selectedAreaId, setSelectedAreaId] = useState(1);
     const [concertId, setConcertId] = useState(0);
     const [order, setOrder] = useState({
-        concerName: "",
+        concertId: 0,
+        areaId: 0,
+        concertName: "",
         concertDate: null,
         venueName: "",
         areaName: "",
@@ -26,7 +28,9 @@ const CreateOrder = () => {
         }
 
         let newOrder = {
-            concerName: "",
+            concertId: route.query.id,
+            areaId: router.query.selectedAreaId,
+            concertName: "",
             concertDate: null,
             venueName: "",
             areaName: "",
@@ -36,7 +40,7 @@ const CreateOrder = () => {
         };
 
         const fetchConcertData = fetchConcert(route.query.id).then((data) => {
-            newOrder.concerName = data.title;
+            newOrder.concertName = data.title;
             newOrder.concertDate = data.dateTime;
         });
 
@@ -60,7 +64,7 @@ const CreateOrder = () => {
         <div>
             <StepperBar index={2}/>
             <OrderDetail props={order} concertId={router.query.id}/>
-            <ConfirmOrder props={route.query.id}/>
+            <ConfirmOrder props={order}/>
         </div>
     );
 };

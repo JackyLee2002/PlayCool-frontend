@@ -16,9 +16,9 @@ const ConfirmOrder = ({props}) => {
         });
     }
     const confirmOder = () => {
-        let venueId = getVenueId(9);
+        let venueId = getVenueId(props.concertId);
         createOrder({
-            concertId: 9, areaId: 1, venueId: venueId
+            concertId: props.concertId, areaId: props.areaId, venueId: venueId
         }).then((data) => {
             console.log(data);
             router.push(`/snap-order/${data.orderId}`)
@@ -31,16 +31,16 @@ const ConfirmOrder = ({props}) => {
             Order Summary
         </div>
         <div className={styles.orderSummaryItem}>
-            Music of the Spheres World, 1 VIP Tickets
+            {props.concertName}, {props.areaName} Ticket x1
         </div>
         <div className={styles.orderSummaryItem}>
             <span>Subtotal</span>
-            <span>$399.x1</span>
+            <span>${props.price}</span>
         </div>
         <Divider style={{margin: '10px 0'}}/>
         <div className={styles.orderSummaryItem}>
             <span>Total USD</span>
-            <span>$399.00</span>
+            <span>${props.price}</span>
         </div>
         <div className={styles.buttonContainer}>
 
@@ -51,7 +51,7 @@ const ConfirmOrder = ({props}) => {
                     borderRadius: '50px', backgroundColor: "white", border: '1px solid #3337BF'
                 }}
                 onClick={() => {
-                    router.push(`/concert-detail/${props}`)
+                    router.push(`/concert-detail/${props.concertId}`)
                 }}
             >
                 Back
