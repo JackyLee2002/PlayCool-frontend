@@ -18,8 +18,8 @@ const NavBar = ({ handleOpen }) => {
                  <Image src={playCoolLogo} alt="PlayCool Logo" width={150} height={50} />
                 </Link>
                 <div className={styles.navItems}>
-                    <Link href="/events" passHref>
-                        <Button className={styles.navButton} sx={{ 'color': 'white' }}>Vote Song List</Button>
+                    <Link href="/song-list" passHref>
+                        <Button className={styles.navButton} sx={{ 'color': 'white' }}>Song List</Button>
                     </Link>
                     <Link href="/my-tickets" passHref>
                         <Button className={styles.navButton} sx={{ 'color': 'white' }}>My Ticket</Button>

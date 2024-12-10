@@ -1,0 +1,8 @@
+.title {
+    text-align: center;
+}
+.songCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
