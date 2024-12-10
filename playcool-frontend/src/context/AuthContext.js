@@ -49,6 +49,30 @@ const AuthProvider = ({ children }) => {
     setLoginOpen(true);
   }
 
+  const createOrder = async (orderDetails) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(orderDetails),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create order");
+    }
+
+    const data = await response.json();
+    console.log("Order created successfully:", data);
+    return data;
+  } catch (err) {
+    setError(err.message);
+    setOpen(true);
+  }
+};
+
   const login = async (username, password) => {
     try {
       const response = await fetch(
@@ -115,7 +139,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, error, login, register, logout, loginOpen,openLogin }}
+      value={{ user, token, error, login, register, logout, loginOpen,openLogin,createOrder }}
     >
       {children}
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

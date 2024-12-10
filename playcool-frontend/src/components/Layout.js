@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import {AuthContext} from "@/src/context/AuthContext";
 import {Box, Modal} from "@mui/material";
 import LoginPage from "@/src/components/Login";
+import Footer from "@/src/components/Footer";
 
 const Layout = ({ children }) => {
     const [open, setOpen] = useState(false);
@@ -23,6 +24,7 @@ const Layout = ({ children }) => {
                 </Box>
             </Modal>
             {children}
+            <Footer />
         </div>
     );
 };
