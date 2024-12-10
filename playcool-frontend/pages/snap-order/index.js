@@ -6,7 +6,7 @@ import { useSnackbar } from 'notistack';
 const SnapOrder = () => {
     const [url, setURL] = useState("");
     useEffect(() => {
-        if (typeof window != undefined) {
+        if (typeof window !== undefined) {
             setURL(window.location.href);
         }
     },[])
