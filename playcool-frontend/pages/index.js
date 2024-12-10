@@ -25,7 +25,6 @@ export default function MainPage() {
       <Banner />
       {/* <ConcertList /> */}
       <VotePoster />
-      <Footer />
     </div>
   );
 }
