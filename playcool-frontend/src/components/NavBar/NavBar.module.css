@@ -1,7 +1,8 @@
-.appBar{
+.appBar {
     backgroundColor: 'transparent';
     boxShadow: 'none'
 }
+
 .toolbar {
     display: flex;
     flex-direction: row;
@@ -16,7 +17,7 @@
 
 .navItems {
     display: flex;
-    gap: 16px; /* Adjust the gap as needed */
+    gap: 16px;
     margin-left: 40%;
 }
 
