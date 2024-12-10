@@ -5,7 +5,7 @@ import { getSongList, vote, isVoted } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
 import Image from 'next/image';
-import LoginPage from '@/src/components/Login';
+import Login from '@/src/components/Login';
 
 export default function SongList() {
     const [songs, setSongs] = useState([]);
@@ -127,7 +127,7 @@ export default function SongList() {
                     onClick={handleClose}
                 >
                     <Box onClick={(e) => e.stopPropagation()}>
-                        <LoginPage />
+                        <Login />
                     </Box>
                 </Box>
             </Modal>

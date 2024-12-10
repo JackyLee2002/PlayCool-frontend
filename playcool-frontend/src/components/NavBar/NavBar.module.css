@@ -1,6 +1,6 @@
 .appBar {
     backgroundColor: 'transparent';
-    boxShadow: 'none'
+    boxShadow: 'none';
 }
 
 .toolbar {
@@ -13,7 +13,6 @@
     background-color: transparent;
     top: 0;
 }
-
 
 .navItems {
     display: flex;

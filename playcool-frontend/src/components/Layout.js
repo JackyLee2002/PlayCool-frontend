@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import NavBar from './NavBar';
 import {AuthContext} from "@/src/context/AuthContext";
 import {Box, Modal} from "@mui/material";
-import LoginPage from "@/src/components/Login";
+import Login from "@/src/components/Login";
 import Footer from "@/src/components/Footer";
 
 const Layout = ({ children }) => {
@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
             <NavBar handleOpen={handleOpen} />
             <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
-                    <LoginPage />
+                    <Login />
                 </Box>
             </Modal>
             {children}

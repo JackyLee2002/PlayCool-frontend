@@ -8,8 +8,6 @@ import {fetchAreaById, fetchConcert} from "@/src/components/api";
 const CreateOrder = () => {
     const route = useRouter();
     const router = useRouter();
-    const [selectedAreaId, setSelectedAreaId] = useState(1);
-    const [concertId, setConcertId] = useState(0);
     const [order, setOrder] = useState({
         concertId: 0,
         areaId: 0,
@@ -56,9 +54,6 @@ const CreateOrder = () => {
             setOrder(newOrder);
         });
     }, [router.query.selectedAreaId, route.query.id]);
-
-    useEffect(() => {
-    }, [order]);
 
     return (
         <div>

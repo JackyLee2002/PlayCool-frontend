@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { TextField, Button, Typography, Container, Box } from "@mui/material";
 
-const LoginPage = () => {
+const Login = () => {
     const { login, register, error } = useContext(AuthContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -95,4 +95,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default Login;
