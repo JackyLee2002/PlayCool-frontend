@@ -6,8 +6,11 @@ import {AuthContext} from "@/src/context/AuthContext";
 import Link from "next/link";
 import {fetchConcert} from "@/src/components/api";
 import {useState} from "react";
+import {useRouter} from "next/router";
 
 const ConfirmOrder = () => {
+    const route = useRouter();
+    const router = useRouter();
     const {createOrder} = useContext(AuthContext);
     const [orderId, setOrderId] = useState();
 
@@ -16,15 +19,17 @@ const ConfirmOrder = () => {
             return data.venue.venueId;
         });
     }
-    const confirmOder = async () => {
+    const confirmOder =  () => {
         let venueId = getVenueId(9);
-        const order = await createOrder({
+        createOrder({
             concertId: 9,
             areaId: 1,
             venueId: venueId
+        }).then((data) => {
+            console.log(data);
+            router.push(`/snap-order/${data.orderId}`)
         });
-        setOrderId(order.orderId);
-        router.push(`/snap-order/${orderId}`)
+
 
     }
     return (
