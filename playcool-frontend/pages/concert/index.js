@@ -1,206 +1,221 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    CardMedia,
-    Modal, Stack,
-    Typography,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Modal,
+  Stack,
+  Typography,
 } from "@mui/material";
-import "./Concert.module.css";
-import {useRouter} from "next/router";
-import {fetchConcerts} from "@/src/components/api";
+import { useRouter } from "next/router";
+import { fetchConcerts } from "@/src/components/api";
 import EventIcon from "@mui/icons-material/Event";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 import Pagination from "@mui/material/Pagination";
 
 const ConcertPage = () => {
-    const [concerts, setConcerts] = useState([]);
-    const [selectedConcert, setSelectedConcert] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const router = useRouter();
-    const concertsPerPage = 6;
+  const [concerts, setConcerts] = useState([]);
+  const [selectedConcert, setSelectedConcert] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
+  const concertsPerPage = 6;
 
-    const handleConcertClick = (concert) => {
-        setSelectedConcert(concert);
-    };
+  const handleConcertClick = (concert) => {
+    setSelectedConcert(concert);
+  };
 
-    const handleClose = () => {
-        setSelectedConcert(null);
-    };
+  const handleClose = () => {
+    setSelectedConcert(null);
+  };
 
-    useEffect(() => {
-        // Fetch concert data
-        fetchConcerts().then((data) => {
-            setConcerts(data);
-        });
-    }, []);
+  useEffect(() => {
+    // Fetch concert data
+    fetchConcerts().then((data) => {
+      setConcerts(data);
+    });
+  }, []);
 
-    const totalConcerts = concerts.length;
-    const totalPages = Math.ceil(totalConcerts / concertsPerPage);
+  const totalConcerts = concerts.length;
+  const totalPages = Math.ceil(totalConcerts / concertsPerPage);
 
-    const indexOfLastConcert = currentPage * concertsPerPage;
-    const indexOfFirstConcert = indexOfLastConcert - concertsPerPage;
-    const currentConcerts = concerts.slice(
-        indexOfFirstConcert,
-        indexOfLastConcert
-    );
+  const indexOfLastConcert = currentPage * concertsPerPage;
+  const indexOfFirstConcert = indexOfLastConcert - concertsPerPage;
+  const currentConcerts = concerts.slice(
+    indexOfFirstConcert,
+    indexOfLastConcert
+  );
 
-    return (
-        <Box className="page-container" sx={{maxWidth: "60%", marginLeft:"20%"}}>
-            <Typography variant="h4" component="h1" gutterBottom textAlign="center">
-                Concerts
-            </Typography>
-            <Box className="concert-cards-container">
-                {currentConcerts && currentConcerts.length > 0 && currentConcerts.map((concert) => (
-                    <Card
-                        key={concert.concertId}
-                        onClick={() => handleConcertClick(concert)}
-                        className="concert-card"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            borderRadius: 2,
-                            overflow: "hidden",
-                            marginBottom: 2,
-                        }}
+  return (
+    <Box className="page-container" sx={{ maxWidth: "60%", marginLeft: "20%" }}>
+      <Typography variant="h4" component="h1" gutterBottom textAlign="center">
+        Concerts
+      </Typography>
+      <Box className="concert-cards-container">
+        {currentConcerts &&
+          currentConcerts.length > 0 &&
+          currentConcerts.map((concert) => (
+            <Card
+              key={concert.concertId}
+              onClick={() => handleConcertClick(concert)}
+              className="concert-card"
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                borderRadius: 2,
+                overflow: "hidden",
+                marginBottom: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "darkblue",
+                  color: "white",
+                  padding: 2,
+                  borderTopLeftRadius: 8,
+                  borderBottomLeftRadius: 8,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minWidth: 100,
+                  height: "160px",
+                  width: "120px",
+                }}
+              >
+                <EventIcon />
+                <Typography variant="body2" sx={{ mt: "5px", mb: "5px" }}>
+                  {new Date(concert.dateTime).toLocaleDateString()}
+                </Typography>
+                <Typography variant="body2">
+                  {new Date(concert.dateTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Typography>
+              </Box>
+              <CardMedia
+                component="img"
+                height="140"
+                sx={{
+                  width: "auto",
+                  height: "auto",
+                  maxHeight: 200,
+                  maxWidth: 200,
+                }}
+                image={concert.concertImage}
+                alt={concert.title}
+              />
+              <CardContent sx={{ flex: 1 }}>
+                <Typography variant="h5" component="div">
+                  {concert.title}
+                </Typography>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", marginTop: 1 }}
+                >
+                  <LocationOnIcon />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ marginLeft: 1 }}
+                  >
+                    {concert.venue.city}
+                  </Typography>
+                </Box>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ marginLeft: 4 }}
+                >
+                  {concert.venue.name}
+                </Typography>
+                <Box
+                  sx={{ display: "flex", alignItems: "center", marginTop: 1 }}
+                >
+                  <ConfirmationNumberIcon />
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{ marginLeft: 1 }}
+                  >
+                    <Typography
+                      variant="body2"
+                      color={
+                        new Date(concert.dateTime) < new Date()
+                          ? "red"
+                          : concert.availableSeats <= 0
+                          ? "text.secondary"
+                          : "green"
+                      }
                     >
-                        <Box
-                            sx={{
-                                backgroundColor: "darkblue",
-                                color: "white",
-                                padding: 2,
-                                borderTopLeftRadius: 8,
-                                borderBottomLeftRadius: 8,
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                minWidth: 100,
-                                height: "160px",
-                                width: "120px",
-                            }}
-                        >
-                            <EventIcon/>
-                            <Typography variant="body2" sx={{mt: "5px", mb: "5px"}}>
-                                {new Date(concert.dateTime).toLocaleDateString()}
-                            </Typography>
-                            <Typography variant="body2">
-                                {new Date(concert.dateTime).toLocaleTimeString([], {
-                                    hour: "2-digit",
-                                    minute: "2-digit",
-                                })}
-                            </Typography>
-                        </Box>
-                        <CardMedia
-                            component="img"
-                            height="140"
-                            sx={{
-                                width: "auto",
-                                height: "auto",
-                                maxHeight: 200,
-                                maxWidth: 200,
-                            }}
-                            image={concert.concertImage}
-                            alt={concert.title}
-                        />
-                        <CardContent sx={{flex: 1}}>
-                            <Typography variant="h5" component="div">
-                                {concert.title}
-                            </Typography>
-                            <Box sx={{display: "flex", alignItems: "center", marginTop: 1}}>
-                                <LocationOnIcon/>
-                                <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                    sx={{marginLeft: 1}}
-                                >
-                                    {concert.venue.city}
-                                </Typography>
-                            </Box>
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                sx={{marginLeft: 4}}
-                            >
-                                {concert.venue.name}
-                            </Typography>
-                            <Box sx={{display: "flex", alignItems: "center", marginTop: 1}}>
-                                <ConfirmationNumberIcon/>
-                                <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                    sx={{marginLeft: 1}}
-                                >
-                                    <Typography
-                                        variant="body2"
-                                        color={
-                                            new Date(concert.dateTime) < new Date()
-                                                ? "red"
-                                                : concert.availableSeats <= 0
-                                                    ? "text.secondary"
-                                                    : "green"
-                                        }
-                                    >
-                                        {new Date(concert.dateTime) < new Date()
-                                            ? "Event Passed"
-                                            : concert.availableSeats <= 0
-                                                ? "Sold Out!"
-                                                : concert.availableSeats === 1
-                                                    ? "1 Ticket Available!"
-                                                    : concert.availableSeats + " Tickets Available!"}
-                                    </Typography>
-                                </Typography>
-                            </Box>
-                        </CardContent>
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                router.push(`/concert-detail/${concert.concertId}`);
+                      {new Date(concert.dateTime) < new Date()
+                        ? "Event Passed"
+                        : concert.availableSeats <= 0
+                        ? "Sold Out!"
+                        : concert.availableSeats === 1
+                        ? "1 Ticket Available!"
+                        : concert.availableSeats + " Tickets Available!"}
+                    </Typography>
+                  </Typography>
+                </Box>
+              </CardContent>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/concert-detail/${concert.concertId}`);
+                }}
+                disabled={new Date(concert.dateTime) < new Date()}
+                sx={{
+                  marginRight: 2,
+                  marginBottom: 2,
+                  alignSelf: "flex-end",
+                  borderColor: "#3337BF",
+                  color: "#3337BF",
+                  fontSize: "1rem",
+                  padding: "5px 10px",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    borderColor: "lightpurple",
+                    backgroundColor: "rgba(0, 0, 119, 0.1)",
+                  },
+                }}
+              >
+                {new Date(concert.dateTime) < new Date()
+                  ? "Passed"
+                  : "BUY NOW!"}
+              </Button>
+            </Card>
+          ))}
+      </Box>
 
-                            }}
-                            disabled={new Date(concert.dateTime) < new Date()}
-                            sx={{
-                                marginRight: 2,
-                                marginBottom: 2,
-                                alignSelf: "flex-end",
-                                borderColor: "#3337BF",
-                                color: "#3337BF",
-                                fontSize: "1rem",
-                                padding: "5px 10px",
-                                borderRadius: "10px",
-                                "&:hover": {
-                                    borderColor: "lightpurple",
-                                    backgroundColor: "rgba(0, 0, 119, 0.1)",
-                                },
-                            }}
-                        >
-                            {new Date(concert.dateTime) < new Date() ? "Passed" : "BUY NOW!"}
-                        </Button>
-                    </Card>
-                ))}
-            </Box>
-
-            <Box className="pagination-container" sx={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 2 }}>
-                <Stack spacing={2}>
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        onChange={(event, value) => setCurrentPage(value)}
-                        showFirstButton
-                        showLastButton
-                        variant="outlined"
-                        color="primary"
-                    />
-                </Stack>
-            </Box>
-        </Box>
-    );
+      <Box
+        className="pagination-container"
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 2,
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={(event, value) => setCurrentPage(value)}
+            showFirstButton
+            showLastButton
+            variant="outlined"
+            color="primary"
+          />
+        </Stack>
+      </Box>
+    </Box>
+  );
 };
 
 export default ConcertPage;
