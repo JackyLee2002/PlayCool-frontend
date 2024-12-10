@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Button, Box } from '@mui/material';
+import {Typography, Button, Box, CardMedia, CardContent, Card} from '@mui/material';
 import {fetchAvailableSeats, fetchConcert} from "@/src/components/api";
 import {useRouter} from "next/router";
+import OrderDetail from "@/src/components/OrderDetail";
+import StepperBar from "@/src/components/StepperBar";
 
 const ConcertDetail = () => {
     const route = useRouter();
@@ -30,17 +32,47 @@ const ConcertDetail = () => {
     return (
         <div>
             <div>
-                {/* 展示演唱会图片 */}
-                {/*<Image src={concert.concertImage} />*/}
-                <Typography variant="h4" gutterBottom>
-                    {concert.title}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                    {concert.venue.city}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                    Date: {concert.date} Time: {concert.time}
-                </Typography>
+                <StepperBar index={2}></StepperBar>
+                <Card
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        width: "auto",
+                        marginTop: 6
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: "auto",
+                        }}
+                    >
+                        <CardMedia
+                            component="img"
+                            alt="Concert"
+                            height="140"
+                            image={
+                                "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
+                            }
+                            title="Concert"
+                            sx={{ width: 150 }}
+                        />
+                        <CardContent sx={{ textAlign: "center" }}>
+                            <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
+                                {concert.title}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {concert.venue.city + ", " + concert.venue.location}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                Time: {concert.dateTime}
+                            </Typography>
+                        </CardContent>
+                    </Box>
+                </Card>
                 {/*<Image src={concert.seatsImage} />*/}
 
                 <Box display="flex" flexWrap="wrap" spacing={2}>

@@ -7,10 +7,10 @@ import styles from './StepperBar.module.css';
 
 const steps = ['Choose Time', 'Choose Seat', 'Checkout', 'Get Ticket'];
 
-const StepperBar = () => {
+const StepperBar = (index) => {
     return (
         <Box className={styles.stepperBar}>
-            <Stepper activeStep={1} alternativeLabel sx={{
+            <Stepper activeStep={index} alternativeLabel sx={{
                 '& .MuiStepIcon-root': {fontSize: '2rem'},
                 '& .MuiStepIcon-root.Mui-completed': {color: 'black', fontSize: '2rem'},
                 '& .MuiStepIcon-root.Mui-active': {color: 'black', fontSize: '2rem'}
