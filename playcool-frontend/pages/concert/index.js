@@ -8,7 +8,6 @@ import {
     Modal, Stack,
     Typography,
 } from "@mui/material";
-import "./Concert.module.css";
 import {useRouter} from "next/router";
 import {fetchConcerts} from "@/src/components/api";
 import EventIcon from "@mui/icons-material/Event";
@@ -49,16 +48,15 @@ const ConcertPage = () => {
     );
 
     return (
-        <Box className="page-container" sx={{maxWidth: "60%", marginLeft:"20%"}}>
+        <Box sx={{maxWidth: "60%", marginLeft:"20%"}}>
             <Typography variant="h4" component="h1" gutterBottom textAlign="center">
                 Concerts
             </Typography>
-            <Box className="concert-cards-container">
+            <Box>
                 {currentConcerts && currentConcerts.length > 0 && currentConcerts.map((concert) => (
                     <Card
                         key={concert.concertId}
                         onClick={() => handleConcertClick(concert)}
-                        className="concert-card"
                         sx={{
                             display: "flex",
                             flexDirection: "row",
@@ -186,7 +184,7 @@ const ConcertPage = () => {
                 ))}
             </Box>
 
-            <Box className="pagination-container" sx={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 2 }}>
+            <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: 2 }}>
                 <Stack spacing={2}>
                     <Pagination
                         count={totalPages}
