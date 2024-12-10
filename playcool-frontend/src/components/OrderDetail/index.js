@@ -8,6 +8,7 @@ const OrderDetail = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "auto",
+          boxShadow: "0",
       }}
     >
       <Box
