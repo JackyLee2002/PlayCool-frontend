@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Modal } from '@mui/material';
-import NavBar from '../../src/components/NavBar';
 import { getSongList, vote, isVoted } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
@@ -81,7 +80,7 @@ export default function SongList() {
                             className={styles.songCard}
                             sx={{ backgroundColor: getBackgroundColor(index + 1) }}
                         >
-                            <CardContent>
+                            <CardContent className={styles.songCardContent}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     {getImageSrc(song.name) && (
                                         <Box sx={{ width: '200px', height: '200px', position: 'relative' }}>
