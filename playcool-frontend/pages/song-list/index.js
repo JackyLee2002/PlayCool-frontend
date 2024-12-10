@@ -21,7 +21,7 @@ export default function SongList() {
     useEffect(() => {
         fetchSongs();
         document.body.style.cssText = 'overflow-x: hidden';
-        if (!token || token == null) {
+        if (!token) {
             return;
         }
         checkIfVoted();
