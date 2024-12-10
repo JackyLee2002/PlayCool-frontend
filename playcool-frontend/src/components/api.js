@@ -20,7 +20,7 @@ export const fetchConcerts = async () => {
   }
 };
 
-export const fetchConcert = async () => {
+export const fetchConcert = async (id) => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/concerts/${id}`,
