@@ -1,5 +1,22 @@
 .title {
     text-align: center;
+    font-size: 3rem; /* Make the font size larger */
+    animation: pulse 2s infinite; /* Add animation effect */
+    background: linear-gradient(to right, #ff0000, #ff7f7f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 .songCard {
     display: flex;

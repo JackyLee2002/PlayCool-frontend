@@ -27,7 +27,7 @@ const NavBar = ({handleOpen}) => {
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
-                        <Button className={styles.navButton} sx={{ 'color': 'white' }}>Song List</Button>
+                        <Button className={styles.navButton} sx={{ 'color': 'black' }}>Song List</Button>
                     </Link>
                     <Link href="/my-tickets" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>My Ticket</Button>
