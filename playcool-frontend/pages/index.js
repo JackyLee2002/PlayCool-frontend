@@ -22,15 +22,8 @@ export default function MainPage() {
 
   return (
     <div>
-      <NavBar handleOpen={handleOpen} />
       <Banner />
-      <Modal open={open && loginOpen} onClose={handleClose}>
-        <Box sx={{ ...modalStyle }}>
-          <LoginPage />
-        </Box>
-      </Modal>
       <ConcertList />
-      <OrderDetail />
       <VotePoster />
       <Footer />
     </div>
