@@ -5,7 +5,7 @@ import OrderDetail from "@/src/components/OrderDetail";
 const CreateOrder = () => {
 
     return (<div>
-            <StepperBar/>
+            <StepperBar index={2}/>
             <OrderDetail/>
             <ConfirmOrder/>
         </div>);
