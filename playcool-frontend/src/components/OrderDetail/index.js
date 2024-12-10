@@ -1,6 +1,6 @@
 import {Card, CardContent, CardMedia, Typography, Box} from "@mui/material";
 
-const OrderDetail = () => {
+const OrderDetail = ({order}) => {
     return (
         <Card
             sx={{

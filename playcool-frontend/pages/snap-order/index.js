@@ -18,8 +18,8 @@ const SnapOrder = ({orderId}) => {
     const snapTicket = async () => {
         // Implement the logic to snap a ticket here
         console.log("Ticket snapped!");
-        await fetchSnapTicket(orderId, token);
-
+        const response = await fetchSnapTicket(orderId, token);
+        setOrder(response);
         // navigate to the pay page
         await router.push(`/pay-order/${orderId}`);
     };
@@ -44,7 +44,7 @@ const SnapOrder = ({orderId}) => {
                     {token}
                 </Typography>
 
-                <OrderDetail/> {/* 在这里嵌入 OrderDetail 组件展示具体订单详情内容 */}
+                <OrderDetail order={{"order":1}}/>
                 <Box
                     sx={{
                         display: 'flex',
