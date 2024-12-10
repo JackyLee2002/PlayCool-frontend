@@ -6,6 +6,7 @@ const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
@@ -16,14 +17,15 @@ const AuthProvider = ({ children }) => {
     if (savedToken) {
       setToken(savedToken);
       fetchUserInfo(savedToken);
+      setLoading(false);
     }
   }, []);
 
   const fetchUserInfo = async (token) => {
     try {
-      console.log(token);
+      setLoading(true);
       const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,11 +35,12 @@ const AuthProvider = ({ children }) => {
       if (!response.ok) {
         setToken(null);
         setUser(null);
+        setLoading(false);
         localStorage.removeItem("token");
         throw new Error("Failed to fetch user info");
       }
+      setLoading(false);
       const data = await response.json();
-      console.log(data);
       setUser(data);
     } catch (err) {
       setError(null);
@@ -47,31 +50,34 @@ const AuthProvider = ({ children }) => {
 
   const openLogin = () => {
     setLoginOpen(true);
-  }
+  };
 
   const createOrder = async (orderDetails) => {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(orderDetails),
-    });
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/order`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(orderDetails),
+        }
+      );
 
-    if (!response.ok) {
-      throw new Error("Failed to create order");
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const data = await response.json();
+      console.log("Order created successfully:", data);
+      return data;
+    } catch (err) {
+      setError(err.message);
+      setOpen(true);
     }
-
-    const data = await response.json();
-    console.log("Order created successfully:", data);
-    return data;
-  } catch (err) {
-    setError(err.message);
-    setOpen(true);
-  }
-};
+  };
 
   const login = async (username, password) => {
     try {
@@ -104,7 +110,7 @@ const AuthProvider = ({ children }) => {
   const register = async (username, email, password) => {
     try {
       const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
         {
           method: "POST",
           headers: {
@@ -138,7 +144,18 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, error, login, register, logout, loginOpen,openLogin,createOrder }}
+      value={{
+        user,
+        token,
+        error,
+        login,
+        register,
+        logout,
+        loginOpen,
+        openLogin,
+        createOrder,
+        loading,
+      }}
     >
       {children}
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

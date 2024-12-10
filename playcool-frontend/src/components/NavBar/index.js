@@ -32,14 +32,11 @@ const NavBar = ({handleOpen}) => {
                     <Link href="/my-tickets" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>My Ticket</Button>
                     </Link>
-                    <Link href="/create-order" passHref>
+                    <Link href="/create-order/[id]" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>Create Order</Button>
                     </Link>
                     <Link href="/concert" passHref>
                         <Button className={styles.navButton} sx={{'color': 'black'}}>Concert</Button>
-                    </Link>
-                    <Link href="/testing" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Testing</Button>
                     </Link>
                 </div>
                 {user ? (

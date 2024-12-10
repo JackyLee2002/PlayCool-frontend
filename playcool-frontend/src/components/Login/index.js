@@ -25,17 +25,18 @@ const LoginPage = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    mt: 8,
+                    mt: 4,
+                    mb:4,
                     bgcolor: "background.paper",
                     p: 4,
-                    borderRadius: 2,
+                    borderRadius: 3,
                     boxShadow: 3,
                     backgroundImage: "linear-gradient(to right, #ff7e5f, #feb47b)",
                 }}
             >
-                <Typography variant="h4" gutterBottom>
-                    Music of the SPHERES World Tour
-                </Typography>
+                {/*<Typography variant="h4" gutterBottom>*/}
+                {/*    Music of the SPHERES World Tour*/}
+                {/*</Typography>*/}
                 <Typography variant="h5" gutterBottom>
                     {isRegister ? "Register" : "Login"}
                 </Typography>
@@ -54,6 +55,7 @@ const LoginPage = () => {
                             margin="normal"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
                         />
                     )}
                     <TextField
@@ -63,6 +65,7 @@ const LoginPage = () => {
                         margin="normal"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        required
                     />
                     <TextField
                         label="Password"
@@ -72,6 +75,7 @@ const LoginPage = () => {
                         margin="normal"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                     <Button
                         type="submit"
@@ -83,7 +87,7 @@ const LoginPage = () => {
                         {isRegister ? "Register" : "Login"}
                     </Button>
                 </form>
-                <Button color="secondary" sx={{ mt: 2 }} onClick={() => setIsRegister(!isRegister)}>
+                <Button color="secondary" sx={{ mt: 2,textTransform: 'none' }} onClick={() => setIsRegister(!isRegister)}>
                     {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
                 </Button>
             </Box>
