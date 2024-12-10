@@ -1,21 +1,38 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Box, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
 import {AuthContext} from "@/src/context/AuthContext";
-import {fetchPayOrder} from "@/src/components/api";
-import {router} from "next/client";
+import {fetchOrder, fetchPayOrder} from "@/src/components/api";
+import {useRouter} from "next/router";
 
-const PayOrder = ({orderId}) => {
+const PayOrder = () => {
     const [payment, setPayment] = useState("WX");
     const {token} = useContext(AuthContext);
+    const [order, setOrder] = useState({});
+    const route = useRouter();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!router.query.id) {
+            return;
+        }
+        fetchOrderData(router.query.id);
+    }, [router]);
+
+    const fetchOrderData = async (id) => {
+        if (id && token) {
+            const response = await fetchOrder(id, token);
+            setOrder(response);
+        }
+    };
 
     const payOrder = async () => {
         // Implement the logic to pay the order here
         console.log("Order paid!");
-        const response = await fetchPayOrder(orderId, token, payment);
+        const response = await fetchPayOrder(router.query.id, token, payment);
         console.log(response);
         // navigate to the order-list page
-         await router.push(`/order-list`);
+         await router.push(`/my-orders`);
     }
     console.log(payment)
     return (
@@ -35,9 +52,8 @@ const PayOrder = ({orderId}) => {
             >
                 <Typography variant="h3" sx={{marginBottom: '20px'}}>
                     Pay Order
-                    {token}
                 </Typography>
-                <OrderDetail/> {/* 在这里嵌入 OrderDetail 组件展示具体订单详情内容 */}
+                <OrderDetail props={order}/>
 
                 <Box
                     sx={{
