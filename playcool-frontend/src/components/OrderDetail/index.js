@@ -1,6 +1,6 @@
-import {Box, Card, CardContent, CardMedia, Typography} from "@mui/material";
+import {Card, CardContent, CardMedia, Typography, Box} from "@mui/material";
 
-const OrderDetail = ({props}) => {
+const OrderDetail = ({order}) => {
     return (
         <Card
             sx={{
@@ -24,17 +24,17 @@ const OrderDetail = ({props}) => {
                     alt="Concert"
                     height="140"
                     image={
-                        props?.concertImage || "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
+                        "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
                     }
                     title="Concert"
                     sx={{width: 150}}
                 />
                 <CardContent sx={{textAlign: "center"}}>
                     <Typography variant="h4" component="h2" sx={{fontWeight: "bold"}}>
-                        {props.concertName}
+                        Music of the Spheres World
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.venueName}
+                        Zayed Sports City, Abu Dhabi, United Arab Emirates
                     </Typography>
                 </CardContent>
             </Box>
@@ -50,18 +50,13 @@ const OrderDetail = ({props}) => {
                 }}
             >
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Time:</strong> {props.concertDate}
+                    <strong>Time:</strong> June 04, Mon. 08:00 pm
                 </Typography>
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Area:</strong> {props.areaName}
+                    <strong>Seat:</strong> Section 1, Row D, Seat 106
                 </Typography>
-                {props.seatNumber ?
-                    <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                            <strong>SeatNumber:</strong> {props.seatNumber}
-                    </Typography> :
-                    null}
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Price:</strong> ${props.price}
+                    <strong>Price:</strong> $399.00
                 </Typography>
             </Box>
         </Card>

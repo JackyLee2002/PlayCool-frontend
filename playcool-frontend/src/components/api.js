@@ -128,22 +128,3 @@ export const fetchPayOrder = async (orderId, tokens, paymentMethod) => {
         return {status: 'error', data: []};
     }
 }
-
-export const fetchOrder = async (orderId, tokens) => {
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/${orderId}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${tokens}`,
-            },
-        });
-        if(!response.ok) {
-            throw new Error('Failed to fetch order');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching concerts:', error);
-        return {status: 'error', data: []};
-    }
-}
