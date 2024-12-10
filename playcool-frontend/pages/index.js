@@ -21,7 +21,7 @@ export default function MainPage() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <div >
       <Banner />
       {/* <ConcertList /> */}
       <VotePoster />

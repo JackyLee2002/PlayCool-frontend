@@ -24,9 +24,6 @@
     background-color: white;
     z-index: 1;
 }
-body {
-    overflow-x: hidden;
-}
 .songListContainer {
     background-image: url('../statics/song-list-background.png');
     background-size: cover;
