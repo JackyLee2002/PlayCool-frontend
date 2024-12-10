@@ -1,0 +1,33 @@
+.title {
+    text-align: center;
+    font-size: 3rem;
+    animation: pulse 2s infinite;
+    color: white; /* Plain white color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a shadow for border effect */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.songCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    z-index: 1;
+}
+.songListContainer {
+    background-image: url('../statics/song-list-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
