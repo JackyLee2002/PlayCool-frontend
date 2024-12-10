@@ -49,18 +49,17 @@ const ConcertPage = () => {
   );
 
   return (
-    <Box className="page-container" sx={{ maxWidth: "60%", marginLeft: "20%" }}>
+    <Box sx={{ maxWidth: "60%", marginLeft: "20%" }}>
       <Typography variant="h4" component="h1" gutterBottom textAlign="center">
         Concerts
       </Typography>
-      <Box className="concert-cards-container">
+      <Box>
         {currentConcerts &&
           currentConcerts.length > 0 &&
           currentConcerts.map((concert) => (
             <Card
               key={concert.concertId}
               onClick={() => handleConcertClick(concert)}
-              className="concert-card"
               sx={{
                 display: "flex",
                 flexDirection: "row",
@@ -194,7 +193,6 @@ const ConcertPage = () => {
       </Box>
 
       <Box
-        className="pagination-container"
         sx={{
           display: "flex",
           flexDirection: "row",
