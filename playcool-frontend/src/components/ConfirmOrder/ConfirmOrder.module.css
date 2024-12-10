@@ -1,0 +1,42 @@
+.orderSummary {
+    margin: 20px 500px;
+    border: 1px solid #ccc;
+    padding: 40px 50px;
+    border-radius: 5px;
+}
+
+.orderSummaryTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.orderSummaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 40px;
+}
+
+.backButton {
+    background-color: white;
+    border: 1px solid #3337BF;
+    color: #3337BF;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.createOrderButton {
+    background-color: #3337BF;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 300px;
+}
