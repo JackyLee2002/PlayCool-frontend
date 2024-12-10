@@ -13,9 +13,27 @@ export const getSongList = async () => {
         console.error(err);
     }
 };
-export const vote = async (songId) => {
+export const vote = async (songId, token) => {
     try {
-        const response = await axiosInstance.post('/songs/vote', { songId });
+        const response = await axiosInstance.post('/songs/vote', { songId }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+
+export const isVoted = async (token) => {
+    try {
+        const response = await axiosInstance.get(`/songs/is-voted`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (err) {
         console.error(err);
