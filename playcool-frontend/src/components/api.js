@@ -58,7 +58,7 @@ export const fetchAvailableSeats = async (id) => {
 export const fetchSnapTicket = async (orderId, tokens) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/snap/${orderId}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${tokens}`,
@@ -66,6 +66,26 @@ export const fetchSnapTicket = async (orderId, tokens) => {
         });
         if(!response.ok) {
             throw new Error('Failed to snap ticket');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching concerts:', error);
+        return {status: 'error', data: []};
+    }
+}
+
+export const fetchPayOrder = async (orderId, tokens, paymentMethod) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/pay`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${tokens}`,
+            },
+            body: JSON.stringify({orderId, paymentMethod})
+        });
+        if(!response.ok) {
+            throw new Error('Failed to pay order');
         }
         return await response.json();
     } catch (error) {
