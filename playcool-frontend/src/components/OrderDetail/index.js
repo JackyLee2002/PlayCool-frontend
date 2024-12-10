@@ -1,6 +1,8 @@
-import {Card, CardContent, CardMedia, Typography, Box} from "@mui/material";
+import {Box, Card, CardContent, CardMedia, Typography} from "@mui/material";
+import {useEffect, useState} from "react";
 
-const OrderDetail = () => {
+const OrderDetail = ({props}) => {
+
     return (
         <Card
             sx={{
@@ -31,10 +33,10 @@ const OrderDetail = () => {
                 />
                 <CardContent sx={{textAlign: "center"}}>
                     <Typography variant="h4" component="h2" sx={{fontWeight: "bold"}}>
-                        Music of the Spheres World
+                        {props.concerName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Zayed Sports City, Abu Dhabi, United Arab Emirates
+                        {props.venueName}
                     </Typography>
                 </CardContent>
             </Box>
@@ -50,13 +52,13 @@ const OrderDetail = () => {
                 }}
             >
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Time:</strong> June 04, Mon. 08:00 pm
+                    <strong>Time:</strong> {props.concertDate}
                 </Typography>
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Seat:</strong> Section 1, Row D, Seat 106
+                    <strong>Area:</strong> {props.areaName}
                 </Typography>
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
-                    <strong>Price:</strong> $399.00
+                    <strong>Price:</strong> ${props.price}
                 </Typography>
             </Box>
         </Card>

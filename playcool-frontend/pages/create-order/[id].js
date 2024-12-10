@@ -1,7 +1,9 @@
 import StepperBar from "@/src/components/StepperBar";
 import ConfirmOrder from "@/src/components/ConfirmOrder";
+import OrderDetail from "@/src/components/OrderDetail";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import {fetchAreaById, fetchConcert} from "@/src/components/api";
 
 const CreateOrder = () => {
     const route = useRouter();
@@ -9,9 +11,13 @@ const CreateOrder = () => {
     const [selectedAreaId, setSelectedAreaId] = useState(1);
     const [concertId, setConcertId] = useState(0);
     const order = {
-        concertId: concertId,
-        selectedAreaId: selectedAreaId
-    };
+        concerName: "",
+        concertDate: null,
+        venueName: "",
+        areaName: "",
+        price: "",
+        concertImage: "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
+    }
     useEffect(() => {
         if (!route.query.id) {
             return;
@@ -21,17 +27,24 @@ const CreateOrder = () => {
         }
         setConcertId(route.query.id);
         setSelectedAreaId(router.query.selectedAreaId);
-        order.concertId = route.query.id;
-        order.selectedAreaId = router.query.selectedAreaId;
-        // console.log(order);
-    }, [router]);
-
+        if (concertId) {
+            fetchConcert(concertId).then((data) => {
+                order.concerName = data.title;
+                order.concertDate = data.dateTime;
+            })
+        }
+        if (selectedAreaId) {
+            fetchAreaById(selectedAreaId).then((data) => {
+                order.venueName = data.venue.name;
+                order.areaName = data.name;
+                order.price = data.price;
+            }, [router]);
+        }
+}, [router, concertId, selectedAreaId]);
     return (<div>
         <StepperBar index={2}/>
-        {/*<OrderDetail props={order}/>*/}
-        <ConfirmOrder/>
-    </div>);
-}
-
+        <OrderDetail props={order}/>
+        <ConfirmOrder props={concertId}/>
+    </div>);}
 
 export default CreateOrder;
