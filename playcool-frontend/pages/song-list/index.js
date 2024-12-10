@@ -21,10 +21,10 @@ export default function SongList() {
     useEffect(() => {
         fetchSongs();
         document.body.style.cssText = 'overflow-x: hidden';
-        if (!token) {
-            return;
+        if (token) {
+            checkIfVoted();
+            setIsLoginOpen(false);
         }
-        checkIfVoted();
     }, [token]);
 
     const checkIfVoted = async () => {
