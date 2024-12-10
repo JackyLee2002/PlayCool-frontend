@@ -23,7 +23,7 @@ export default function MainPage() {
   return (
     <div >
       <Banner />
-      <ConcertList />
+      {/* <ConcertList /> */}
       <VotePoster />
     </div>
   );
