@@ -21,7 +21,7 @@ export default function SongList() {
     useEffect(() => {
         fetchSongs();
         document.body.style.cssText = 'overflow-x: hidden';
-        if (!token || token == null) {
+        if (!token) {
             return;
         }
         checkIfVoted();
@@ -99,8 +99,13 @@ export default function SongList() {
                 ))}
             </Box>
             <Modal open={isLoginOpen} onClose={handleClose}>
-                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                    <LoginPage />
+                <Box
+                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+                    onClick={handleClose}
+                >
+                    <Box onClick={(e) => e.stopPropagation()}>
+                        <LoginPage />
+                    </Box>
                 </Box>
             </Modal>
         </div>

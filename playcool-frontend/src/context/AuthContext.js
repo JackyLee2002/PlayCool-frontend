@@ -94,7 +94,6 @@ const AuthProvider = ({ children }) => {
         setToken(data.token);
         localStorage.setItem("token", data.token);
         await fetchUserInfo(data.token);
-        router.push("/");
       }
     } catch (err) {
       setError(err.message);
