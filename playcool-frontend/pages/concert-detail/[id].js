@@ -32,7 +32,7 @@ const ConcertDetail = () => {
     return (
         <div>
             <div>
-                <StepperBar index={2}></StepperBar>
+                <StepperBar index={1}></StepperBar>
                 <Card
                     sx={{
                         display: "flex",
