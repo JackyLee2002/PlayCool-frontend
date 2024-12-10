@@ -21,7 +21,6 @@ const CreateOrder = () => {
             <StepperBar/>
             <OrderDetail/>
             <ConfirmOrder/>
-            <Footer/>
         </div>
     );
 }
