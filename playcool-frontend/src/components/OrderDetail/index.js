@@ -1,8 +1,6 @@
 import {Box, Card, CardContent, CardMedia, Typography} from "@mui/material";
-import {useEffect, useState} from "react";
 
 const OrderDetail = ({props}) => {
-
     return (
         <Card
             sx={{
@@ -26,14 +24,14 @@ const OrderDetail = ({props}) => {
                     alt="Concert"
                     height="140"
                     image={
-                        "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
+                        props?.concertImage || "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
                     }
                     title="Concert"
                     sx={{width: 150}}
                 />
                 <CardContent sx={{textAlign: "center"}}>
                     <Typography variant="h4" component="h2" sx={{fontWeight: "bold"}}>
-                        {props.concerName}
+                        {props.concertName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.venueName}
@@ -57,6 +55,11 @@ const OrderDetail = ({props}) => {
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
                     <strong>Area:</strong> {props.areaName}
                 </Typography>
+                {props.seatNumber ?
+                    <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
+                            <strong>SeatNumber:</strong> {props.seatNumber}
+                    </Typography> :
+                    null}
                 <Typography variant="body2" component="p" sx={{fontSize: "16px", paddingBottom: "3px"}}>
                     <strong>Price:</strong> ${props.price}
                 </Typography>
