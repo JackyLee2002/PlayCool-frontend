@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Modal } from '@mui/material';
-import { getSongList, vote, isVoted } from '../api/songService';
+import { getSongList, vote, checkVote, getVotedSongIdList } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
 import Image from 'next/image';
@@ -8,8 +8,9 @@ import LoginPage from '@/src/components/Login';
 
 export default function SongList() {
     const [songs, setSongs] = useState([]);
-    const [hasVoted, setHasVoted] = useState(false);
+    const [canVote, setCanVote] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [votedSongIdList, setVotedSongIdList] = useState([]);
     const { token } = useContext(AuthContext);
 
     const fetchSongs = async () => {
@@ -17,18 +18,24 @@ export default function SongList() {
         setSongs(songList);
     };
 
+    const fetchVotedSongIdList = async () => {
+        const votedSongIdList = await getVotedSongIdList(token);
+        setVotedSongIdList(votedSongIdList);
+    }
+
     useEffect(() => {
         fetchSongs();
         document.body.style.cssText = 'overflow-x: hidden';
-        if (token) {
-            checkIfVoted();
+        if (token && token !== null) {
+            checkCanVote();
             setIsLoginOpen(false);
+            fetchVotedSongIdList();
         }
     }, [token]);
 
-    const checkIfVoted = async () => {
-        const voted = await isVoted(token);
-        setHasVoted(voted);
+    const checkCanVote = async () => {
+        const voted = await checkVote(token);
+        setCanVote(voted);
     };
 
     const handleVote = async (songId) => {
@@ -38,7 +45,8 @@ export default function SongList() {
         }
         await vote(songId, token);
         fetchSongs();
-        checkIfVoted();
+        checkCanVote();
+        fetchVotedSongIdList();
     };
 
     const handleClose = () => {
@@ -49,26 +57,26 @@ export default function SongList() {
         try {
             return require(`../statics/${songName}.png`);
         } catch (err) {
-            return null;
+            return require(`../statics/Other.png`);
         }
     };
 
     const getBackgroundColor = (rank) => {
         switch (rank) {
             case 1:
-                return '#FFD700'; // Gold
+                return '#FFD700';
             case 2:
-                return '#FFC700'; // Bright Yellow
+                return '#FFC700';
             case 3:
-                return '#FFB700'; // Yellow-Orange
+                return '#FFB700';
             case 4:
-                return '#FFA500'; // Orange
+                return '#FFA500';
             case 5:
-                return '#FF8C00'; // Dark Orange
+                return '#FF8C00';
             case 6:
-                return '#FF7F50'; // Coral
+                return '#FF7F50';
             default:
-                return '#FFFFFF'; // Default to white if rank is not 1-6
+                return '#FFFFFF';
         }
     };
 
@@ -114,7 +122,7 @@ export default function SongList() {
                                 color="primary"
                                 sx={{ alignSelf: 'center' }}
                                 onClick={() => handleVote(song.id)}
-                                disabled={hasVoted}
+                                disabled={canVote || votedSongIdList.includes(song.id)}
                             >
                                 Vote
                             </Button>
