@@ -1,0 +1,17 @@
+.SouvenirSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*overflow-x: auto;*/
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+}
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
