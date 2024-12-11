@@ -92,8 +92,8 @@ export default function SongList() {
 
     return (
         <div id={"mainDiv"} className={styles.songListContainer}>
-            <h1 className={styles.title}>Vote For Your Favorite Song !</h1>
-            <Box display="flex" flexDirection="column" gap={2} sx={{ width: '50vw', marginLeft: '25%' }}>
+            <h1 className={styles.title} style={{marginBottom: '20px'}}>Vote For Your Favorite Song !</h1>
+            <Box display="flex" flexDirection="column" gap={2} sx={{width: '50vw', marginLeft: '25%'}}>
                 {currentSongs.map((song, index) => (
                     <Box key={song.id}>
                         <Card
