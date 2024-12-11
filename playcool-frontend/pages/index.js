@@ -28,10 +28,7 @@ export default function MainPage() {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <VideoMediaGroup />
         </Box>
-          
           <SouvenirSection />
-     
-          
       </div>
   );
 }
