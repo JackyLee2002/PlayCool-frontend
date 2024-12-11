@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, CardContent, Typography, Button, Box, Modal, Pagination } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Modal, Pagination, Snackbar, Alert } from '@mui/material';
 import { getSongList, vote, checkVote, getVotedSongIdList, getVotesByUserId } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
@@ -11,10 +11,11 @@ export default function SongList() {
     const [canVote, setCanVote] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [votedSongIdList, setVotedSongIdList] = useState([]);
-    const [remainingVotes, setRemainingVotes] = useState(3); // 默认剩余投票数为3
+    const [remainingVotes, setRemainingVotes] = useState(3);
     const { token } = useContext(AuthContext);
     const [page, setPage] = useState(1);
     const [songsPerPage] = useState(5);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const fetchSongs = async () => {
         const songList = await getSongList();
@@ -57,10 +58,15 @@ export default function SongList() {
         checkCanVote();
         fetchVotedSongIdList();
         fetchRemainingVotes();
+        setSnackbarOpen(true);
     };
 
     const handleClose = () => {
         setIsLoginOpen(false);
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     const getImageSrc = (songName) => {
@@ -183,6 +189,16 @@ export default function SongList() {
                     </Box>
                 </Box>
             </Modal>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+            >
+                <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+                    Vote successful!
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
