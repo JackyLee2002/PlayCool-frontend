@@ -29,12 +29,6 @@ const NavBar = ({handleOpen}) => {
                     <Link href="/song-list" passHref>
                         <Button className={styles.navButton} sx={{color: "white"}}>Song List</Button>
                     </Link>
-                    <Link href="/my-tickets" passHref>
-                        <Button className={styles.navButton} sx={{color: "white"}} >My Ticket</Button>
-                    </Link>
-                    <Link href="/create-order/[id]" passHref>
-                        <Button className={styles.navButton} sx={{color: "white"}} >Create Order</Button>
-                    </Link>
                     <Link href="/concert" passHref>
                         <Button className={styles.navButton} sx={{color: "white"}} >Concert</Button>
                     </Link>
