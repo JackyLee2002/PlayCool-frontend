@@ -18,11 +18,12 @@
     display: flex;
     gap: 16px;
     margin-left: 40%;
+    color: white;
 }
 
 .navButton {
-    color: black;
     text-transform: none;
+    color: white;
 }
 
 .loginButton {
