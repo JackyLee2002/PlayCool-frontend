@@ -18,7 +18,6 @@ const NavBar = ({handleOpen}) => {
             boxShadow: 'none',
             zIndex: "1000",
             height: '50px',
-            paddingRight: "25px"
         }}>
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
                 <Link href="/" passHref>
@@ -27,10 +26,17 @@ const NavBar = ({handleOpen}) => {
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
-                        <Button className={styles.navButton} sx={{color: "white"}}>Song List</Button>
+                        <Button className={styles.navButton} sx={{color: "white",
+                            ":hover": {
+                                scale: 1.2,
+                            }}}>Song List</Button>
                     </Link>
                     <Link href="/concert" passHref>
-                        <Button className={styles.navButton} sx={{color: "white"}} >Concert</Button>
+                        <Button className={styles.navButton} sx={{color: "white",
+                        ":hover": {
+                            scale: 1.2,
+                        }
+                        }} >Concert</Button>
                     </Link>
 
                 </div>
@@ -39,7 +45,7 @@ const NavBar = ({handleOpen}) => {
                         <AccountMenu/>
                     </div>) : (
 
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen}>
+                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px"}}>
                         Login / Register
                     </Button>)}
 
