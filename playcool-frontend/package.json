@@ -14,11 +14,12 @@
     "@mui/icons-material": "^6.1.10",
     "@mui/material": "^6.1.10",
     "@mui/styles": "^6.1.10",
-    "next": "^15.0.4",
     "axios": "^1.7.9",
+    "next": "^15.0.4",
     "playcool-frontend": "file:",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-responsive-3d-carousel": "^2.1.1"
   },
   "devDependencies": {
     "eslint": "^8",
