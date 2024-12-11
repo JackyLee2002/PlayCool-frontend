@@ -1,0 +1,54 @@
+Index: playcool-frontend/src/components/SouvenirItem/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { Suspense } from 'react';\r\nimport { Canvas } from '@react-three/fiber';\r\nimport { useGLTF, OrbitControls } from '@react-three/drei';\r\nimport styles from './SouvenirItem.module.css';\r\n\r\nconst Model = ({ gltfPath }) => {\r\n    const { scene } = useGLTF(gltfPath);\r\n    return <primitive object={scene} />;\r\n};\r\n\r\nconst SouvenirItem = ({ gltfPath }) => {\r\n    return (\r\n        <div className={styles.SouvenirItem}>\r\n            <div className={styles.SouvenirCanvas} style={{ width: '600px', height: '400px' }}>\r\n                <Canvas camera={{ position: [0, 0, 1.4] }}>\r\n                    <ambientLight intensity={0.5} />\r\n                    <directionalLight position={[10, 10, 5]} intensity={1} />\r\n                    <Suspense fallback={null}>\r\n                        <Model gltfPath={gltfPath} />\r\n                    </Suspense>\r\n                    <OrbitControls enablePan={false} enableZoom={true} />\r\n                </Canvas>\r\n            </div>\r\n            <div className={styles.SouvenirDescription}>\r\n                <h3>Check out more of Coldplay Souvenirs!</h3>\r\n                <p>A perfect souvenir for fans to be worn by Coldplay during their concerts.</p>\r\n            </div>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default SouvenirItem;
+===================================================================
+diff --git a/playcool-frontend/src/components/SouvenirItem/index.js b/playcool-frontend/src/components/SouvenirItem/index.js
+--- a/playcool-frontend/src/components/SouvenirItem/index.js	
++++ b/playcool-frontend/src/components/SouvenirItem/index.js	
+@@ -2,7 +2,7 @@
+ import { Canvas } from '@react-three/fiber';
+ import { useGLTF, OrbitControls } from '@react-three/drei';
+ import styles from './SouvenirItem.module.css';
+-
++import { Button } from '@mui/material';
+ const Model = ({ gltfPath }) => {
+     const { scene } = useGLTF(gltfPath);
+     return <primitive object={scene} />;
+@@ -18,12 +18,13 @@
+                     <Suspense fallback={null}>
+                         <Model gltfPath={gltfPath} />
+                     </Suspense>
+-                    <OrbitControls enablePan={false} enableZoom={true} />
++                    <OrbitControls enablePan={false} enableZoom={true} autoRotate={true} autoRotateSpeed={5.0} />
+                 </Canvas>
+             </div>
+             <div className={styles.SouvenirDescription}>
+                 <h3>Check out more of Coldplay Souvenirs!</h3>
+                 <p>A perfect souvenir for fans to be worn by Coldplay during their concerts.</p>
++                <Button sx={{"font-size":"16px", "font-weight" : "bold"}}onClick={() => window.location.href = 'https://usstore.coldplay.com/products/coldplay-tour-hat'}  > Buy now </Button>
+             </div>
+         </div>
+     );
+Index: playcool-frontend/src/components/SouvenirItem/SouvenirItem.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n.SouvenirCanvas {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    /*width: 30vw;*/\r\n}\r\n.SouvenirItem {\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    padding: 16px;\r\n    height: 50vh;\r\n    width: 40vw;\r\n    border: #00004d 2px solid;\r\n    border-radius: 10px;\r\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);\r\n    margin: 16px;\r\n    background-color: #00004b;\r\n}\r\n.SouvenirItem:hover {\r\n    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 12px 24px rgba(0, 0, 0, 0.4);\r\n}\r\n\r\n.SouvenirDescription {\r\n    text-align: center;\r\n    margin-top: 16px;\r\n}\r\n\r\n.SouvenirDescription h3 {\r\n    margin: 0;\r\n    font-size: 1.5em;\r\n}\r\n\r\n.SouvenirDescription p {\r\n    margin: 8px 0 0;\r\n    font-size: 1em;\r\n    color: #666;\r\n}\r\n\r\n
+===================================================================
+diff --git a/playcool-frontend/src/components/SouvenirItem/SouvenirItem.module.css b/playcool-frontend/src/components/SouvenirItem/SouvenirItem.module.css
+--- a/playcool-frontend/src/components/SouvenirItem/SouvenirItem.module.css	
++++ b/playcool-frontend/src/components/SouvenirItem/SouvenirItem.module.css	
+@@ -39,4 +39,13 @@
+     font-size: 1em;
+     color: #666;
+ }
++.buyNowButton {
++    background-color: ;
++    color: white;
++    border: none;
++    padding: 10px;
++    cursor: pointer;
++    border-radius: 5px;
++    margin-top: 16px;
++}
+ 
