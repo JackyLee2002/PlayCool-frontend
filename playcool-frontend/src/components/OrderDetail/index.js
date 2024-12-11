@@ -22,6 +22,8 @@ const OrderDetail = ({ props }) => {
         alignItems: "center",
         width: "auto",
         boxShadow: "0",
+          backgroundColor: "transparent",
+          color: "white",
       }}
     >
       <Box
@@ -47,7 +49,7 @@ const OrderDetail = ({ props }) => {
           <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
             {props.concertName}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" component="p">
             {props.venueName}
           </Typography>
         </CardContent>

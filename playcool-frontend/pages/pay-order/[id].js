@@ -50,7 +50,7 @@ const PayOrder = () => {
                     margin: 'auto' // Center horizontally
                 }}
             >
-                <Typography variant="h3" sx={{marginBottom: '20px'}}>
+                <Typography variant="h3" sx={{marginBottom: '20px',color:'white'}}>
                     Pay Order
                 </Typography>
                 <OrderDetail props={order}/>
@@ -63,7 +63,7 @@ const PayOrder = () => {
                         marginTop: '20px'
                     }}
                 >
-                    <Typography variant="h6" sx={{marginRight: '20px'}}>
+                    <Typography variant="h6" sx={{marginRight: '20px',color:'white'}}>
                         Please Select Payment Method:
                     </Typography>
                     <Box

@@ -44,7 +44,7 @@ export default function CarouselUI() {
   return (
     <div
       style={{
-        backgroundColor: "#0F1139",
+        // backgroundColor: "#0F1139",
       }}
     >
       <Carousel

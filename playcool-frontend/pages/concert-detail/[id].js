@@ -10,6 +10,7 @@ import {
 import { fetchAvailableSeats, fetchConcert } from "@/src/components/api";
 import { useRouter } from "next/router";
 import StepperBar from "@/src/components/StepperBar";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 const ConcertDetail = () => {
   const route = useRouter();
@@ -47,11 +48,18 @@ const ConcertDetail = () => {
       <StepperBar index={1}></StepperBar>
       <div>
         <Card
+
+
           sx={{
             display: "flex",
             flexDirection: "column",
             width: "auto",
             marginTop: 6,
+              backgroundColor: "transparent"
+          //     gradient: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%)",
+
+
+
           }}
         >
           <Box
@@ -168,11 +176,11 @@ const ConcertDetail = () => {
                       alignItems: "center",
                       justifyContent: "center",
                       border: "1px solid #ccc",
-                      borderRadius: "4px",
+                      borderRadius: "8px",
                       marginLeft: 10,
                       backgroundColor:
                         selectedAreaId === area.areaId
-                          ? "#90EE90"
+                          ? "lightskyblue"
                           : area.availableSeatsCount === 0
                           ? "lightgray"
                           : "white",
@@ -204,7 +212,7 @@ const ConcertDetail = () => {
                             area.availableSeatsCount < 100 ? "red" : "green",
                         }}
                       >
-                        余: {area.availableSeatsCount}
+                          <ConfirmationNumberIcon sx={{ marginRight: 1 }} />{area.availableSeatsCount}
                       </Typography>
                     </CardContent>
                   </Card>

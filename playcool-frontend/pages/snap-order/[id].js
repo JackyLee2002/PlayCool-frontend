@@ -43,11 +43,12 @@ const SnapOrder = () => {
                         flexDirection: 'column',
                         alignItems: 'center',
                         padding: '20px',
-                        border: '1px solid lightgray',
+                        // border: '1px solid lightgray',
                         borderRadius: '10px',
                         width: '1200px', // Set a fixed width
                         height: '550px', // Set a fixed height
-                        margin: 'auto' // Center horizontally
+                        margin: 'auto' ,// Center horizontally
+                        color: 'white',
                     }}
                 >
                     <Typography variant="h3" sx={{marginBottom: '20px'}}>
@@ -91,7 +92,8 @@ const SnapOrder = () => {
                                         border: '1px solid lightgray',
                                         borderRadius: '5px',
                                         flex: 1,
-                                        width: '300px'
+                                        width: '300px',
+                                        color:'black'
                                     }}
                                 />
                                 <button
