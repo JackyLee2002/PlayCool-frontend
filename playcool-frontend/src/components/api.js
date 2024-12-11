@@ -188,13 +188,12 @@ export const fetchNoAuthOrder = async (orderId) => {
     }
 }
 
-export const fetchNoAuthSnapTicket = async (orderId, tokens) => {
+export const fetchNoAuthSnapTicket = async (orderId) => {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/snap/oauth/${orderId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                "Authorization": `Bearer ${tokens}`,
             },
         });
         if(!response.ok) {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {Box, Button, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
 import { AuthContext } from "@/src/context/AuthContext";
-import { fetchOrder, fetchSnapTicket } from "@/src/components/api";
+import {fetchNoAuthSnapTicket, fetchOrder, fetchSnapTicket} from "@/src/components/api";
 import { useRouter } from "next/router";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
@@ -20,7 +20,7 @@ const SnapOrder = () => {
             return;
         }
         if (router.query.id) {
-            setURL(`${window.location.origin}/snap-order-help/${router.query.id}`);
+            setURL(`${window.location.origin}/snap-help-order/${router.query.id}`);
         }
         fetchOrderData(router.query.id);
     }, [router]);
@@ -38,16 +38,20 @@ const SnapOrder = () => {
             setOrder(response);
             if (response.concertDate) {
                 const concertDate = new Date(response.concertDate);
-                concertDate.setDate(concertDate.getDate());
+                concertDate.setDate(concertDate.getDate()-31);
                 setTargetDate(concertDate);
             }
         }
     };
 
     const snapTicket = async () => {
-        await fetchSnapTicket(router.query.id, token);
-        await router.push(`/pay-order/${router.query.id}`);
+        const response = await fetchNoAuthSnapTicket(router.query.id)
+        setOrder(response);
     };
+
+    const success = async () => {
+        await router.push(`/pay-order/${router.query.id}`);
+    }
 
     return (
         <div style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column' }}>
@@ -64,7 +68,7 @@ const SnapOrder = () => {
                 }}
             >
                 <Typography variant="h3" sx={{ marginBottom: '20px' }}>
-                    Share with your friends
+                    Share With Your Friends
                 </Typography>
 
                 {targetDate && (
@@ -156,11 +160,7 @@ const SnapOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            if (targetDate && currentDate >= targetDate) {
-                                snapTicket();
-                            } else {
-                                alert("未到抢票时间");
-                            }
+                            order.seatNumber === null ? snapTicket() : success()
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
@@ -174,7 +174,7 @@ const SnapOrder = () => {
                             width: '200px',
                         }}
                     >
-                        Snap Ticket
+                        {order.seatNumber === null ? "Snap Ticket" : "Success"}
                     </Button>
                 </Box>
             </Box>
