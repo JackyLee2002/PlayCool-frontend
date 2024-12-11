@@ -2,12 +2,15 @@ import { Carousel } from "react-responsive-3d-carousel";
 import "react-responsive-3d-carousel/dist/styles.css";
 import Image from "next/image";
 import Link from "next/link";
+import Concert from '../../../public/Concert.png'
+import Vote from '../../../public/Vote.png'
+import AlbumsOnSale from '../../../public/AlbumsOnSale.png'
 
 export default function CarouselUI() {
   const items = [
     <Link href="/song-list" key={1}>
       <Image
-        src="https://nedxstgaprodfiles.blob.core.windows.net/image/neste_coldplay_collaboration_release_photo._photo_courtesy_of_coldplay_2.jpg"
+        src={Vote}
         alt="image song"
         width={700}
         height={400}
@@ -20,7 +23,7 @@ export default function CarouselUI() {
       key={2}
     >
       <Image
-        src="https://i.redd.it/v9jcnqlllw2e1.jpeg"
+        src={AlbumsOnSale}
         alt="cd image"
         width={700}
         height={400}
@@ -29,7 +32,7 @@ export default function CarouselUI() {
     </a>,
     <Link href="/concert" target="_blank" key={3}>
       <Image
-        src="https://i.redd.it/13rsjg2gyigz.jpg"
+        src={Concert}
         alt="concert image"
         width={700}
         height={400}
