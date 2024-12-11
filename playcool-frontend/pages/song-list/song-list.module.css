@@ -31,3 +31,13 @@
     background-repeat: no-repeat;
     min-height: 100vh;
 }
+.songCardContent {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.songCardContent:hover {
+    transform: scale(1.05);
+    color: white;
+}
