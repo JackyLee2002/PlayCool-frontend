@@ -5,7 +5,7 @@ import NavBar from "../src/components/NavBar";
 import Banner from "../src/components/Banner";
 import VideoMediaGroup from '../src/components/VideoMediaGroup';
 import VotePoster from "@/src/components/VotePoster";
-import '../styles/globals.css'; // Adjust the path as needed
+
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
 
