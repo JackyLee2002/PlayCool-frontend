@@ -1,14 +1,17 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './ConfirmOrder.module.css';
-import {Button} from '@mui/material';
+import {Box, Button, Modal} from '@mui/material';
 import Divider from "@mui/material/Divider";
 import {AuthContext} from "@/src/context/AuthContext";
 import {fetchConcert} from "@/src/components/api";
 import {useRouter} from "next/router";
+import Login from "@/src/components/Login";
 
 const ConfirmOrder = ({props}) => {
     const router = useRouter();
     const {createOrder} = useContext(AuthContext);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const {user} = useContext(AuthContext);
 
     const getVenueId = (concertId) => {
         fetchConcert(concertId).then((data) => {
@@ -16,16 +19,22 @@ const ConfirmOrder = ({props}) => {
         });
     }
     const confirmOder = () => {
+        if (!user) {
+            setIsLoginOpen(true);
+            return;
+        }
         let venueId = getVenueId(props.concertId);
         createOrder({
             concertId: props.concertId, areaId: props.areaId, venueId: venueId
         }).then((data) => {
-            console.log(data);
             router.push(`/snap-order/${data.orderId}`)
         });
-
-
     }
+
+    const handleClose = () => {
+        setIsLoginOpen(false);
+    };
+
     return (<div className={styles.orderSummary}>
         <div className={styles.orderSummaryTitle}>
             Order Summary
@@ -68,6 +77,16 @@ const ConfirmOrder = ({props}) => {
                 Create Order
             </Button>
         </div>
+        <Modal open={isLoginOpen} onClose={handleClose}>
+            <Box
+                sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}
+                onClick={handleClose}
+            >
+                <Box onClick={(e) => e.stopPropagation()}>
+                    <Login/>
+                </Box>
+            </Box>
+        </Modal>
     </div>);
 };
 
