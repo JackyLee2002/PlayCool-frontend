@@ -39,7 +39,6 @@ const modalStyle = {
     transform: "translate(-50%, -50%)",
     width: 600,
     boxShadow: "1px",
-    p: 4,
 };
 
 export default Layout;
