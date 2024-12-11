@@ -3,11 +3,9 @@ import { AuthContext } from "../src/context/AuthContext";
 import { Box, Modal } from "@mui/material";
 import NavBar from "../src/components/NavBar";
 import Banner from "../src/components/Banner";
-
-import Login from "../src/components/Login";
-import Footer from "@/src/components/Footer";
-import ConcertList from "@/src/components/ConcertList";
+import VideoMediaGroup from '../src/components/VideoMediaGroup';
 import VotePoster from "@/src/components/VotePoster";
+import '../styles/globals.css'; // Adjust the path as needed
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
 
@@ -28,13 +26,20 @@ export default function MainPage() {
       {/* <ConcertList /> */}
       <VotePoster />
     </div>
+      <div>
+        <Banner />
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <VideoMediaGroup />
+        </Box>
+        <VotePoster />
+      </div>
   );
 }
 
 const modalStyle = {
   position: "absolute",
   top: "50%",
-  left: "50%",
+  left: "20%",
   transform: "translate(-50%, -50%)",
   width: 700,
   boxShadow: 24,

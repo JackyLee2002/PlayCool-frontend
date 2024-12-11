@@ -15,11 +15,14 @@
     "@mui/material": "^6.1.10",
     "@mui/styles": "^6.1.10",
     "axios": "^1.7.9",
-    "next": "^15.0.4",
+    "react-responsive-3d-carousel": "^2.1.1",
+    "next": "^15.1.0",
     "playcool-frontend": "file:",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-responsive-3d-carousel": "^2.1.1"
+    "react-player": "^2.16.0",
+    "styled-components": "^6.1.13"
+
   },
   "devDependencies": {
     "eslint": "^8",

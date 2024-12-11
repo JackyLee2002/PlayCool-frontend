@@ -1,7 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import NavBar from './NavBar';
-import {AuthContext} from "@/src/context/AuthContext";
-import {Box, Modal} from "@mui/material";
+import { AuthContext } from "@/src/context/AuthContext";
+import { Box, Modal } from "@mui/material";
 import Login from "@/src/components/Login";
 import Footer from "@/src/components/Footer";
 
@@ -17,9 +17,7 @@ const Layout = ({ children }) => {
 
     return (
         <div>
-
-                <title>PlayCool</title>
-
+            <title>PlayCool</title>
             <NavBar handleOpen={handleOpen} />
             <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
