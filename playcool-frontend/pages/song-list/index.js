@@ -83,8 +83,6 @@ export default function SongList() {
                 return '#FFA500';
             case 5:
                 return '#FF8C00';
-            case 6:
-                return '#FF7F50';
             default:
                 return '#FFFFFF';
         }
@@ -141,6 +139,11 @@ export default function SongList() {
                                     </Box>
                                 </Box>
                             </CardContent>
+                            {votedSongIdList.includes(song.id) && (
+                                <Typography variant="body2" color="error" sx={{alignSelf: 'center', marginBottom: 1, fontSize: '1.2rem', fontWeight: 'bold'}}>
+                                    You have already voted for this song.
+                                </Typography>
+                            )}
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -160,12 +163,12 @@ export default function SongList() {
                     page={page}
                     onChange={handlePageChange}
                     sx={{
-                        backgroundColor: "rgba(255, 255, 0, 0.8)", // 更鲜艳的背景颜色
+                        backgroundColor: "rgba(255, 255, 0, 0.8)",
                         borderRadius: "8px",
                         padding: "10px",
                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                         '& .MuiPaginationItem-root': {
-                            color: "black", // 分页项的字体颜色
+                            color: "black",
                         },
                     }}
                 />
