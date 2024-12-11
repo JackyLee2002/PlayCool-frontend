@@ -56,17 +56,19 @@ export default function SongList() {
     const getBackgroundColor = (rank) => {
         switch (rank) {
             case 1:
-                return '#FF3000';
+                return '#FFD700'; // Gold
             case 2:
-                return '#FF4500';
+                return '#FFC700'; // Bright Yellow
             case 3:
-                return '#FF6347';
+                return '#FFB700'; // Yellow-Orange
             case 4:
-                return '#FF7F50';
+                return '#FFA500'; // Orange
             case 5:
-                return '#FF8C00';
+                return '#FF8C00'; // Dark Orange
             case 6:
-                return '#FFA07A';
+                return '#FF7F50'; // Coral
+            default:
+                return '#FFFFFF'; // Default to white if rank is not 1-6
         }
     };
 
@@ -92,16 +94,16 @@ export default function SongList() {
                                             {song.name}
                                         </Typography>
                                         {song.album && (
-                                            <Typography color="text.secondary">
+                                            <Typography>
                                                 album: {song.album}
                                             </Typography>
                                         )}
                                         {song.releaseDate && (
-                                            <Typography color="text.secondary">
+                                            <Typography>
                                                 release date: {song.releaseDate}
                                             </Typography>
                                         )}
-                                        <Typography variant="body2">
+                                        <Typography>
                                             votes: {song.votes}
                                         </Typography>
                                     </Box>
