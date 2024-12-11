@@ -32,7 +32,7 @@ export default function SongList() {
     };
 
     const handleVote = async (songId) => {
-        if (!token) {
+        if (!token || token === null) {
             setIsLoginOpen(true);
             return;
         }
