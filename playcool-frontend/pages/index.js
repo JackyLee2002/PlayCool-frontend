@@ -20,14 +20,11 @@ export default function MainPage() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <CarouselUI />
-      <Banner />
-      {/* <ConcertList /> */}
-      <VotePoster />
-    </div>
       <div>
+        <CarouselUI />
         <Banner />
+        {/* <ConcertList /> */}
+        <VotePoster />
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <VideoMediaGroup />
         </Box>
