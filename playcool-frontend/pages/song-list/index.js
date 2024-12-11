@@ -152,8 +152,15 @@ export default function SongList() {
                             )}
                             <Button
                                 variant="contained"
-                                color="primary"
-                                sx={{alignSelf: 'center'}}
+                                sx={{
+                                    marginLeft: "auto",
+                                    alignSelf: "flex-end",
+                                    backgroundColor: "#3337BF",
+                                    color: "deepblue",
+                                    fontSize: "1rem",
+                                    padding: "10px 20px",
+                                    borderRadius: "12px",
+                                }}
                                 onClick={() => handleVote(song.id)}
                                 disabled={canVote || votedSongIdList.includes(song.id)}
                             >
