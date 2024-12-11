@@ -25,7 +25,6 @@ export default function MyOrders() {
             return;
         }
         fetchOrders(token, page - 1, 10).then((data) => {
-            console.log("data", data);
             setOrders(data.content);
             setTotalPages(data.totalPages);
         });
@@ -95,9 +94,9 @@ export default function MyOrders() {
                                 <Typography variant="body2" color="text.secondary">
                                     Created Time: {new Date(order.createdAt).toLocaleString()}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
+                                {order.paymentStatus == "COMPLETED"  && <Typography variant="body2" color="text.secondary">
                                     Paid Time: {new Date(order.updatedAt).toLocaleString()}
-                                </Typography>
+                                </Typography> }
                             </CardContent>
                             <Button
                                 variant="outlined"
