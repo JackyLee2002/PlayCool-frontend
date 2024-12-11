@@ -150,7 +150,6 @@ export default function SongList() {
                         borderRadius: "8px",
                         padding: "10px",
                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                        color: "black", // 字体颜色
                         '& .MuiPaginationItem-root': {
                             color: "black", // 分页项的字体颜色
                         },
