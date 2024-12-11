@@ -53,4 +53,17 @@ export const getVotedSongIdList = async (token) => {
     }
 }
 
+export const getVotesByUserId = async(token) => {
+    try {
+        const response = await axiosInstance.get(`/songs/votes`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 export default axiosInstance;

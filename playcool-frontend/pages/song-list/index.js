@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Modal, Pagination } from '@mui/material';
-import { getSongList, vote, checkVote, getVotedSongIdList } from '../api/songService';
+import { getSongList, vote, checkVote, getVotedSongIdList, getVotesByUserId } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ export default function SongList() {
     const [canVote, setCanVote] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [votedSongIdList, setVotedSongIdList] = useState([]);
+    const [remainingVotes, setRemainingVotes] = useState(3); // 默认剩余投票数为3
     const { token } = useContext(AuthContext);
     const [page, setPage] = useState(1);
     const [songsPerPage] = useState(5);
@@ -25,6 +26,11 @@ export default function SongList() {
         setVotedSongIdList(votedSongIdList || []);
     }
 
+    const fetchRemainingVotes = async () => {
+        const votes = await getVotesByUserId(token);
+        setRemainingVotes(3 - votes);
+    }
+
     useEffect(() => {
         fetchSongs();
         document.body.style.cssText = 'overflow-x: hidden';
@@ -32,6 +38,7 @@ export default function SongList() {
             checkCanVote();
             setIsLoginOpen(false);
             fetchVotedSongIdList();
+            fetchRemainingVotes();
         }
     }, [token]);
 
@@ -49,6 +56,7 @@ export default function SongList() {
         fetchSongs();
         checkCanVote();
         fetchVotedSongIdList();
+        fetchRemainingVotes();
     };
 
     const handleClose = () => {
@@ -92,22 +100,28 @@ export default function SongList() {
 
     return (
         <div id={"mainDiv"} className={styles.songListContainer}>
-            <h1 className={styles.title} style={{marginBottom: '20px'}}>Vote For Your Favorite Song !</h1>
+            <h1 className={styles.title} style={{paddingTop: '30px', fontSize: '3rem'}}>
+                Vote For Your Favorite Songs !
+            </h1>
+            <h4 className={styles.title} style={{marginBottom: '20px', fontSize: '2rem'}}>
+                Remaining Votes: {remainingVotes}
+            </h4>
             <Box display="flex" flexDirection="column" gap={2} sx={{width: '50vw', marginLeft: '25%'}}>
                 {currentSongs.map((song, index) => (
                     <Box key={song.id}>
                         <Card
                             className={styles.songCard}
-                            sx={{ backgroundColor: getBackgroundColor(index + 1) }}
+                            sx={{backgroundColor: getBackgroundColor(index + 1)}}
                         >
                             <CardContent className={styles.songCardContent}>
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <Box sx={{display: 'flex', alignItems: 'center'}}>
                                     {getImageSrc(song.name) && (
-                                        <Box sx={{ width: '200px', height: '200px', position: 'relative' }}>
-                                            <Image src={getImageSrc(song.name)} alt={song.name} layout="fill" objectFit="contain" />
+                                        <Box sx={{width: '160px', height: '160px', position: 'relative'}}>
+                                            <Image src={getImageSrc(song.name)} alt={song.name} layout="fill"
+                                                   objectFit="contain"/>
                                         </Box>
                                     )}
-                                    <Box sx={{ marginLeft: 2 }}>
+                                    <Box sx={{marginLeft: 2}}>
                                         <Typography variant="h5" component="div">
                                             {song.name}
                                         </Typography>
@@ -130,7 +144,7 @@ export default function SongList() {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                sx={{ alignSelf: 'center' }}
+                                sx={{alignSelf: 'center'}}
                                 onClick={() => handleVote(song.id)}
                                 disabled={canVote || votedSongIdList.includes(song.id)}
                             >
@@ -140,7 +154,7 @@ export default function SongList() {
                     </Box>
                 ))}
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+            <Box sx={{display: "flex", justifyContent: "center", mt: 4}}>
                 <Pagination
                     count={Math.ceil(songs.length / songsPerPage)}
                     page={page}
@@ -158,11 +172,11 @@ export default function SongList() {
             </Box>
             <Modal open={isLoginOpen} onClose={handleClose}>
                 <Box
-                    sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+                    sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}
                     onClick={handleClose}
                 >
                     <Box onClick={(e) => e.stopPropagation()}>
-                        <Login />
+                        <Login/>
                     </Box>
                 </Box>
             </Modal>
