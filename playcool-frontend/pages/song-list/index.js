@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Modal } from '@mui/material';
-import NavBar from '../../src/components/NavBar';
 import { getSongList, vote, isVoted } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
@@ -57,17 +56,19 @@ export default function SongList() {
     const getBackgroundColor = (rank) => {
         switch (rank) {
             case 1:
-                return '#FF3000';
+                return '#FFD700'; // Gold
             case 2:
-                return '#FF4500';
+                return '#FFC700'; // Bright Yellow
             case 3:
-                return '#FF6347';
+                return '#FFB700'; // Yellow-Orange
             case 4:
-                return '#FF7F50';
+                return '#FFA500'; // Orange
             case 5:
-                return '#FF8C00';
+                return '#FF8C00'; // Dark Orange
             case 6:
-                return '#FFA07A';
+                return '#FF7F50'; // Coral
+            default:
+                return '#FFFFFF'; // Default to white if rank is not 1-6
         }
     };
 
@@ -81,7 +82,7 @@ export default function SongList() {
                             className={styles.songCard}
                             sx={{ backgroundColor: getBackgroundColor(index + 1) }}
                         >
-                            <CardContent>
+                            <CardContent className={styles.songCardContent}>
                                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                     {getImageSrc(song.name) && (
                                         <Box sx={{ width: '200px', height: '200px', position: 'relative' }}>
@@ -93,16 +94,16 @@ export default function SongList() {
                                             {song.name}
                                         </Typography>
                                         {song.album && (
-                                            <Typography color="text.secondary">
+                                            <Typography>
                                                 album: {song.album}
                                             </Typography>
                                         )}
                                         {song.releaseDate && (
-                                            <Typography color="text.secondary">
+                                            <Typography>
                                                 release date: {song.releaseDate}
                                             </Typography>
                                         )}
-                                        <Typography variant="body2">
+                                        <Typography>
                                             votes: {song.votes}
                                         </Typography>
                                     </Box>
