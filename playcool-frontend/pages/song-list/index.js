@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Card, CardContent, Typography, Button, Box, Modal } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Modal, Pagination } from '@mui/material';
 import { getSongList, vote, checkVote, getVotedSongIdList } from '../api/songService';
 import styles from './song-list.module.css';
 import { AuthContext } from '@/src/context/AuthContext';
@@ -12,6 +12,8 @@ export default function SongList() {
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [votedSongIdList, setVotedSongIdList] = useState([]);
     const { token } = useContext(AuthContext);
+    const [page, setPage] = useState(1);
+    const [songsPerPage] = useState(5);
 
     const fetchSongs = async () => {
         const songList = await getSongList();
@@ -80,11 +82,19 @@ export default function SongList() {
         }
     };
 
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
+
+    const indexOfLastSong = page * songsPerPage;
+    const indexOfFirstSong = indexOfLastSong - songsPerPage;
+    const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
+
     return (
         <div id={"mainDiv"} className={styles.songListContainer}>
             <h1 className={styles.title}>Vote For Your Favorite Song !</h1>
             <Box display="flex" flexDirection="column" gap={2} sx={{ width: '50vw', marginLeft: '25%' }}>
-                {songs.map((song, index) => (
+                {currentSongs.map((song, index) => (
                     <Box key={song.id}>
                         <Card
                             className={styles.songCard}
@@ -130,6 +140,13 @@ export default function SongList() {
                     </Box>
                 ))}
             </Box>
+            <Pagination
+                count={Math.ceil(songs.length / songsPerPage)}
+                page={page}
+                onChange={handlePageChange}
+                className={styles.pagination}
+                sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}
+            />
             <Modal open={isLoginOpen} onClose={handleClose}>
                 <Box
                     sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
