@@ -25,7 +25,7 @@ const VideoMediaCard = ({ videoSrc, title, likes, views }) => {
                     <div style={styles.info}>
                         <h2 style={styles.title}>{title}</h2>
                         <p style={styles.details}>
-                            {likes} likes • {views} views
+                            {likes}  • {views} 
                         </p>
                     </div>
                 </>
@@ -45,7 +45,7 @@ const styles = {
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         borderRadius: '20px',
         overflow: 'hidden',
-        padding: '20px',
+        padding: '10px',
     },
     videoWrapper: {
         width: '100%',
@@ -59,7 +59,7 @@ const styles = {
     info: {
         width: '100%',
         textAlign: 'center',
-        padding: '10px',
+        // padding: '10px',
         color: 'white',
     },
     title: {
