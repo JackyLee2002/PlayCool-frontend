@@ -18,25 +18,25 @@ const NavBar = ({handleOpen}) => {
             boxShadow: 'none',
             zIndex: "1000",
             height: '50px',
-            paddingRight: "25px"
         }}>
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
                 <Link href="/" passHref>
                     <Image src={playCoolLogo} alt="PlayCool Logo" width={150} height={50}
-                           style={{backgroundColor: "lightgrey", margin: "10px"}}/>
+                           style={{ margin: "10px"}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
-                        <Button className={styles.navButton} sx={{ 'color': 'black' }}>Song List</Button>
-                    </Link>
-                    <Link href="/my-tickets" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>My Ticket</Button>
-                    </Link>
-                    <Link href="/create-order/[id]" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Create Order</Button>
+                        <Button className={styles.navButton} sx={{color: "white",
+                            ":hover": {
+                                scale: 1.2,
+                            }}}>Song List</Button>
                     </Link>
                     <Link href="/concert" passHref>
-                        <Button className={styles.navButton} sx={{'color': 'black'}}>Concert</Button>
+                        <Button className={styles.navButton} sx={{color: "white",
+                        ":hover": {
+                            scale: 1.2,
+                        }
+                        }} >Concert</Button>
                     </Link>
 
                 </div>
@@ -45,7 +45,7 @@ const NavBar = ({handleOpen}) => {
                         <AccountMenu/>
                     </div>) : (
 
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen}>
+                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px"}}>
                         Login / Register
                     </Button>)}
 

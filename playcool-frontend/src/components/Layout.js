@@ -1,8 +1,8 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import NavBar from './NavBar';
-import {AuthContext} from "@/src/context/AuthContext";
-import {Box, Modal} from "@mui/material";
-import LoginPage from "@/src/components/Login";
+import { AuthContext } from "@/src/context/AuthContext";
+import { Box, Modal } from "@mui/material";
+import Login from "@/src/components/Login";
 import Footer from "@/src/components/Footer";
 
 const Layout = ({ children }) => {
@@ -17,13 +17,11 @@ const Layout = ({ children }) => {
 
     return (
         <div>
-
-                <title>PlayCool</title>
-
+            <title>PlayCool</title>
             <NavBar handleOpen={handleOpen} />
             <Modal open={open && loginOpen} onClose={handleClose}>
                 <Box sx={{ ...modalStyle }}>
-                    <LoginPage />
+                    <Login />
                 </Box>
             </Modal>
             {children}
@@ -39,7 +37,6 @@ const modalStyle = {
     transform: "translate(-50%, -50%)",
     width: 600,
     boxShadow: "1px",
-    p: 4,
 };
 
 export default Layout;

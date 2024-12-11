@@ -1,6 +1,6 @@
 .appBar {
-    backgroundColor: 'transparent';
-    boxShadow: 'none'
+    backgroundColor:  #0F1139;
+    boxShadow: 'none';
 }
 
 .toolbar {
@@ -10,20 +10,20 @@
     justify-content: space-between;
     z-index: 1000;
     position: absolute;
-    background-color: transparent;
+    background-color:  #0F1139;
     top: 0;
 }
-
 
 .navItems {
     display: flex;
     gap: 16px;
-    margin-left: 40%;
+    margin-left: 70%;
+    color: white;
 }
 
 .navButton {
-    color: black;
     text-transform: none;
+    color: white;
 }
 
 .loginButton {

@@ -64,6 +64,28 @@ export const fetchAvailableSeats = async (id) => {
   }
 };
 
+export const fetchAreaById = async (id) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/areas/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch area");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching area:", error);
+    return { status: "error", data: null };
+  }
+};
+
 export const fetchOrders = async (token, page = 0, size = 10) => {
   if (!token) {
     return { status: "error", data: [] };
