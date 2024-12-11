@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundImage: {
+        'gradient-dark-blue': 'linear-gradient(135deg, #00008b 0%, #000033 100%)',
+      },
     },
   },
   plugins: [],

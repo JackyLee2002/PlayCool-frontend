@@ -15,7 +15,9 @@
 }
 
 body {
+  @apply bg-gradient-dark-blue !important;
   color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh; /* Ensure the body takes the full height */
+  margin: 0; /* Remove default margin */
 }
