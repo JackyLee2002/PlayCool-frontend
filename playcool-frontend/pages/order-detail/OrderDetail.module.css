@@ -1,0 +1,26 @@
+.card {
+    min-height: 80vh;
+    padding: 50px;
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 5%;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.detailItem {
+    margin-bottom: 10px;
+}
+
+.qrCode {
+    margin-top: 20px;
+    text-align: center;
+}
