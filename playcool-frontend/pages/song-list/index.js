@@ -22,7 +22,7 @@ export default function SongList() {
 
     const fetchVotedSongIdList = async () => {
         const votedSongIdList = await getVotedSongIdList(token);
-        setVotedSongIdList(votedSongIdList);
+        setVotedSongIdList(votedSongIdList || []);
     }
 
     useEffect(() => {
@@ -140,13 +140,23 @@ export default function SongList() {
                     </Box>
                 ))}
             </Box>
-            <Pagination
-                count={Math.ceil(songs.length / songsPerPage)}
-                page={page}
-                onChange={handlePageChange}
-                className={styles.pagination}
-                sx={{ display: 'flex', justifyContent: 'center', marginTop: 2 }}
-            />
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+                <Pagination
+                    count={Math.ceil(songs.length / songsPerPage)}
+                    page={page}
+                    onChange={handlePageChange}
+                    sx={{
+                        backgroundColor: "rgba(255, 255, 0, 0.8)", // 更鲜艳的背景颜色
+                        borderRadius: "8px",
+                        padding: "10px",
+                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                        color: "black", // 字体颜色
+                        '& .MuiPaginationItem-root': {
+                            color: "black", // 分页项的字体颜色
+                        },
+                    }}
+                />
+            </Box>
             <Modal open={isLoginOpen} onClose={handleClose}>
                 <Box
                     sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
