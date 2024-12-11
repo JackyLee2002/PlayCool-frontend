@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
 import { AuthContext } from "@/src/context/AuthContext";
 import { fetchOrder, fetchSnapTicket } from "@/src/components/api";
 import { useRouter } from "next/router";
+import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
+import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 
 const SnapOrder = () => {
     const [url, setURL] = useState("");
     const { token } = useContext(AuthContext);
     const [order, setOrder] = useState({});
     const router = useRouter();
-    const [countdown, setCountdown] = useState("");
+    const [targetDate, setTargetDate] = useState(null);
+    const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
         if (!router.query.id) {
@@ -22,12 +25,21 @@ const SnapOrder = () => {
         fetchOrderData(router.query.id);
     }, [router]);
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
     const fetchOrderData = async (id) => {
         if (id && token) {
             const response = await fetchOrder(id, token);
             setOrder(response);
             if (response.concertDate) {
-                startCountdown(response.concertDate);
+                const concertDate = new Date(response.concertDate);
+                concertDate.setDate(concertDate.getDate());
+                setTargetDate(concertDate);
             }
         }
     };
@@ -35,35 +47,6 @@ const SnapOrder = () => {
     const snapTicket = async () => {
         await fetchSnapTicket(router.query.id, token);
         await router.push(`/pay-order/${router.query.id}`);
-    };
-
-    const startCountdown = (concertDate) => {
-        const targetDate = new Date(concertDate);
-        targetDate.setDate(targetDate.getDate() + 30);
-
-        const updateCountdown = () => {
-            const now = new Date();
-            const timeDifference = targetDate - now;
-
-            if (timeDifference <= 0) {
-                setCountdown("抢票倒计时结束!");
-            } else {
-                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-                const countdownText = `${days}days${hours}hours${minutes}minutes${seconds}seconds`;
-                if (timeDifference <= 5 * 60 * 1000) { // last 5 minutes
-                    setCountdown(<span style={{ color: 'red' }}>{countdownText}</span>);
-                } else {
-                    setCountdown(countdownText);
-                }
-            }
-        };
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
     };
 
     return (
@@ -81,12 +64,19 @@ const SnapOrder = () => {
                 }}
             >
                 <Typography variant="h3" sx={{ marginBottom: '20px' }}>
-                    Share with you friends
+                    Share with your friends
                 </Typography>
 
-                <Typography variant="h5" sx={{ marginBottom: '20px' }}>
-                    Countdown:{countdown}
-                </Typography>
+                {targetDate && (
+                    <FlipClockCountdown
+                        to={targetDate}
+                        hideOnComplete={false}
+                        className="flip-clock"
+                        labels={['Days', 'Hours', 'Minutes', 'Seconds']}
+                        labelStyle={{ fontSize: '14px' }}
+                        digitBlockStyle={{ width: 50, height: 60, fontSize: 40, fontWeight: 'bold', color: new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'red' : 'white' }}
+                    />
+                )}
 
                 <OrderDetail props={order} />
 
@@ -164,29 +154,28 @@ const SnapOrder = () => {
                         marginTop: '20px'
                     }}
                 >
-                    <button
+                    <Button
                         onClick={() => {
-                            if (countdown === "抢票倒计时结束!") {
+                            if (targetDate && currentDate >= targetDate) {
                                 snapTicket();
                             } else {
                                 alert("未到抢票时间");
                             }
                         }}
-                        disabled={countdown !== "抢票倒计时结束!"}
+                        disabled={!targetDate || currentDate < targetDate}
                         style={{
                             marginTop: '20px',
                             padding: '10px 20px',
                             cursor: 'pointer',
                             borderRadius: '20px',
                             border: '1px solid lightgray',
-                            backgroundColor: countdown === "抢票倒计时结束!" ? '#3337BF' : 'gray',
+                            backgroundColor: targetDate && currentDate >= targetDate ? '#3337BF' : 'gray',
                             color: 'white',
                             width: '200px',
-
                         }}
                     >
                         Snap Ticket
-                    </button>
+                    </Button>
                 </Box>
             </Box>
         </div>
