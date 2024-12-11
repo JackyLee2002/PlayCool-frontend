@@ -9,6 +9,7 @@ import Footer from "@/src/components/Footer";
 import ConcertList from "@/src/components/ConcertList";
 import VotePoster from "@/src/components/VotePoster";
 import OrderDetail from "@/src/components/OrderDetail";
+import CarouselUI from "@/src/components/Carousel";
 
 export default function MainPage() {
   const [open, setOpen] = useState(false);
@@ -21,7 +22,8 @@ export default function MainPage() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div >
+    <div>
+      <CarouselUI />
       <Banner />
       {/* <ConcertList /> */}
       <VotePoster />
