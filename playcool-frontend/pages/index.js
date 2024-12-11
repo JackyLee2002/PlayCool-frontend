@@ -4,8 +4,8 @@ import { Box, Modal } from "@mui/material";
 import NavBar from "../src/components/NavBar";
 import Banner from "../src/components/Banner";
 import VideoMediaGroup from '../src/components/VideoMediaGroup';
-import VotePoster from "@/src/components/VotePoster";
-
+import SouvenirItem from "../src/components/SouvenirItem";
+import SouvenirSection from "../src/components/SouvenirSection";
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
 
@@ -24,11 +24,11 @@ export default function MainPage() {
         <CarouselUI />
         <Banner />
         {/* <ConcertList /> */}
-        <VotePoster />
+
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <VideoMediaGroup />
         </Box>
-        <VotePoster />
+          <SouvenirSection />
       </div>
   );
 }
