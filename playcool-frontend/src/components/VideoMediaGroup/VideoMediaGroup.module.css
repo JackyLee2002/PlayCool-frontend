@@ -1,0 +1,52 @@
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.groupContainer {
+    margin-top: 80px;
+    margin-bottom: 100px;
+    position: relative;
+    width: 50%;
+    height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 30px;
+    background: radial-gradient(circle, rgba(200, 162, 200, 01.0) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.cardWrapper {
+    width: 45%;
+    height: 35vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 139, 0.1); /* Dark blue with 20% transparency */
+    animation: float 4s ease-in-out infinite;
+    /*margin: 20px 0;*/
+}
+
+.card1 {
+    margin-top: 3%;
+}
+
+.card2 {
+    margin-top: 10%;
+}
+
+.card3 {
+    margin-top: 0;
+}
+
+.card4 {
+    margin-top: 5%;
+}
