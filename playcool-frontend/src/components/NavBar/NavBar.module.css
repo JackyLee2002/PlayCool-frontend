@@ -20,7 +20,12 @@
     margin-left: 75%;
     min-width: 200px;
     color: white;
+}
 
+@media (max-width: 768px) {
+    .navItems {
+        margin-left: auto;
+    }
 }
 
 .navButton {

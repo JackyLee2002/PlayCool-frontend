@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, Snackbar, Typography} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Snackbar, Typography } from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
-import {fetchNoAuthOrder, fetchNoAuthSnapTicket} from "@/src/components/api";
-import {useRouter} from "next/router";
+import { fetchNoAuthOrder, fetchNoAuthSnapTicket } from "@/src/components/api";
+import { useRouter } from "next/router";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import SockJS from "sockjs-client";
-import {Stomp} from "@stomp/stompjs";
+import { Stomp } from "@stomp/stompjs";
 import MuiAlert from '@mui/material/Alert';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const SnapHelpOrder = () => {
     const [order, setOrder] = useState({});
@@ -15,11 +16,10 @@ const SnapHelpOrder = () => {
     const [targetDate, setTargetDate] = useState(null);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [seatNumber, setSeatNumber] = useState("");
-    const [open, setOpen] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' | 'error' | 'info' | 'warning'
-
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     useEffect(() => {
         if (!router.query.id) {
@@ -93,25 +93,22 @@ const SnapHelpOrder = () => {
         }
         setSnackbarOpen(false);
     };
+
     return (
-        <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
+        <div style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column', width: "100vw" }}>
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    padding: '20px',
+                    padding: { xs: '10px', sm: '20px' },
                     border: '1px solid lightgray',
                     borderRadius: '10px',
-                    width: '1200px',
+                    width: { xs: '90%', sm: '80%', md: '60%', lg: '50%', xl: '1200px' },
                     margin: 'auto',
-                    '@media (max-width: 600px)': {
-                        width: '100%',
-                        padding: '10px',
-                    },
                 }}
             >
-                <Typography variant="h3" sx={{marginBottom: '20px'}}>
+                <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: { xs: '1.5rem', sm: '2rem' } }}>
                     Help Your Friend: <strong>{order.userName}</strong> Snap The Ticket
                 </Typography>
 
@@ -121,22 +118,21 @@ const SnapHelpOrder = () => {
                         hideOnComplete={false}
                         className="flip-clock"
                         labels={['Days', 'Hours', 'Minutes', 'Seconds']}
-                        labelStyle={{fontSize: '14px'}}
+                        labelStyle={{ fontSize: isMobile ? '10px' : '14px' }}
                         digitBlockStyle={{
-                            width: 50,
-                            height: 60,
-                            fontSize: 40,
+                            width: isMobile ? 30 : 50,
+                            height: isMobile ? 40 : 60,
+                            fontSize: isMobile ? '20px' : '40px',
                             fontWeight: 'bold',
                             color: new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'red' : 'white'
                         }}
                     />
                 )}
-
-                <OrderDetail props={order}/>
+                <OrderDetail props={order} />
                 <Box
                     sx={{
                         display: 'flex',
-                        flexDirection: 'column',
+                        flexDirection: isMobile ? 'column' : 'row',
                         alignItems: 'center',
                         marginTop: '20px'
                     }}
@@ -146,25 +142,27 @@ const SnapHelpOrder = () => {
                             (order.seatNumber === null && seatNumber === "") ? snapTicket() : success();
                         }}
                         disabled={!targetDate || currentDate < targetDate}
-                        style={{
+                        sx={{
                             marginTop: '20px',
-                            padding: '10px 20px',
+                            padding: { xs: '8px 16px', sm: '10px 20px' },
                             cursor: 'pointer',
                             borderRadius: '20px',
                             border: '1px solid lightgray',
                             backgroundColor: targetDate && currentDate >= targetDate ? '#3337BF' : 'gray',
                             color: 'white',
-                            width: '200px',
-                            '@media (max-width: 600px)': {
-                                width: '100%',
-                                padding: '10px',
-                            },
+                            width: { xs: '100%', sm: '200px' }, // Full width on small screens
                         }}
                     >
                         {(order.seatNumber === null && seatNumber === "") ? "Snap Ticket" : "Snap Success!"}
                     </Button>
                 </Box>
-                <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} >
+
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Snackbar at the top center
+                >
                     <MuiAlert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
                         {snackbarMessage}
                     </MuiAlert>

@@ -77,7 +77,7 @@ const SnapOrder = () => {
     }
 
         return (
-            <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
+            <div style={{minHeight: '81.5vh', display: 'flex', flexDirection: 'column'}}>
                 <Box
                     sx={{
                         display: 'flex',
