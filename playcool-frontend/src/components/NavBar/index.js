@@ -20,9 +20,9 @@ const NavBar = ({handleOpen}) => {
             height: '50px',
         }}>
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
-                <Link href="/" passHref>
+                <Link href="/" passHref style={{flexGrow: 1, display: 'flex', alignItems: 'center'}}>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{ margin: "10px", minHeight: 20,minWidth: "150px"}}/>
+                           style={{ margin: "10px", width: '100px', height: 'auto'}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
@@ -40,11 +40,27 @@ const NavBar = ({handleOpen}) => {
                     </Link>
 
                 </div>
-
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{ minWidth: "150px"}}>
+                {user ? (
+                    <div>
+                        <AccountMenu/>
+                    </div>
+                ) : (
+                    <Button
+                        variant="outlined"
+                        startIcon={<PersonIcon/>}
+                        onClick={handleOpen}
+                        sx={{
+                            marginRight: "25px",
+                            marginLeft: "16px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            minWidth: "200px"
+                        }}
+                    >
                         Login / Register
                     </Button>
-
+                )}
             </Toolbar>
         </AppBar>
     );
