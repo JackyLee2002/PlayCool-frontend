@@ -1,17 +1,38 @@
-.SouvenirSection{
+.SouvenirSection {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /*overflow-x: auto;*/
     white-space: nowrap;
-    animation: scroll 30s linear infinite;
+    animation: scroll 10s linear infinite; /* Adjusted the duration to 20s for faster animation */
+    /*overflow: hidden;*/
 }
+
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
-    100% {
-        transform: translateX(-100%);
+    25% { /* Adjusted to start the next animation earlier */
+        transform: translateX(-5%);
     }
+    50% {
+        transform: translateX(-10%);
+    }
+    75% { /* Added an intermediate step */
+        transform: translateX(-20%);
+    }
+    100% {
+        transform: translateX(-30%);
+    }
+}
+
+
+.SouvenirItem {
+    flex: 0 0 auto;
+}
+.scrollContent{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

@@ -22,18 +22,18 @@ const SouvenirItem = ({ gltfPath }) => {
                 alt="Drag Right"
                 className={styles.dragIcon}
             />
-            <div className={styles.SouvenirCanvas} style={{width: '600px', height: '400px'}} onClick={handleBuyClick}>
+            <div className={styles.SouvenirCanvas} style={{width: '600px', height: '400px'}} >
                 <Canvas camera={{position: [0, 0, 1.4]}}>
                     <ambientLight intensity={0.5}/>
                     <directionalLight position={[10, 10, 5]} intensity={1}/>
                     <Suspense fallback={null}>
                         <Model gltfPath={gltfPath}/>
                     </Suspense>
-                    <OrbitControls enablePan={false} enableZoom={true}/>
+                    <OrbitControls enablePan={false} enableZoom={true}  autoRotate={true} autoRotateSpeed={10} />
                 </Canvas>
             </div>
             <div className={styles.SouvenirDescription}>
-                <h3>Check out more of Coldplay Souvenirs!</h3>
+                <h3 className={styles.SouvenirNav} onClick={handleBuyClick}>Click to check it out  !</h3>
                 <p>Perfect souvenir for fans to be worn by Coldplay during their concerts.</p>
             </div>
         </div>
