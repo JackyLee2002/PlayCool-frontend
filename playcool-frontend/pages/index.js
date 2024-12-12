@@ -23,7 +23,7 @@ export default function MainPage() {
   return (
       <div>
         <CarouselUI />
-        <Banner />
+        {/*<Banner />*/}
         {/* <ConcertList /> */}
         <ConcertHomePageSection />
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>

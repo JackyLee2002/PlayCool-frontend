@@ -1,19 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Box, Button, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
-import { AuthContext } from "@/src/context/AuthContext";
-import {fetchNoAuthSnapTicket, fetchOrder, fetchSnapTicket} from "@/src/components/api";
-import { useRouter } from "next/router";
+import {AuthContext} from "@/src/context/AuthContext";
+import {fetchOrder, fetchSnapTicket} from "@/src/components/api";
+import {useRouter} from "next/router";
+import SockJS from 'sockjs-client';
+import {Stomp} from "@stomp/stompjs";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 
 const SnapOrder = () => {
-    const [url, setURL] = useState("");
-    const { token } = useContext(AuthContext);
-    const [order, setOrder] = useState({});
-    const router = useRouter();
-    const [targetDate, setTargetDate] = useState(null);
-    const [currentDate, setCurrentDate] = useState(new Date());
+        const [url, setURL] = useState("");
+        const {token} = useContext(AuthContext);
+        const [order, setOrder] = useState({});
+        const route = useRouter();
+        const router = useRouter();
+        const [seatNumber, setSeatNumber] = useState("");
+        const [targetDate, setTargetDate] = useState(null);
+        const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
         if (!router.query.id) {
@@ -38,14 +42,33 @@ const SnapOrder = () => {
             setOrder(response);
             if (response.concertDate) {
                 const concertDate = new Date(response.concertDate);
-                concertDate.setDate(concertDate.getDate()-31);
+                concertDate.setDate(concertDate.getDate() - 31);
                 setTargetDate(concertDate);
             }
         }
     };
+    useEffect(() => {
+        const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, (frame) => {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/orders', (message) => {
+                const updatedOrder = JSON.parse(message.body);
+                setSeatNumber(updatedOrder.seatNumber);
+                console.log(updatedOrder);
+            }, (error) => {
+                console.error('WebSocket connection error: ', error);
+            });
+        });
+
+        return () => {
+            stompClient.disconnect();
+        };
+    }, []);
 
     const snapTicket = async () => {
-        const response = await fetchNoAuthSnapTicket(router.query.id)
+        const response = await fetchSnapTicket(router.query.id,token);
         setOrder(response);
     };
 
@@ -53,23 +76,24 @@ const SnapOrder = () => {
         await router.push(`/pay-order/${router.query.id}`);
     }
 
-    return (
-        <div style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column' }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    padding: '20px',
-                    border: '1px solid lightgray',
-                    borderRadius: '10px',
-                    width: '1200px',
-                    margin: 'auto'
-                }}
-            >
-                <Typography variant="h3" sx={{ marginBottom: '20px' }}>
-                    Share With Your Friends
-                </Typography>
+        return (
+            <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '20px',
+                        border: '1px solid lightgray',
+                        borderRadius: '10px',
+                        width: '1200px',
+                        height: '550px',
+                        margin: 'auto'
+                    }}
+                >
+                    <Typography variant="h3" sx={{marginBottom: '20px'}}>
+                        Share with you friends
+                    </Typography>
 
                 {targetDate && (
                     <FlipClockCountdown
@@ -160,7 +184,7 @@ const SnapOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            order.seatNumber === null ? snapTicket() : success()
+                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success()
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
@@ -174,7 +198,7 @@ const SnapOrder = () => {
                             width: '200px',
                         }}
                     >
-                        {order.seatNumber === null ? "Snap Ticket" : "Success"}
+                        {(order.seatNumber === null && seatNumber === "") ? "Snap Ticket" : "Success"}
                     </Button>
                 </Box>
             </Box>
