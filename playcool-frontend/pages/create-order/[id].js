@@ -58,7 +58,7 @@ const CreateOrder = () => {
   }, [router.query.selectedAreaId, route.query.id]);
 
   return (
-    <div>
+    <div >
       <StepperBar index={2} />
       <OrderDetail props={order} concertId={router.query.id} />
       <ConfirmOrder props={order} />

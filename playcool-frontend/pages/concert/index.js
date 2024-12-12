@@ -174,10 +174,6 @@ const ConcertPage = () => {
                                       fontSize: "1rem",
                                       padding: "5px 10px",
                                       borderRadius: "10px",
-                                      "&:hover": {
-                                          borderColor: "lightpurple",
-                                          backgroundColor: "rgba(0, 0, 119, 0.1)",
-                                      },
                                   }}
                               >
                                   {new Date(concert.dateTime) < new Date()

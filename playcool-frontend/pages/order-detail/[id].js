@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import React, { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import QRCode from "react-qr-code";
-import {fetchOrder} from "@/src/components/api";
-import {AuthContext} from "@/src/context/AuthContext";
+import { fetchOrder } from "@/src/components/api";
+import { AuthContext } from "@/src/context/AuthContext";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {Box, CardHeader, Typography} from '@mui/material';
@@ -13,7 +13,7 @@ import styles from "./OrderDetail.module.css";
 const OrderDetail = () => {
     const router = useRouter();
     const [order, setOrder] = useState(null);
-    const {token} = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
     const [hostUrl, setHostUrl] = useState("");
 
     useEffect(() => {
@@ -35,11 +35,11 @@ const OrderDetail = () => {
     const orderStatusIcon = (status) => {
         switch (status) {
             case "PENDING":
-                return <span style={{color: "orange"}}>⏳ Pending</span>;
+                return <span style={{ color: "orange" }}>⏳ Pending</span>;
             case "USED":
-                return <span style={{color: "green"}}>✔️ Used</span>;
+                return <span style={{ color: "green" }}>✔️ Used</span>;
             case "REFUNDED":
-                return <span style={{color: "red"}}>❌ Refunded</span>;
+                return <span style={{ color: "red" }}>❌ Refunded</span>;
             case "UNUSED":
                 return <span style={{color: "orange"}}> Unused</span>;
             default:
@@ -48,7 +48,7 @@ const OrderDetail = () => {
     };
 
     return (
-        <div>
+        <div >
             {order ? (
                 <>
                     <Box sx={{
@@ -67,7 +67,7 @@ const OrderDetail = () => {
                             width: '100%',
                             display: 'flex',
                             justifyContent: 'center',
-                            borderRadius: '20px',
+                            borderRadius:'20px',
                             alignItems: 'center'
                         }}>
                             <Box sx={{
@@ -77,7 +77,7 @@ const OrderDetail = () => {
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                borderRadius: '20px',
+                                borderRadius:'20px',
                             }}>
                                 <Card sx={{
                                     width: '50%',
@@ -87,8 +87,7 @@ const OrderDetail = () => {
                                     gap: '1px',
                                     alignItems: 'start',
                                     height: '350px',
-                                    borderRadius: '12px',
-                                    // borderRight: '1px dashed transparent',
+                                    borderRadius:'12px',
                                     background: `radial-gradient(circle at right top, transparent 16px, white 0) right top / 100% 50% no-repeat, radial-gradient(circle at right bottom, transparent 16px, white 0) right bottom / 100% 50% no-repeat;`
                                 }}>
                                     <Box sx={{
@@ -128,6 +127,9 @@ const OrderDetail = () => {
                                             <Typography variant="body1" sx={{fontSize: '1.2rem', mt: "2%"}}>
                                                 <strong>🏠 {order.venueName} {order.areaName} {order.seatNumber}</strong>
                                             </Typography>
+                                            {/*<Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "5%" }}>*/}
+                                            {/*    <strong>📦 Order Status:</strong> {orderStatusIcon(order.orderStatus)}*/}
+                                            {/*</Typography>*/}
                                             <Typography variant="body1"
                                                         sx={{
                                                             display: "flex",
@@ -142,7 +144,7 @@ const OrderDetail = () => {
                                                         height: '24px',
                                                         marginRight: '10px',
                                                         marginLeft: '10px'
-                                                    }}/>
+                                                    }} />
                                                 ) : (
                                                     <Image src="/alipay.png" alt="Alipay" width={24} height={24}
                                                            style={{marginRight: '10px', marginLeft: '10px'}}/>
@@ -164,9 +166,8 @@ const OrderDetail = () => {
                                     flexDirection: 'column',
                                     alignItems: 'center',
                                     height: '350px',
-                                    borderRadius: '12px',
-                                    // borderLeft: 'none',
-                                    background: `radial-gradient(circle at left top, transparent 16px, white 0) left top / 100% 50% no-repeat, radial-gradient(circle at left bottom, transparent 16px, white 0) left bottom / 100% 50% no-repeat;`,
+                                    borderRadius:'12px',
+                                    background: `radial-gradient(circle at left top, transparent 16px, white 0) left top / 100% 50% no-repeat, radial-gradient(circle at left bottom, transparent 16px, white 0) left bottom / 100% 50% no-repeat;`
                                 }}>
                                     <CardContent sx={{
                                         display: 'flex',
