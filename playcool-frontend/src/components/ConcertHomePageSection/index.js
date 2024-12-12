@@ -25,6 +25,7 @@ const ConcertHomePageSection = () => {
     }, []);
 
     const latestConcert = concerts[0]; // Assuming the latest concert is the first in the array
+    const isConcertUpcoming = latestConcert && new Date(latestConcert.dateTime) > new Date();
 
     const handleConcertClick = (concert) => {
         router.push(`/concert-detail/${concert.concertId}`);
@@ -41,10 +42,10 @@ const ConcertHomePageSection = () => {
                     }}></div>
                 ))}
             </div>
-            <Typography className={styles.sectionTitle} variant="h4" component="h1" gutterBottom textAlign="center">
-                UPCOMING CONCERT:
+            <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={styles.sectionTitle} variant="h4" component="h1" gutterBottom textAlign="center">
+                {isConcertUpcoming ? "LATEST CONCERT ON SALE" : "NO UPCOMING CONCERTS"}
             </Typography>
-            {latestConcert && (
+            {isConcertUpcoming && (
                 <Card
                     className={styles.ConcertHomePageCard}
                     key={latestConcert.concertId}

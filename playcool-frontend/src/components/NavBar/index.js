@@ -21,8 +21,8 @@ const NavBar = ({handleOpen}) => {
         }}>
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
                 <Link href="/" passHref>
-                    <Image src={playCoolLogo} alt="PlayCool Logo" width={150} height={50}
-                           style={{ margin: "10px"}}/>
+                    <Image src={playCoolLogo} alt="PlayCool Logo"
+                           style={{ margin: "10px", minHeight: 20, midWidth: 250}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>

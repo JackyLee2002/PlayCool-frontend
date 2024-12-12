@@ -1,10 +1,10 @@
-
 .SouvenirCanvas {
     display: flex;
     justify-content: center;
     align-items: center;
     /*width: 30vw;*/
 }
+
 .SouvenirItem {
     display: flex;
     flex-direction: column;
@@ -14,19 +14,25 @@
     padding: 16px;
     height: 50vh;
     width: 40vw;
-    border: #00004d 2px solid;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     margin: 16px;
-    background-color: #00004b;
+    background-color: rgba(79, 88, 199, 0.2);
+    word-wrap: break-word; /* For older browsers */
+    overflow-wrap: break-word; /* For modern browsers */
+    white-space: normal;
+    position: relative; /* Add this to position the buy button */
 }
+
 .SouvenirItem:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 12px 24px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .SouvenirDescription {
     text-align: center;
     margin-top: 16px;
+    text-shadow: 4px 6px 4px #000;
 }
 
 .SouvenirDescription h3 {
@@ -37,6 +43,22 @@
 .SouvenirDescription p {
     margin: 8px 0 0;
     font-size: 1em;
-    color: #666;
+    color: #ffffff;
+    overflow: hidden;
+}
+.dragIcon{
+    margin-left: auto;
+   width : 22px;
+    height: 22px;
 }
 
+.buyButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.5);
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}

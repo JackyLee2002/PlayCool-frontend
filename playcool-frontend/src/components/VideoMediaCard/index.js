@@ -15,7 +15,7 @@ const VideoMediaCard = ({ videoSrc, title, likes, views }) => {
                     <div style={styles.videoWrapper}>
                         <ReactPlayer
                             url={videoSrc}
-                            playing
+                            playing = {false}
                             controls
                             width="100%"
                             height="100%"
@@ -35,18 +35,7 @@ const VideoMediaCard = ({ videoSrc, title, likes, views }) => {
 };
 
 const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        borderRadius: '20px',
-        overflow: 'hidden',
-        padding: '10px',
-    },
+   
     videoWrapper: {
         width: '100%',
         height: '60%',
@@ -59,13 +48,14 @@ const styles = {
     info: {
         width: '100%',
         textAlign: 'center',
-        // padding: '10px',
         color: 'white',
+        textShadow: '4px 6px 4px #000',
     },
     title: {
         margin: '10px 0',
         fontSize: '24px',
         fontWeight: 'bold',
+        textShadow: '4px 6px 4px #000',
     },
     details: {
         fontSize: '16px',
