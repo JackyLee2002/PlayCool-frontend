@@ -5,12 +5,16 @@ import {fetchNoAuthOrder, fetchNoAuthSnapTicket} from "@/src/components/api";
 import {useRouter} from "next/router";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
+import SockJS from "sockjs-client";
+import {Stomp} from "@stomp/stompjs";
 
 const SnapHelpOrder = () => {
     const [order, setOrder] = useState({});
     const router = useRouter();
     const [targetDate, setTargetDate] = useState(null);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [seatNumber, setSeatNumber] = useState("");
+
 
     useEffect(() => {
         if (!router.query.id) {
@@ -24,6 +28,26 @@ const SnapHelpOrder = () => {
             setCurrentDate(new Date());
         }, 1000);
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, (frame) => {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/orders', (message) => {
+                const updatedOrder = JSON.parse(message.body);
+                setSeatNumber(updatedOrder.seatNumber);
+                console.log(updatedOrder);
+            }, (error) => {
+                console.error('WebSocket connection error: ', error);
+            });
+        });
+
+        return () => {
+            stompClient.disconnect();
+        };
     }, []);
 
     const fetchOrderData = async (id) => {
@@ -93,7 +117,7 @@ const SnapHelpOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            order.seatNumber === null ? snapTicket() : success()
+                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success()
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
@@ -107,7 +131,7 @@ const SnapHelpOrder = () => {
                             width: '200px',
                         }}
                     >
-                        {order.seatNumber === null ? "Snap Ticket" : "Success"}
+                        {(order.seatNumber === null && seatNumber === "") ? "Snap Ticket" : "Success"}
                     </Button>
                 </Box>
             </Box>

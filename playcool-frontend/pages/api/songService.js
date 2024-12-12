@@ -27,9 +27,9 @@ export const vote = async (songId, token) => {
 };
 
 
-export const isVoted = async (token) => {
+export const checkVote = async (token) => {
     try {
-        const response = await axiosInstance.get(`/songs/is-voted`, {
+        const response = await axiosInstance.get(`/songs/can-vote`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -40,7 +40,7 @@ export const isVoted = async (token) => {
     }
 };
 
-export const getVotedSongId = async (token) => {
+export const getVotedSongIdList = async (token) => {
     try {
         const response = await axiosInstance.get(`/songs/voted-song`, {
             headers: {
@@ -52,5 +52,27 @@ export const getVotedSongId = async (token) => {
         console.error(err);
     }
 }
+
+export const getVotesByUserId = async(token) => {
+    try {
+        const response = await axiosInstance.get(`/songs/votes`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+export const getAllVotes = async () => {
+    try {
+        const response = await axiosInstance.get(`/songs/all-votes`);
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
 
 export default axiosInstance;
