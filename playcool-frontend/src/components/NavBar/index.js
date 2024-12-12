@@ -33,9 +33,9 @@ const NavBar = ({handleOpen}) => {
                     </Link>
                     <Link href="/concert" passHref>
                         <Button className={styles.navButton} sx={{color: "white",
-                        ":hover": {
-                            scale: 1.2,
-                        }
+                            ":hover": {
+                                scale: 1.2,
+                            }
                         }} >Concert</Button>
                     </Link>
 

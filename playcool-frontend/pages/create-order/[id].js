@@ -60,8 +60,13 @@ const CreateOrder = () => {
   return (
     <div >
       <StepperBar index={2} />
+
+      <div style={{"display" : "flex" ,  flexDirection: "column",
+        alignItems: "center", justifyContent: "center" }}>
+
       <OrderDetail props={order} concertId={router.query.id} />
       <ConfirmOrder props={order} />
+      </div>
     </div>
   );
 };
