@@ -130,7 +130,7 @@ const SnapHelpOrder = () => {
                             labels={['Days', 'Hours', 'Minutes', 'Seconds']}
                             labelStyle={{ fontSize: '14px' }}
                             digitBlockStyle={{
-                                width: matches ? 50 : 35 ,
+                                width: matches ? 50 : 25 ,
                                 height: 60,
                                 fontSize: 40,
                                 fontWeight: 'bold',
