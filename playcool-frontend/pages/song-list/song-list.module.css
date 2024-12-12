@@ -1,9 +1,9 @@
 .title {
     text-align: center;
-    font-size: 3rem;
     animation: pulse 2s infinite;
     color: white; /* Plain white color */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a shadow for border effect */
+    font-weight: bold;
 }
 
 @keyframes pulse {

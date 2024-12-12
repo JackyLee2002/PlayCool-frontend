@@ -8,6 +8,7 @@ import SouvenirItem from "../src/components/SouvenirItem";
 import SouvenirSection from "../src/components/SouvenirSection";
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
+import SongRating from "@/src/components/SongRating";
 
 export default function MainPage() {
   const [open, setOpen] = useState(false);
@@ -19,18 +20,16 @@ export default function MainPage() {
   };
   const handleClose = () => setOpen(false);
 
-  return (
-      <div>
-        <CarouselUI />
-        {/*<Banner />*/}
-        {/* <ConcertList /> */}
-
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <VideoMediaGroup />
-        </Box>
-          <SouvenirSection />
-      </div>
-  );
+    return (
+        <div>
+            <CarouselUI />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: '100vh', padding: 2 }}>
+                <VideoMediaGroup />
+                <SongRating />
+            </Box>
+            <SouvenirSection />
+        </div>
+    );
 }
 
 const modalStyle = {
