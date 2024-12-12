@@ -9,10 +9,9 @@ const Model = ({ gltfPath }) => {
     const { scene } = useGLTF(gltfPath);
     return <primitive object={scene} />;
 };
-
-const SouvenirItem = ({ gltfPath }) => {
+const SouvenirItem = ({ gltfPath, site }) => {
     const handleBuyClick = () => {
-        window.location.href = 'https://usstore.coldplay.com/products/coldplay-heart-logo-hat';
+        window.location.href = site;
     };
 
     return (
@@ -22,19 +21,19 @@ const SouvenirItem = ({ gltfPath }) => {
                 alt="Drag Right"
                 className={styles.dragIcon}
             />
-            <div className={styles.SouvenirCanvas} style={{width: '600px', height: '400px'}} >
-                <Canvas camera={{position: [0, 0, 1.4]}}>
-                    <ambientLight intensity={0.5}/>
-                    <directionalLight position={[10, 10, 5]} intensity={1}/>
+            <div className={styles.SouvenirCanvas} style={{ width: '600px', height: '400px' }}>
+                <Canvas camera={{ position: [0, 0, 1.4] }}>
+                    <ambientLight intensity={0.5} />
+                    <directionalLight position={[10, 10, 5]} intensity={1} />
                     <Suspense fallback={null}>
-                        <Model gltfPath={gltfPath}/>
+                        <Model gltfPath={gltfPath} />
                     </Suspense>
-                    <OrbitControls enablePan={false} enableZoom={true}  autoRotate={true} autoRotateSpeed={10} />
+                    <OrbitControls enablePan={false} enableZoom={true} autoRotate={true} autoRotateSpeed={10} />
                 </Canvas>
             </div>
             <div className={styles.SouvenirDescription}>
-                <h3 className={styles.SouvenirNav} onClick={handleBuyClick}>Click to check it out  !</h3>
-                <p>Perfect souvenir for fans to be worn by Coldplay during their concerts.</p>
+                <h3 className={styles.SouvenirNav} onClick={handleBuyClick}>Click to check it out!</h3>
+                <p>Perfect souvenir for fans to be worn.</p>
             </div>
         </div>
     );

@@ -24,11 +24,11 @@ const NavBar = ({ handleOpen }) => {
         }}>
 
             <Toolbar className={styles.toolbar} style={{ padding: '0px' }}>
-                <Link href="/" passHref>
+                {!isMobile && <Link href="/" passHref>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{ margin: "10px", minHeight: 20, minWidth: isMobile ? "100px" : "150px" }} />
+                           style={{margin: "10px", minHeight: 20, minWidth: isMobile ? "100px" : "150px"}}/>
 
-                </Link>
+                </Link>}
                 <div className={styles.navItems} style={{ marginLeft: isMobile ? 'auto' : '60%' }}>
                     <Link href="/song-list" passHref>
                         <Button className={styles.navButton} sx={{
@@ -63,10 +63,10 @@ const NavBar = ({ handleOpen }) => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            minWidth: "200px"
+                            minWidth: isMobile ? "50px" : "200px"
                         }}
                     >
-                        Login / Register
+                        {!isMobile ? "Login / Register" : "Login"}
                     </Button>
                 )}
 
