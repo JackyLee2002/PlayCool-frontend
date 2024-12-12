@@ -113,7 +113,7 @@ export default function MyOrders() {
 
                             >
                                 <Typography sx={{color: "white"}}>
-                                    {order.paymentStatus === "COMPLETED" ? "View Details" : "Pay"} &rarr;
+                                    {order.paymentStatus === "COMPLETED" ? "View Ticket" : "Pay"} &rarr;
                                 </Typography>
                             </Button>
                         </CardContent>
