@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, Snackbar, Typography} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Snackbar, Typography } from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
-import {fetchNoAuthOrder, fetchNoAuthSnapTicket} from "@/src/components/api";
-import {useRouter} from "next/router";
+import { fetchNoAuthOrder, fetchNoAuthSnapTicket } from "@/src/components/api";
+import { useRouter } from "next/router";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
 import SockJS from "sockjs-client";
-import {Stomp} from "@stomp/stompjs";
+import { Stomp } from "@stomp/stompjs";
 import MuiAlert from '@mui/material/Alert';
+import styles from './snap-help-order.module.css';
+import { useMediaQuery } from '@mui/material';
 
 const SnapHelpOrder = () => {
     const [order, setOrder] = useState({});
@@ -18,8 +20,10 @@ const SnapHelpOrder = () => {
     const [open, setOpen] = useState(false);
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' | 'error' | 'info' | 'warning'
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 
+    // use media query to change the width of the box
+    const matches = useMediaQuery('(min-width:600px)');
 
     useEffect(() => {
         if (!router.query.id) {
@@ -93,8 +97,9 @@ const SnapHelpOrder = () => {
         }
         setSnackbarOpen(false);
     };
+
     return (
-        <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
+        <div style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -112,28 +117,30 @@ const SnapHelpOrder = () => {
                     },
                 }}
             >
-                <Typography variant="h4" sx={{marginBottom: '20px', color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'}}>
-                    HELP  <strong>{order.userName}</strong> SNAP THE TICKET
+                <Typography variant="h4" sx={{ marginBottom: '20px', color: 'white', fontWeight: 'bold', textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)' }}>
+                    HELP <strong>{order.userName}</strong> SNAP THE TICKET
                 </Typography>
 
                 {targetDate && (
-                    <FlipClockCountdown
-                        to={targetDate}
-                        hideOnComplete={false}
-                        className="flip-clock"
-                        labels={['Days', 'Hours', 'Minutes', 'Seconds']}
-                        labelStyle={{fontSize: '14px'}}
-                        digitBlockStyle={{
-                            width: 50,
-                            height: 60,
-                            fontSize: 40,
-                            fontWeight: 'bold',
-                            color: new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'red' : 'white'
-                        }}
-                    />
+                    <div className={styles['flip-clock-wrapper']}>
+                        <FlipClockCountdown
+                            to={targetDate}
+                            hideOnComplete={false}
+                            className={styles['flip-clock']}
+                            labels={['Days', 'Hours', 'Minutes', 'Seconds']}
+                            labelStyle={{ fontSize: '14px' }}
+                            digitBlockStyle={{
+                                width: matches ? 50 : 35 ,
+                                height: 60,
+                                fontSize: 40,
+                                fontWeight: 'bold',
+                                color: new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'red' : 'white'
+                            }}
+                        />
+                    </div>
                 )}
 
-                <OrderDetail props={order}/>
+                <OrderDetail props={order} />
                 <Box
                     sx={{
                         display: 'flex',
@@ -152,7 +159,6 @@ const SnapHelpOrder = () => {
                             padding: '10px 20px',
                             cursor: 'pointer',
                             borderRadius: '10px',
-
                             backgroundColor: targetDate && currentDate >= targetDate ? '#3337BF' : 'gray',
                             color: 'white',
                             width: '200px',

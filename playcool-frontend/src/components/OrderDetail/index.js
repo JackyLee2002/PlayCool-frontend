@@ -18,13 +18,13 @@ const OrderDetail = ({ props }) => {
         <Card
             sx={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: { xs: "column", md: "row" },
                 alignItems: "center",
-                width: "700px",
+                width: { xs: "100%", md: "700px" },
                 boxShadow: "0",
                 backgroundColor: "transparent",
                 color: "white",
-                height: "200px",
+                height: { xs: "auto", md: "200px" },
             }}
         >
             <CardMedia
@@ -36,22 +36,25 @@ const OrderDetail = ({ props }) => {
                     "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
                 }
                 title="Concert"
-                sx={{ width: 250 }}
+                sx={{ width: { xs: "100%", md: 250 } }}
             />
             <Box
                 sx={{
                     display: "flex",
-                    marginLeft: "90px",
+                    marginLeft: { xs: "0", md: "90px" },
                     flexDirection: "column",
                     width: "100%",
-                    marginTop: "30px",
+                    marginTop: { xs: "10px", md: "30px" },
                 }}
             >
                 <CardContent
-                    sx={{     display: "flex",
+                    sx={{
+                        display: "flex",
                         flexDirection: "column",
-
-                        alignItems: "flex-start", padding: "0px" , marginLeft :"44px",}}
+                        alignItems: { xs: "center", md: "flex-start" },
+                        padding: "0px",
+                        marginLeft: { xs: "0", md: "44px" },
+                    }}
                 >
                     <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
                         {props.concertName}
@@ -65,10 +68,10 @@ const OrderDetail = ({ props }) => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-start",
+                        alignItems: { xs: "center", md: "flex-start" },
                         width: "100%",
                         p: 3,
-                        ml: "20px",
+                        ml: { xs: "0", md: "20px" },
                     }}
                 >
                     <Typography
