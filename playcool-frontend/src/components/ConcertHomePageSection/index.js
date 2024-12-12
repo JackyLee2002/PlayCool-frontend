@@ -7,7 +7,7 @@ import {
     CardMedia,
     Typography,
 } from "@mui/material";
-import styles from "./ConcertHomePageSection.module.css";
+import "./ConcertHomePageSection.css";
 import { useRouter } from "next/router";
 import { fetchConcerts } from "@/src/components/api";
 import EventIcon from "@mui/icons-material/Event";
@@ -32,22 +32,22 @@ const ConcertHomePageSection = () => {
     };
 
     return (
-        <Box className={styles.ConcertHomePageSection}>
-            <div className={styles.stars}>
+        <Box className={"ConcertHomePageSection"}>
+            <div className={"stars"}>
                 {[...Array(900)].map((_, i) => (
-                    <div key={i} className={styles.star} style={{
+                    <div key={i} className={"star"} style={{
                         top: `${Math.random() * 200}%`,
                         left: `${Math.random() * 200}%`,
                         animationDuration: `${Math.random() * 2 + 1}s`
                     }}></div>
                 ))}
             </div>
-            <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={styles.sectionTitle} variant="h4" component="h1" gutterBottom textAlign="center">
+            <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={"sectionTitle"} variant="h4" component="h1" gutterBottom textAlign="center">
                 {isConcertUpcoming ? "UPCOMING CONCERT ON SALE" : "NO UPCOMING CONCERTS"}
             </Typography>
             {isConcertUpcoming && (
                 <Card
-                    className={styles.ConcertHomePageCard}
+                    className={"ConcertHomePageCard"}
                     key={latestConcert.concertId}
                     onClick={() => handleConcertClick(latestConcert)}
                     sx={{
