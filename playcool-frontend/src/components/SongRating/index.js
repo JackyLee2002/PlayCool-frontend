@@ -3,7 +3,8 @@ import {Box, Card, CardContent, Typography, LinearProgress, Button} from '@mui/m
 import {getSongList, getAllVotes} from '../../../pages/api/songService';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import styles from './SongRating.module.css'; // Import the CSS module
+import styles from './SongRating.module.css';
+import {red} from "@mui/material/colors"; // Import the CSS module
 
 const SongRating = () => {
     const [songs, setSongs] = useState([]);
@@ -49,7 +50,7 @@ const SongRating = () => {
                     gutterBottom
                     align="center"
                     sx={{
-                        color: 'white',
+                        color: '#00008a',
                         fontSize: '50px',
                         fontWeight: 'bold',
                         marginBottom: '30px'
@@ -61,7 +62,7 @@ const SongRating = () => {
                     <Box key={song.id} sx={{marginBottom: 5, position: 'relative', minHeight: 80}}>
                         <LinearProgress
                             variant="determinate"
-
+                            color="warning"
                             value={(song.votes / totalVotes) * 100}
                             sx={{
                                 height: 80,
@@ -99,7 +100,7 @@ const SongRating = () => {
                             <Image src={getImageSrc(song.name)} alt={song.name}
                                    style={{width: 60, height: 60, borderRadius: '50%', marginRight: 16}}/>
                             <Box>
-                                <Typography component="div" sx={{color: 'white', fontSize: '3'}}>
+                                <Typography component="div" sx={{color: 'white', fontSize: `${(5 - index) * 4.5 + 15}px`}}>
                                     {index + 1}. {song.name}
                                 </Typography>
                             </Box>
@@ -109,7 +110,7 @@ const SongRating = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
                     <Button
                         variant="contained"
-                        color="primary"
+                        color="warning"
                         onClick={handleVoteNow}
                         sx={{
                             fontSize: '1.5rem',
