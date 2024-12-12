@@ -8,6 +8,7 @@ import SouvenirItem from "../src/components/SouvenirItem";
 import SouvenirSection from "../src/components/SouvenirSection";
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
+import ConcertHomePageSection from "@/src/components/ConcertHomePageSection";
 
 export default function MainPage() {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function MainPage() {
         <CarouselUI />
         <Banner />
         {/* <ConcertList /> */}
-
+        <ConcertHomePageSection />
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
           <VideoMediaGroup />
         </Box>
