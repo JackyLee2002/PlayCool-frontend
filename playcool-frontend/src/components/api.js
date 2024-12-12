@@ -169,3 +169,39 @@ export const fetchOrder = async (orderId, tokens) => {
         return {status: 'error', data: []};
     }
 }
+
+export const fetchNoAuthOrder = async (orderId) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/oauth/${orderId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if(!response.ok) {
+            throw new Error('Failed to fetch order');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching concerts:', error);
+        return {status: 'error', data: []};
+    }
+}
+
+export const fetchNoAuthSnapTicket = async (orderId) => {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order/snap/oauth/${orderId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if(!response.ok) {
+            throw new Error('Failed to snap ticket');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching concerts:', error);
+        return {status: 'error', data: []};
+    }
+}
