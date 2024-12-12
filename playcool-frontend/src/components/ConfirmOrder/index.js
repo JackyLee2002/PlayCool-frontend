@@ -42,7 +42,7 @@ const ConfirmOrder = ({props}) => {
         setIsLoginOpen(false);
     };
 
-    return (<div className={styles.orderSummary}>
+    return (<div  className={styles.orderSummary}>
         <div className={styles.orderSummaryTitle}>
             Order Summary
         </div>

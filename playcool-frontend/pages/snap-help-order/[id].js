@@ -83,7 +83,7 @@ const SnapHelpOrder = () => {
 
     const success = () => {
         setSnackbarMessage('Ticket already snapped.');
-        setSnackbarSeverity('info');
+        setSnackbarSeverity('warning');
         setSnackbarOpen(true);
     };
 
@@ -93,7 +93,6 @@ const SnapHelpOrder = () => {
         }
         setSnackbarOpen(false);
     };
-
     return (
         <div style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column', width: "100vw" }}>
             <Box
@@ -108,8 +107,8 @@ const SnapHelpOrder = () => {
                     margin: 'auto',
                 }}
             >
-                <Typography variant="h4" sx={{ marginBottom: '20px', fontSize: { xs: '1.5rem', sm: '2rem' } }}>
-                    Help Your Friend: <strong>{order.userName}</strong> Snap The Ticket
+                <Typography variant="h4" sx={{marginBottom: '20px'}}>
+                    Help <strong>{order.userName}</strong> Snap The Ticket
                 </Typography>
 
                 {targetDate && (
