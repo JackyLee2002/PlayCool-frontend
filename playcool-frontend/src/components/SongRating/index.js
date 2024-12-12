@@ -3,7 +3,8 @@ import {Box, Card, CardContent, Typography, LinearProgress, Button} from '@mui/m
 import {getSongList, getAllVotes} from '../../../pages/api/songService';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import styles from './SongRating.module.css'; // Import the CSS module
+import styles from './SongRating.module.css';
+import {red} from "@mui/material/colors"; // Import the CSS module
 
 const SongRating = () => {
     const [songs, setSongs] = useState([]);
@@ -61,7 +62,7 @@ const SongRating = () => {
                     <Box key={song.id} sx={{marginBottom: 5, position: 'relative', minHeight: 80}}>
                         <LinearProgress
                             variant="determinate"
-
+                            color="warning"
                             value={(song.votes / totalVotes) * 100}
                             sx={{
                                 height: 80,
@@ -109,7 +110,7 @@ const SongRating = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
                     <Button
                         variant="contained"
-                        color="primary"
+                        color="warning"
                         onClick={handleVoteNow}
                         sx={{
                             fontSize: '1.5rem',
