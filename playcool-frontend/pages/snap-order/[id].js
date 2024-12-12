@@ -8,7 +8,7 @@ import SockJS from 'sockjs-client';
 import { Stomp } from "@stomp/stompjs";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
-import QRCode from 'react-qr-code';
+import QRCode from "react-qr-code";
 import QrCodeIcon from '@mui/icons-material/QrCode';
 
 const SnapOrder = () => {
@@ -49,7 +49,6 @@ const SnapOrder = () => {
             }
         }
     };
-
     useEffect(() => {
         const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
         const stompClient = Stomp.over(socket);
@@ -71,35 +70,17 @@ const SnapOrder = () => {
     }, []);
 
     const snapTicket = async () => {
-        const response = await fetchSnapTicket(router.query.id, token);
+        const response = await fetchSnapTicket(router.query.id,token);
         setOrder(response);
     };
 
     const success = async () => {
         await router.push(`/pay-order/${router.query.id}`);
-    };
+    }
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    return (
-        <div className={"bg-gradient-to-tr from-indigo-100 via-blue-250 via-20% to-blue-500"} style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column' }}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    padding: '20px',
-                    border: '1px solid lightgray',
-                    borderRadius: '10px',
-                    width: '1200px',
-                    height: '550px',
-                    margin: 'auto'
-                }}
-            >
-                <Typography variant="h3" sx={{ marginBottom: '20px' }}>
-                    Share with you friends
-                </Typography>
         return (
             <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
                 <Box
@@ -112,7 +93,7 @@ const SnapOrder = () => {
                         borderRadius: '10px',
                         width: '1200px',
                         height: '550px',
-                        margin: 'auto',
+                        margin: 'auto'
                     }}
                 >
                     <Typography variant="h3" sx={{marginBottom: '20px'}}>
@@ -267,7 +248,6 @@ const SnapOrder = () => {
                         alignItems: 'center',
                         borderRadius: '12px',
                         animation: 'fadeIn 5s',
-                    //     use the same gradient color as the background
                     }}
                 >
                     <Typography id="qr-code-modal" variant="h6" component="h2" sx={{ mb: 2 }}>
