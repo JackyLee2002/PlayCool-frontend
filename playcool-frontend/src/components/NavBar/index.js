@@ -51,11 +51,11 @@ const NavBar = ({handleOpen}) => {
                         onClick={handleOpen}
                         sx={{
                             marginRight: "25px",
-                            marginLeft: "16px", // Add margin to prevent overlap
+                            marginLeft: "16px",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            minWidth: "200px" // Ensure enough space for the text
+                            minWidth: "200px"
                         }}
                     >
                         Login / Register
