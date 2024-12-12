@@ -42,7 +42,7 @@ const SnapOrder = () => {
             setOrder(response);
             if (response.concertDate) {
                 const concertDate = new Date(response.concertDate);
-                concertDate.setDate(concertDate.getDate()-31);
+                concertDate.setDate(concertDate.getDate() - 31);
                 setTargetDate(concertDate);
             }
         }
@@ -68,7 +68,7 @@ const SnapOrder = () => {
     }, []);
 
     const snapTicket = async () => {
-        const response = await fetchNoAuthSnapTicket(router.query.id)
+        const response = await fetchSnapTicket(router.query.id,token);
         setOrder(response);
     };
 
@@ -184,7 +184,7 @@ const SnapOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            order.seatNumber === null ? snapTicket() : success()
+                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success()
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
@@ -198,7 +198,7 @@ const SnapOrder = () => {
                             width: '200px',
                         }}
                     >
-                        {order.seatNumber === null ? "Snap Ticket" : "Success"}
+                        {(order.seatNumber === null && seatNumber === "") ? "Snap Ticket" : "Success"}
                     </Button>
                 </Box>
             </Box>
