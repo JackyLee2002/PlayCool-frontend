@@ -8,6 +8,7 @@ import SouvenirItem from "../src/components/SouvenirItem";
 import SouvenirSection from "../src/components/SouvenirSection";
 import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
+import ConcertHomePageSection from "@/src/components/ConcertHomePageSection";
 import SongRating from "@/src/components/SongRating";
 
 export default function MainPage() {
@@ -20,6 +21,19 @@ export default function MainPage() {
   };
   const handleClose = () => setOpen(false);
 
+  return (
+      <div>
+        <CarouselUI />
+        {/*<Banner />*/}
+        {/* <ConcertList /> */}
+        <ConcertHomePageSection />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: '100vh', padding: 2 }}>
+              <VideoMediaGroup />
+              <SongRating />
+          </Box>
+          <SouvenirSection />
+      </div>
+  );
     return (
         <div>
             <CarouselUI />

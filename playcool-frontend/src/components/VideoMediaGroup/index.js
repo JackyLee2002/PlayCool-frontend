@@ -8,25 +8,25 @@ const VideoCardGroup = () => {
             videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
             title: 'Yellow',
             likes: 'Live in Tokyo',
-            views: '2023 Nov',
+            views: 'Nov 2023',
         },
         {
             videoSrc: 'https://youtu.be/Fpn1imb9qZg?si=Ur41kJQZ1ziFaDF6',
             title: 'A Sky Full Of Stars',
             likes: 'Live at River Plate',
-            views: '2023 Apr',
+            views: 'Apr 2023',
         },
         {
             videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
             title: 'Viva La Vida ',
             likes: 'Live In São Paulo',
-            views: '2018 Oct',
+            views: 'Oct 2018',
         },
         {
             videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
             title: 'Paradise',
             likes: 'Live from Paris',
-            views: '2012 Nov',
+            views: 'Nov 2012',
         },
     ];
 

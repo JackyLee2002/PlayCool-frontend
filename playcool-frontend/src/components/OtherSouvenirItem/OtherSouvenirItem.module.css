@@ -1,0 +1,42 @@
+
+.SouvenirCanvas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*width: 30vw;*/
+}
+.SouvenirItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 16px;
+    height: 50vh;
+    width: 40vw;
+    border: #00004d 2px solid;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    margin: 16px;
+    background-color: #00004b;
+}
+.SouvenirItem:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.SouvenirDescription {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.SouvenirDescription h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.SouvenirDescription p {
+    margin: 8px 0 0;
+    font-size: 1em;
+    color: #666;
+}
+

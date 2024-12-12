@@ -46,7 +46,7 @@ const ConcertPage = () => {
     );
 
   return (
-      <Box sx={{backgroundImage: `url(${selectedBackground || "ConcertDefaultBackground.jpg"})`,backgroundSize: 'cover'}}>
+      <Box>
           <Box sx={{ maxWidth: "60%", marginLeft: "20%", marginTop:1}}>
               <Typography variant="h4" component="h1" gutterBottom textAlign="center" sx={{color:"white"}}>
                   Concerts
@@ -69,7 +69,7 @@ const ConcertPage = () => {
                           >
                               <Box
                                   sx={{
-                                      backgroundColor: new Date(concert.dateTime) < new Date() ? "gray" : "#32CD32",
+                                      backgroundColor: new Date(concert.dateTime) < new Date() ? "gray" : "#3337BF",
                                       color: "white",
                                       padding: 2,
                                       borderTopLeftRadius: 8,
@@ -166,8 +166,11 @@ const ConcertPage = () => {
                                       marginRight: 2,
                                       marginBottom: 2,
                                       alignSelf: "flex-end",
-                                      borderColor: "#3337BF",
-                                      color: "#3337BF",
+                                      backgroundColor: new Date(concert.dateTime) < new Date()
+                                          ? ""
+                                          : "#3337BF",
+                                      backColor: "#3337BF",
+                                      color: "white",
                                       fontSize: "1rem",
                                       padding: "5px 10px",
                                       borderRadius: "10px",
