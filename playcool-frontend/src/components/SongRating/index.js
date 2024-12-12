@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Card, CardContent, Typography, LinearProgress} from '@mui/material';
+import {Box, Card, CardContent, Typography, LinearProgress, Button} from '@mui/material';
 import {getSongList, getAllVotes} from '../../../pages/api/songService';
 import Image from "next/image";
+import { useRouter } from 'next/router';
 import styles from './SongRating.module.css'; // Import the CSS module
 
 const SongRating = () => {
     const [songs, setSongs] = useState([]);
     const [totalVotes, setTotalVotes] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,6 +28,10 @@ const SongRating = () => {
         }
     };
 
+    const handleVoteNow = () => {
+        router.push('/song-list'); // Navigate to Song List page
+    };
+
     return (
         <Card className={styles['floating-card']} sx={{
             width: '45%',
@@ -33,7 +39,7 @@ const SongRating = () => {
             overflow: 'hidden',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
             backgroundColor: 'rgba(0, 0, 139, 0.1)',
-            margin: '80px 20px 20px 0',
+            margin: '50px 20px 20px 0',
             position: 'relative',
         }}>
             <CardContent>
@@ -100,6 +106,30 @@ const SongRating = () => {
                         </Box>
                     </Box>
                 ))}
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleVoteNow}
+                        sx={{
+                            fontSize: '1.5rem',
+                            animation: 'pulse 2s infinite',
+                            '@keyframes pulse': {
+                                '0%': {
+                                    transform: 'scale(1)',
+                                },
+                                '50%': {
+                                    transform: 'scale(1.1)',
+                                },
+                                '100%': {
+                                    transform: 'scale(1)',
+                                },
+                            },
+                        }}
+                    >
+                        Vote Now!!!
+                    </Button>
+                </Box>
             </CardContent>
         </Card>
     );
