@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { TextField, Button, Typography, Container, Box } from "@mui/material";
-import  "../ConcertHomePageSection/ConcertHomePageSection.css";
+import  styles from "../ConcertHomePageSection/ConcertHomePageSection.module.css";
 
 const Login = () => {
     const { login, register, error } = useContext(AuthContext);
@@ -34,7 +34,7 @@ const Login = () => {
     return (
         <Container maxWidth="sm">
             <Box
-                className={"ConcertHomePageSection"}
+                className={styles.ConcertHomePageSection}
                 sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -108,9 +108,9 @@ const Login = () => {
         onClick={() => setIsRegister(!isRegister)}>
     {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
 </Button>
-                <div className={"stars"} style={{zIndex: "0", pointerEvents: "none"}}>
+                <div className={styles.stars} style={{zIndex: "0", pointerEvents: "none"}}>
                     {[...Array(900)].map((_, i) => (
-                        <div key={i} className={"star"} style={{
+                        <div key={i} className={styles.star} style={{
                             top: `${Math.random() * 200}%`,
                             left: `${Math.random() * 200}%`,
                             animationDuration: `${Math.random() * 2 + 1}s`
