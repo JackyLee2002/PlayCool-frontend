@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent, Typography, LinearProgress } from '@mui/material';
-import { getSongList, getAllVotes } from '../../../pages/api/songService';
+import React, {useEffect, useState} from 'react';
+import {Box, Card, CardContent, Typography, LinearProgress} from '@mui/material';
+import {getSongList, getAllVotes} from '../../../pages/api/songService';
 import Image from "next/image";
 import styles from './SongRating.module.css'; // Import the CSS module
 
@@ -27,7 +27,15 @@ const SongRating = () => {
     };
 
     return (
-        <Card className={styles['floating-card']} sx={{ width: '45%', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', backgroundColor: 'rgba(0, 0, 139, 0.1)', margin: '80px 0 20px 0' }}>
+        <Card className={styles['floating-card']} sx={{
+            width: '45%',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'rgba(0, 0, 139, 0.1)',
+            margin: '80px 20px 20px 0',
+            position: 'relative',
+        }}>
             <CardContent>
                 <Typography
                     variant="h4"
@@ -41,14 +49,33 @@ const SongRating = () => {
                         marginBottom: '30px'
                     }}
                 >
-                    Top 5 Hot Songs
+                    Top 5 <span style={{color: 'red'}}>Hot</span> Songs
                 </Typography>
                 {songs.map((song, index) => (
-                    <Box key={song.id} sx={{ marginBottom: 5, position: 'relative', minHeight: 80 }}>
+                    <Box key={song.id} sx={{marginBottom: 5, position: 'relative', minHeight: 80}}>
                         <LinearProgress
                             variant="determinate"
+
                             value={(song.votes / totalVotes) * 100}
-                            sx={{ height: 80, borderRadius: 2, backgroundColor: 'orange' }}
+                            sx={{
+                                height: 80,
+                                borderRadius: 2,
+                                background: 'linear-gradient(to right, orange, yellow)',
+                                position: 'relative',
+                                overflow: 'hidden',
+                                animation: 'bobble 2s infinite',
+                                '@keyframes bobble': {
+                                    '0%': {
+                                        transform: 'translateX(0%)'
+                                    },
+                                    '50%': {
+                                        transform: 'translateX(-0.4%)'
+                                    },
+                                    '100%': {
+                                        transform: 'translateX(0%)'
+                                    }
+                                }
+                            }}
                         />
                         <Box
                             sx={{
@@ -63,9 +90,10 @@ const SongRating = () => {
                                 color: 'white',
                             }}
                         >
-                            <Image src={getImageSrc(song.name)} alt={song.name} style={{ width: 60, height: 60, borderRadius: '50%', marginRight: 16 }} />
+                            <Image src={getImageSrc(song.name)} alt={song.name}
+                                   style={{width: 60, height: 60, borderRadius: '50%', marginRight: 16}}/>
                             <Box>
-                                <Typography component="div" sx={{ color: 'white' }}>
+                                <Typography component="div" sx={{color: 'white', fontSize: '3'}}>
                                     {index + 1}. {song.name}
                                 </Typography>
                             </Box>
