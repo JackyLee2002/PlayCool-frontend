@@ -67,8 +67,7 @@ const SnapHelpOrder = () => {
         setOrder(response);
     };
 
-    const success = async () => {
-        await router.push(`/pay-order/${router.query.id}`);
+    const success = () => {
     }
 
     return (
@@ -117,7 +116,7 @@ const SnapHelpOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success()
+                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success();
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
