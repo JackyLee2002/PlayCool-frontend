@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, {useContext, useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import QRCode from "react-qr-code";
-import { fetchOrder } from "@/src/components/api";
-import { AuthContext } from "@/src/context/AuthContext";
+import {fetchOrder} from "@/src/components/api";
+import {AuthContext} from "@/src/context/AuthContext";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Box, CardHeader, Typography } from '@mui/material';
+import {Box, CardHeader, Typography} from '@mui/material';
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
 import styles from "./OrderDetail.module.css";
@@ -13,7 +13,7 @@ import styles from "./OrderDetail.module.css";
 const OrderDetail = () => {
     const router = useRouter();
     const [order, setOrder] = useState(null);
-    const { token } = useContext(AuthContext);
+    const {token} = useContext(AuthContext);
     const [hostUrl, setHostUrl] = useState("");
 
     useEffect(() => {
@@ -35,20 +35,20 @@ const OrderDetail = () => {
     const orderStatusIcon = (status) => {
         switch (status) {
             case "PENDING":
-                return <span style={{ color: "orange" }}>⏳ Pending</span>;
+                return <span style={{color: "orange"}}>⏳ Pending</span>;
             case "USED":
-                return <span style={{ color: "green" }}>✔️ Used</span>;
+                return <span style={{color: "green"}}>✔️ Used</span>;
             case "REFUNDED":
-                return <span style={{ color: "red" }}>❌ Refunded</span>;
+                return <span style={{color: "red"}}>❌ Refunded</span>;
             case "UNUSED":
-                return <span style={{ color: "blue" }}>🔵 Unused</span>;
+                return <span style={{color: "orange"}}> Unused</span>;
             default:
                 return status;
         }
     };
 
     return (
-        <div >
+        <div>
             {order ? (
                 <>
                     <Box sx={{
@@ -67,7 +67,7 @@ const OrderDetail = () => {
                             width: '100%',
                             display: 'flex',
                             justifyContent: 'center',
-                            borderRadius:'20px',
+                            borderRadius: '20px',
                             alignItems: 'center'
                         }}>
                             <Box sx={{
@@ -77,17 +77,18 @@ const OrderDetail = () => {
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                borderRadius:'20px',
+                                borderRadius: '20px',
                             }}>
                                 <Card sx={{
-                                    width: '60%',
+                                    width: '50%',
                                     padding: '10px',
                                     display: 'grid',
                                     gridTemplateColumns: 'auto 1fr auto',
                                     gap: '1px',
                                     alignItems: 'start',
                                     height: '350px',
-                                    borderRadius:'12px',
+                                    borderRadius: '12px',
+                                    // borderRight: '1px dashed transparent',
                                     background: `radial-gradient(circle at right top, transparent 16px, white 0) right top / 100% 50% no-repeat, radial-gradient(circle at right bottom, transparent 16px, white 0) right bottom / 100% 50% no-repeat;`
                                 }}>
                                     <Box sx={{
@@ -99,7 +100,11 @@ const OrderDetail = () => {
                                                 width={"250"}
                                                 height={"200"}
 
-                                                style={{ marginTop:'30px',borderRadius: "6px", boxShadow: "5px 2px 10px 1px rgba(0,0,0,0.8)" }}
+                                                style={{
+                                                    marginTop: '30px',
+                                                    borderRadius: "6px",
+                                                    boxShadow: "5px 2px 10px 1px rgba(0,0,0,0.8)"
+                                                }}
                                                 src={hostUrl + order.concertImage.toString()}
                                                 alt="Concert"
                                             />
@@ -108,48 +113,28 @@ const OrderDetail = () => {
                                     <CardContent sx={{
                                         paddingRight: '5px',
                                         display: 'grid',
-                                        gridTemplateColumns: '1fr 1fr',
+                                        // gridTemplateColumns: '1fr 1fr',
                                         gap: '1px',
                                     }}>
-                                        <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="30px"
-                                            marginTop="40px">
-                                            <Typography variant="body1" sx={{ fontSize: '1.6rem' }}>
+                                        <Box display="flex" flexDirection="column" alignItems="flex-start"
+                                             marginLeft="30px"
+                                             marginTop="40px">
+                                            <Typography variant="body1" sx={{fontSize: '1.6rem',
+                                                color: '#545be0'}}>
                                                 <strong>🎵 {order.concertName} </strong>
                                             </Typography>
-                                            <Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "2%" }}>
-                                                <strong>🏠 {order.venueName}</strong>
+                                            <Typography variant="body1" sx={{fontSize: '1.2rem', mt: "2%"}}>
+<strong>📅 {new Date(order.concertDate).toLocaleDateString()} {new Date(order.concertDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</strong>                                            </Typography>
+                                            <Typography variant="body1" sx={{fontSize: '1.2rem', mt: "2%"}}>
+                                                <strong>🏠 {order.venueName} {order.areaName} {order.seatNumber}</strong>
                                             </Typography>
-                                            <Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "2%" }}>
-                                                <strong>💺 {order.areaName} {order.seatNumber}</strong>
-                                            </Typography>
-                                        </Box>
-                                        <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="5px"
-                                            marginTop="40px">
-                                            <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                                <strong>💳 Payment Status:</strong> {order.paymentStatus === "COMPLETED" ? (
-                                                    <span>✔️ <p>{new Date(order.updatedAt).toLocaleString('en-US', {
-                                                        month: 'short',
-                                                        day: 'numeric',
-                                                        year: 'numeric',
-                                                        hour: 'numeric',
-                                                        minute: 'numeric'
-                                                    })}</p></span>
-                                                ) : order.paymentStatus === "PENDING" ? (
-                                                    <span style={{ color: "orange" }}>⏳ Pending</span>
-                                                ) : (
-                                                    order.paymentStatus
-                                                )}
-                                            </Typography>
-                                            {/*<Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "5%" }}>*/}
-                                            {/*    <strong>📦 Order Status:</strong> {orderStatusIcon(order.orderStatus)}*/}
-                                            {/*</Typography>*/}
                                             <Typography variant="body1"
-                                                sx={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    fontSize: '1.2rem',
-                                                    mt: "5%"
-                                                }}>
+                                                        sx={{
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            fontSize: '1.2rem',
+                                                            mt: "2%"
+                                                        }}>
                                                 <strong>💵 Price:</strong>
                                                 {order.paymentMethod === "WX" ? (
                                                     <img src="/wxpay.png" alt="WechatPay" style={{
@@ -157,11 +142,14 @@ const OrderDetail = () => {
                                                         height: '24px',
                                                         marginRight: '10px',
                                                         marginLeft: '10px'
-                                                    }} />
+                                                    }}/>
                                                 ) : (
                                                     <Image src="/alipay.png" alt="Alipay" width={24} height={24}
-                                                        style={{ marginRight: '10px', marginLeft: '10px' }} />
-                                                )}${order.price}
+                                                           style={{marginRight: '10px', marginLeft: '10px'}}/>
+                                                )}${order.price} USD
+                                            </Typography>
+                                            <Typography variant="body1" sx={{fontSize: '1.2rem', mt: "2%"}}>
+                                                <strong>📦Status:</strong> {orderStatusIcon(order.orderStatus)}
                                             </Typography>
                                         </Box>
                                     </CardContent>
@@ -176,8 +164,9 @@ const OrderDetail = () => {
                                     flexDirection: 'column',
                                     alignItems: 'center',
                                     height: '350px',
-                                    borderRadius:'12px',
-                                    background: `radial-gradient(circle at left top, transparent 16px, white 0) left top / 100% 50% no-repeat, radial-gradient(circle at left bottom, transparent 16px, white 0) left bottom / 100% 50% no-repeat;`
+                                    borderRadius: '12px',
+                                    // borderLeft: 'none',
+                                    background: `radial-gradient(circle at left top, transparent 16px, white 0) left top / 100% 50% no-repeat, radial-gradient(circle at left bottom, transparent 16px, white 0) left bottom / 100% 50% no-repeat;`,
                                 }}>
                                     <CardContent sx={{
                                         display: 'flex',
@@ -190,11 +179,8 @@ const OrderDetail = () => {
                                         <Typography variant="h6" gutterBottom>
                                             🎫Ticket Exchange Code
                                         </Typography>
-                                        <Typography variant="body1" sx={{  mt: "1%" }}>
-                                            <strong>📦Status:</strong> {orderStatusIcon(order.orderStatus)}
-                                        </Typography>
-                                        <Box sx={{ marginTop: 1, marginBottom: 2 }}>
-                                            <QRCode value={JSON.stringify(order)} size={200} />
+                                        <Box sx={{marginTop: 1, marginBottom: 2}}>
+                                            <QRCode value={JSON.stringify(order)} size={200}/>
                                         </Box>
                                     </CardContent>
                                 </Card>
@@ -203,7 +189,15 @@ const OrderDetail = () => {
                     </Box>
                 </>
             ) : (
-                "Order not found"
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                    color: 'white'
+                }}>
+                    <Typography variant="h4">Order not found</Typography>
+                </Box>
             )}
         </div>
     );
