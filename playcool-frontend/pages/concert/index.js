@@ -48,7 +48,7 @@ const ConcertPage = () => {
   return (
       <Box>
           <Box sx={{ maxWidth: "60%", marginLeft: "20%", marginTop:1}}>
-              <Typography variant="h4" component="h1" gutterBottom textAlign="center" sx={{color:"white"}}>
+              <Typography variant="h4" component="h1" gutterBottom textAlign="center" sx={{marginTop: "30px", textAlign: "center", color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'}}>
                   Concerts
               </Typography>
               <Box>

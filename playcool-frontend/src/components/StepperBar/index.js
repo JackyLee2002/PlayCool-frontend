@@ -11,13 +11,19 @@ const StepperBar = ({ index }) => {
 
     return (
         <Box className={styles.stepperBar}>
-            <Stepper activeStep={parseInt(index)} alternativeLabel sx={{
-                '& .MuiStepIcon-root': {color: 'white', fontSize: '2rem'},
-                '& .MuiStepIcon-root.Mui-completed': {color: 'white', fontSize: '2rem'},
-                '& .MuiStepIcon-root.Mui-active': {color: 'white', fontSize: '2rem'},
-                '& .MuiStepLabel-label': {color: 'white'},
-                backgroundColor: 'transparent',
-            }}>
+            <Stepper
+                activeStep={parseInt(index)}
+                alternativeLabel
+                sx={{
+                    '& .MuiStepIcon-root': { color: 'white', fontSize: '2rem' },
+                    '& .MuiStepIcon-root.Mui-completed': { color: 'white', fontSize: '2rem' },
+                    '& .MuiStepIcon-root.Mui-active': { color: 'white', fontSize: '2rem' },
+                    '& .MuiStepLabel-label': { color: 'white' },
+                    '& .MuiStepLabel-label.Mui-active': { color: 'white' },
+                    '& .MuiStepLabel-label.Mui-completed': { color: 'white' },
+                    backgroundColor: 'transparent',
+                }}
+            >
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel>{label}</StepLabel>
