@@ -100,7 +100,7 @@ const SongRating = () => {
                             <Image src={getImageSrc(song.name)} alt={song.name}
                                    style={{width: 60, height: 60, borderRadius: '50%', marginRight: 16}}/>
                             <Box>
-                                <Typography component="div" sx={{color: 'white', fontSize: '3'}}>
+                                <Typography component="div" sx={{color: 'white', fontSize: `${(5 - index) * 4.5 + 15}px`}}>
                                     {index + 1}. {song.name}
                                 </Typography>
                             </Box>
