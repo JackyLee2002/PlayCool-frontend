@@ -1,9 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Box, Typography} from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
 import {AuthContext} from "@/src/context/AuthContext";
 import {fetchOrder, fetchSnapTicket} from "@/src/components/api";
 import {useRouter} from "next/router";
+import SockJS from 'sockjs-client';
+import {Stomp} from "@stomp/stompjs";
 
 const SnapOrder = () => {
         const [url, setURL] = useState("");
@@ -11,8 +13,9 @@ const SnapOrder = () => {
         const [order, setOrder] = useState({});
         const route = useRouter();
         const router = useRouter();
+        const [seatNumber, setSeatNumber] = useState("");
 
-        useEffect(() => {
+        useEffect( () => {
             if (!router.query.id) {
                 return;
             }
@@ -22,6 +25,26 @@ const SnapOrder = () => {
             fetchOrderData(router.query.id);
         }, [router]);
 
+        useEffect(() => {
+            const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
+            const stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, (frame) => {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/orders', (message) => {
+                    const updatedOrder = JSON.parse(message.body);
+                    setSeatNumber(updatedOrder.seatNumber);
+                    console.log(updatedOrder);
+                }, (error) => {
+                    console.error('WebSocket connection error: ', error);
+                });
+            });
+
+            return () => {
+                stompClient.disconnect();
+            };
+        }, []);
+
         const fetchOrderData = async (id) => {
             if (id && token) {
                 const response = await fetchOrder(id, token);
@@ -30,10 +53,13 @@ const SnapOrder = () => {
         };
 
         const snapTicket = async () => {
-            // navigate to the pay page
             await fetchSnapTicket(router.query.id, token);
-            await router.push(`/pay-order/${router.query.id}`);
         };
+
+        const success = async () => {
+            await router.push(`/pay-order/${router.query.id}`);
+        }
+
 
         return (
             <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
@@ -45,9 +71,9 @@ const SnapOrder = () => {
                         padding: '20px',
                         border: '1px solid lightgray',
                         borderRadius: '10px',
-                        width: '1200px', // Set a fixed width
-                        height: '550px', // Set a fixed height
-                        margin: 'auto' // Center horizontally
+                        width: '1200px',
+                        height: '550px',
+                        margin: 'auto'
                     }}
                 >
                     <Typography variant="h3" sx={{marginBottom: '20px'}}>
@@ -129,8 +155,8 @@ const SnapOrder = () => {
                             marginTop: '20px'
                         }}
                     >
-                        <button
-                            onClick={snapTicket}
+                        <Button
+                            onClick={(seatNumber !== "" || order.seatNumber !== null) ? success : snapTicket}
                             style={{
                                 marginTop: '20px',
                                 padding: '10px 20px',
@@ -139,11 +165,12 @@ const SnapOrder = () => {
                                 border: '1px solid lightgray',
                                 backgroundColor: '#3337BF',
                                 color: 'white',
-                                width: '200px'
+                                width: '200px',
                             }}
+                            // disabled={seatNumber !== ""}
                         >
-                            Snap Ticket
-                        </button>
+                            {(seatNumber !== "" || order.seatNumber !== null) ? "Success" : "Snap Ticket"}
+                        </Button>
                     </Box>
                 </Box>
             </div>
