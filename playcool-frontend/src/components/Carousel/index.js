@@ -2,10 +2,9 @@ import { Carousel } from "react-responsive-3d-carousel";
 import "react-responsive-3d-carousel/dist/styles.css";
 import Image from "next/image";
 import Link from "next/link";
-import Concert from '../../../public/Concert.png'
-import Vote from '../../../public/Vote.png'
-import AlbumsOnSale from '../../../public/AlbumsOnSale.png'
-import MusicOfTheSpheres from '../../../public/MusicOfTheSpheres.jpg'
+import Concert from "../../../public/Concert.png";
+import Vote from "../../../public/Vote.png";
+import AlbumsOnSale from "../../../public/AlbumsOnSale.png";
 
 export default function CarouselUI() {
   const items = [
@@ -44,9 +43,11 @@ export default function CarouselUI() {
 
   return (
     <div
-      style={{
-        // backgroundColor: "#0F1139",
-      }}
+      style={
+        {
+          // backgroundColor: "#0F1139",
+        }
+      }
     >
       <Carousel
         width={"700px"}
