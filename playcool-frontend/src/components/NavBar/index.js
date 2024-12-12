@@ -22,7 +22,7 @@ const NavBar = ({handleOpen}) => {
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
                 <Link href="/" passHref>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{ margin: "10px", minHeight: 20, midWidth: 250}}/>
+                           style={{ margin: "10px", minHeight: 20}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
@@ -33,36 +33,17 @@ const NavBar = ({handleOpen}) => {
                     </Link>
                     <Link href="/concert" passHref>
                         <Button className={styles.navButton} sx={{color: "white",
-                        ":hover": {
-                            scale: 1.2,
-                        }
+                            ":hover": {
+                                scale: 1.2,
+                            }
                         }} >Concert</Button>
                     </Link>
 
                 </div>
-                {user ? (
-                    <div>
-                        <AccountMenu/>
-                    </div>
-                ) : (
-                    <Button
-                        variant="outlined"
-                        startIcon={<PersonIcon/>}
-                        onClick={handleOpen}
-                        sx={{
-                            marginRight: "25px",
-                            marginLeft: "16px",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            minWidth: "200px"
-                        }}
-                    >
-                    </div>) : (
 
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px", minWidth: "200px"}}>
+                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px", minWidth: "150px"}}>
                         Login / Register
-                    </Button>)}
+                    </Button>
 
             </Toolbar>
         </AppBar>
