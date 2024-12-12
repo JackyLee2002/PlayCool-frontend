@@ -94,7 +94,7 @@ export default function MyOrders() {
                                 <Typography variant="body2" color="text.secondary">
                                     Created Time: {new Date(order.createdAt).toLocaleString()}
                                 </Typography>
-                                {order.paymentStatus == "COMPLETED"  && <Typography variant="body2" color="text.secondary">
+                                {order.paymentStatus === "COMPLETED"  && <Typography variant="body2" color="text.secondary">
                                     Paid Time: {new Date(order.updatedAt).toLocaleString()}
                                 </Typography> }
                             </CardContent>
@@ -109,10 +109,11 @@ export default function MyOrders() {
                                     padding: "10px 20px",
                                     borderRadius: "12px",
                                 }}
-                                onClick={() => router.push(`/order-detail/${order.orderId}`)}
+                            onClick={() => {order.paymentStatus === "COMPLETED" ? router.push(`/order-detail/${order.orderId}`) : router.push(`/pay-order/${order.orderId}`)}}
+
                             >
                                 <Typography sx={{color: "white"}}>
-                                    View Details &rarr;
+                                    {order.paymentStatus === "COMPLETED" ? "View Details" : "Pay"} &rarr;
                                 </Typography>
                             </Button>
                         </CardContent>

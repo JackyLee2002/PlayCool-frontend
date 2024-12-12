@@ -5,6 +5,7 @@ import Link from "next/link";
 import Concert from '../../../public/Concert.png'
 import Vote from '../../../public/Vote.png'
 import AlbumsOnSale from '../../../public/AlbumsOnSale.png'
+import MusicOfTheSpheres from '../../../public/MusicOfTheSpheres.jpg'
 
 export default function CarouselUI() {
   const items = [
@@ -44,7 +45,7 @@ export default function CarouselUI() {
   return (
     <div
       style={{
-        backgroundColor: "#0F1139",
+        // backgroundColor: "#0F1139",
       }}
     >
       <Carousel

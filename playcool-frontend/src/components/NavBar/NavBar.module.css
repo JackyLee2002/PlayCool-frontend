@@ -17,13 +17,16 @@
 .navItems {
     display: flex;
     gap: 16px;
-    margin-left: 70%;
+    margin-left: 75%;
+    min-width: 200px;
     color: white;
+
 }
 
 .navButton {
     text-transform: none;
     color: white;
+
 }
 
 .loginButton {
