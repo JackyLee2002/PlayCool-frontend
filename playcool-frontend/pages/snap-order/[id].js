@@ -100,6 +100,24 @@ const SnapOrder = () => {
                 <Typography variant="h3" sx={{ marginBottom: '20px' }}>
                     Share with you friends
                 </Typography>
+        return (
+            <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '20px',
+                        border: '1px solid lightgray',
+                        borderRadius: '10px',
+                        width: '1200px',
+                        height: '550px',
+                        margin: 'auto',
+                    }}
+                >
+                    <Typography variant="h3" sx={{marginBottom: '20px'}}>
+                        Share with you friends
+                    </Typography>
 
                 {targetDate && (
                     <FlipClockCountdown
