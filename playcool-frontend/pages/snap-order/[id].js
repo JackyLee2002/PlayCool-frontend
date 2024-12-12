@@ -91,7 +91,6 @@ const SnapOrder = () => {
                         padding: '20px',
                         borderRadius: '10px',
                         width: '1200px',
-                        margin: 'auto',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)',
                         backgroundColor: 'rgba(50,50, 50, 0.1)',
                         height: '635px',
