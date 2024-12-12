@@ -83,7 +83,7 @@ const SnapHelpOrder = () => {
 
     const success = () => {
         setSnackbarMessage('Ticket already snapped.');
-        setSnackbarSeverity('info');
+        setSnackbarSeverity('warning');
         setSnackbarOpen(true);
     };
 
