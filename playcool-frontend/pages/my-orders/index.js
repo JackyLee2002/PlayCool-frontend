@@ -35,7 +35,7 @@ export default function MyOrders() {
     };
 
     return (
-        <div style={{minHeight: "80vh"}}>
+        <Box sx={{minHeight: "80vh",maxWidth: "60%", marginLeft: "20%", marginTop:1}}>
             <Typography variant="h5" sx={{textAlign: "center"}}>
                 My Orders
             </Typography>
@@ -127,6 +127,6 @@ export default function MyOrders() {
                     color="primary"
                 />
             </Box>
-        </div>
+        </Box>
     );
 }

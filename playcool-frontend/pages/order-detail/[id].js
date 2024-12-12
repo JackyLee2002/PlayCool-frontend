@@ -48,111 +48,164 @@ const OrderDetail = () => {
     };
 
     return (
-        <>
+        <div >
             {order ? (
-                <Card sx={{
-                    width: '80%',
-                    margin: '0 auto',
-                    marginTop: '100px',
-                    marginBottom: '200px',
-                    padding: '10px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center'
-                }}>
-                    <CardHeader title="Order Detail" sx={{ fontSize: '2rem' }} />
-                    <CardContent sx={{ flex: 0, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Box display="flex" flexDirection="column" alignItems="center" sx={{ paddingRight: '10px' }}>
-                            {order.concertImage && hostUrl && (
-                                <Image
-                                    width={"300"}
-                                    height={"200"}
-                                    src={hostUrl + order.concertImage.toString()}
-                                    alt="Concert"
-                                />
-                            )}
-                        </Box>
-                        <CardContent sx={{ flex: 2, paddingRight: '10px' }}>
-                            <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="50px" marginTop="20px">
-                                <Typography variant="body1" sx={{ fontSize: '1.6rem' }}>
-                                    <strong>🎵 {order.concertName} </strong>
-                                </Typography>
-                                <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                    <strong>🏠 {order.venueName}</strong>
-                                </Typography>
+                <>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '0',
+                        marginTop: '15%',
+                        marginBottom: '20%',
+                        position: 'relative',
 
-                                <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                    <strong>💺 Seat Number:</strong>  {order.areaName}{order.seatNumber}
-                                </Typography>
-                                <Divider style={{ margin: '10px 0' }} />
-                                <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                    <strong>💳 Payment Status:</strong> {order.paymentStatus === "COMPLETED" ? (
-                                        <span>✔️ <p>{new Date(order.updatedAt).toLocaleString('en-US', {
-                                            month: 'short',
-                                            day: 'numeric',
-                                            year: 'numeric',
-                                            hour: 'numeric',
-                                            minute: 'numeric'
-                                        })}</p></span>
-                                    ) : order.paymentStatus === "PENDING" ? (
-                                        <span style={{ color: "orange" }}>⏳ Pending</span>
-                                    ) : (
-                                        order.paymentStatus
-                                    )} {order.paymentStatus === "COMPLETED" && (
-                                    <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-
-                                    </Typography>
-                                )}
-                                </Typography>
-
-                                <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
-                                    <strong>📦 Order Status:</strong> {orderStatusIcon(order.orderStatus)}
-                                </Typography>
-                                {/*<Typography variant="body1" sx={{ fontSize: '1.2rem' }}>*/}
-                                {/*    <strong>📅 Created Time:</strong> {new Date(order.createdAt).toLocaleString('en-US', {*/}
-                                {/*        month: 'short',*/}
-                                {/*        day: 'numeric',*/}
-                                {/*        year: 'numeric',*/}
-                                {/*        hour: 'numeric',*/}
-                                {/*        minute: 'numeric'*/}
-                                {/*    })}*/}
-                                {/*</Typography>*/}
-                                <Typography variant="body1" sx={{ display: "flex", alignItems: "center", fontSize: '1.2rem' }}>
-                                    <strong>💵 Price:</strong>
-                                    {order.paymentMethod === "WX" ? (
-                                        <img src="/wxpay.png" alt="WechatPay" style={{
-                                            width: '24px',
-                                            height: '24px',
-                                            marginRight: '10px',
-                                            marginLeft: '10px'
-                                        }} />
-                                    ) : (
-                                        <Image src="/alipay.png" alt="Alipay" width={24} height={24} style={{ marginRight: '10px', marginLeft: '10px' }} />
-                                    )}${order.price}
-                                </Typography>
-                                <Divider style={{ margin: '10px 0' }} />
-                            </Box>
-                        </CardContent>
-                        <CardContent sx={{
-                            flex: 2,
-                            paddingLeft: '60px',
+                    }}>
+                        <Box sx={{
+                            position: 'absolute',
+                            zIndex: 1,
+                            height: '90%',
+                            width: '100%',
                             display: 'flex',
-                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            borderRadius:'20px',
                             alignItems: 'center'
                         }}>
-                            <Typography variant="h6" gutterBottom>
-                                🎫Ticket Exchange Code
-                            </Typography>
-                            <Box sx={{ marginTop: 1, marginBottom: 2 }}>
-                                <QRCode value={JSON.stringify(order)} size={200} />
+                            <Box sx={{
+                                zIndex: 2,
+                                height: '80%',
+                                width: '90%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                borderRadius:'20px',
+                            }}>
+                                <Card sx={{
+                                    width: '60%',
+                                    padding: '10px',
+                                    display: 'grid',
+                                    gridTemplateColumns: 'auto 1fr auto',
+                                    gap: '1px',
+                                    alignItems: 'start',
+                                    height: '350px',
+                                    borderRadius:'12px',
+                                    background: `radial-gradient(circle at right top, transparent 16px, white 0) right top / 100% 50% no-repeat, radial-gradient(circle at right bottom, transparent 16px, white 0) right bottom / 100% 50% no-repeat;`
+                                }}>
+                                    <Box sx={{
+                                        paddingRight: 0, ml: "25px", mt: "20px",
+                                        width: '100%'
+                                    }}>
+                                        {order.concertImage && hostUrl && (
+                                            <Image
+                                                width={"250"}
+                                                height={"200"}
+
+                                                style={{ marginTop:'30px',borderRadius: "6px", boxShadow: "5px 2px 10px 1px rgba(0,0,0,0.8)" }}
+                                                src={hostUrl + order.concertImage.toString()}
+                                                alt="Concert"
+                                            />
+                                        )}
+                                    </Box>
+                                    <CardContent sx={{
+                                        paddingRight: '5px',
+                                        display: 'grid',
+                                        gridTemplateColumns: '1fr 1fr',
+                                        gap: '1px',
+                                    }}>
+                                        <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="30px"
+                                            marginTop="40px">
+                                            <Typography variant="body1" sx={{ fontSize: '1.6rem' }}>
+                                                <strong>🎵 {order.concertName} </strong>
+                                            </Typography>
+                                            <Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "2%" }}>
+                                                <strong>🏠 {order.venueName}</strong>
+                                            </Typography>
+                                            <Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "2%" }}>
+                                                <strong>💺 {order.areaName} {order.seatNumber}</strong>
+                                            </Typography>
+                                        </Box>
+                                        <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="5px"
+                                            marginTop="40px">
+                                            <Typography variant="body1" sx={{ fontSize: '1.2rem' }}>
+                                                <strong>💳 Payment Status:</strong> {order.paymentStatus === "COMPLETED" ? (
+                                                    <span>✔️ <p>{new Date(order.updatedAt).toLocaleString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric',
+                                                        hour: 'numeric',
+                                                        minute: 'numeric'
+                                                    })}</p></span>
+                                                ) : order.paymentStatus === "PENDING" ? (
+                                                    <span style={{ color: "orange" }}>⏳ Pending</span>
+                                                ) : (
+                                                    order.paymentStatus
+                                                )}
+                                            </Typography>
+                                            {/*<Typography variant="body1" sx={{ fontSize: '1.2rem', mt: "5%" }}>*/}
+                                            {/*    <strong>📦 Order Status:</strong> {orderStatusIcon(order.orderStatus)}*/}
+                                            {/*</Typography>*/}
+                                            <Typography variant="body1"
+                                                sx={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    fontSize: '1.2rem',
+                                                    mt: "5%"
+                                                }}>
+                                                <strong>💵 Price:</strong>
+                                                {order.paymentMethod === "WX" ? (
+                                                    <img src="/wxpay.png" alt="WechatPay" style={{
+                                                        width: '24px',
+                                                        height: '24px',
+                                                        marginRight: '10px',
+                                                        marginLeft: '10px'
+                                                    }} />
+                                                ) : (
+                                                    <Image src="/alipay.png" alt="Alipay" width={24} height={24}
+                                                        style={{ marginRight: '10px', marginLeft: '10px' }} />
+                                                )}${order.price}
+                                            </Typography>
+                                        </Box>
+                                    </CardContent>
+                                </Card>
+                                <Card sx={{
+                                    width: '17%',
+                                    pt: '20px',
+                                    pb: '20px',
+                                    pl: '0',
+                                    pr: '0',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    height: '350px',
+                                    borderRadius:'12px',
+                                    background: `radial-gradient(circle at left top, transparent 16px, white 0) left top / 100% 50% no-repeat, radial-gradient(circle at left bottom, transparent 16px, white 0) left bottom / 100% 50% no-repeat;`
+                                }}>
+                                    <CardContent sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        backgroundColor: "white",
+                                        width: '100%',
+                                        height: '80%',
+                                    }}>
+                                        <Typography variant="h6" gutterBottom>
+                                            🎫Ticket Exchange Code
+                                        </Typography>
+                                        <Typography variant="body1" sx={{  mt: "1%" }}>
+                                            <strong>📦Status:</strong> {orderStatusIcon(order.orderStatus)}
+                                        </Typography>
+                                        <Box sx={{ marginTop: 1, marginBottom: 2 }}>
+                                            <QRCode value={JSON.stringify(order)} size={200} />
+                                        </Box>
+                                    </CardContent>
+                                </Card>
                             </Box>
-                        </CardContent>
-                    </CardContent>
-                </Card>
+                        </Box>
+                    </Box>
+                </>
             ) : (
                 "Order not found"
             )}
-        </>
+        </div>
     );
 };
 
