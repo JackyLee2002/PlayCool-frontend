@@ -58,9 +58,12 @@ const NavBar = ({handleOpen}) => {
                             minWidth: "200px"
                         }}
                     >
+                    </div>) : (
+
+                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px", minWidth: "200px"}}>
                         Login / Register
-                    </Button>
-                )}
+                    </Button>)}
+
             </Toolbar>
         </AppBar>
     );

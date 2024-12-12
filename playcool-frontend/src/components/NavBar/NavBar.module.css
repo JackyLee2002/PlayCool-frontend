@@ -33,4 +33,5 @@
     color: black;
     text-transform: none;
     border: 1px solid black;
+    min-width: 200px;
 }
