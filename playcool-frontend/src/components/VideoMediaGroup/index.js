@@ -5,25 +5,25 @@ import styles from './VideoMediaGroup.module.css';
 const VideoCardGroup = () => {
     const videoData = [
         {
-            videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
+            videoSrc: 'https://www.bilibili.com/video/BV1FyiDYkEYV/?spm_id_from=333.1007.tianma.2-1-4.click',
             title: 'Card 1',
             likes: '287,586',
             views: '1,234,567',
         },
         {
-            videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
+            videoSrc: 'https://www.bilibili.com/video/BV1FyiDYkEYV/?spm_id_from=333.1007.tianma.2-1-4.click',
             title: 'Card 2',
             likes: '150,234',
             views: '987,654',
         },
         {
-            videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
+            videoSrc: 'https://www.bilibili.com/video/BV1FyiDYkEYV/?spm_id_from=333.1007.tianma.2-1-4.click',
             title: 'Card 3',
             likes: '300,123',
             views: '2,345,678',
         },
         {
-            videoSrc: 'https://youtu.be/oYeIMKbNc5A?si=0d1lJX58qMhz9dxW',
+            videoSrc: 'https://www.bilibili.com/video/BV1FyiDYkEYV/?spm_id_from=333.1007.tianma.2-1-4.click',
             title: 'Card 4',
             likes: '400,789',
             views: '3,456,789',

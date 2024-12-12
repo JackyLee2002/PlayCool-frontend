@@ -176,7 +176,7 @@ export default function SongList() {
                     page={page}
                     onChange={handlePageChange}
                     sx={{
-                        backgroundColor: "rgba(255, 255, 0, 0.8)",
+                        backgroundColor: "#FF9D00",
                         borderRadius: "8px",
                         padding: "10px",
                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",

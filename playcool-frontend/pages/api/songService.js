@@ -66,4 +66,13 @@ export const getVotesByUserId = async(token) => {
     }
 };
 
+export const getAllVotes = async () => {
+    try {
+        const response = await axiosInstance.get(`/songs/all-votes`);
+        return response.data;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 export default axiosInstance;
