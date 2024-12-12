@@ -1,11 +1,12 @@
-
-.SouvenirCanvas {
+.OtherSouvenirCanvas {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 80%;
     /*width: 30vw;*/
 }
-.SouvenirItem {
+
+.OtherSouvenirItem {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,29 +15,76 @@
     padding: 16px;
     height: 50vh;
     width: 40vw;
-    border: #00004d 2px solid;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     margin: 16px;
-    background-color: #00004b;
-}
-.SouvenirItem:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 12px 24px rgba(0, 0, 0, 0.4);
+    background-color: rgba(79, 88, 199, 0.2);
+    word-wrap: break-word; /* For older browsers */
+    overflow-wrap: break-word; /* For modern browsers */
+    white-space: normal;
+    position: relative; /* Add this to position the buy button */
 }
 
-.SouvenirDescription {
+.OtherSouvenirItem:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 12px 24px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.OtherSouvenirDescription {
     text-align: center;
     margin-top: 16px;
+    text-shadow: 4px 6px 4px #000;
 }
 
-.SouvenirDescription h3 {
+.OtherSouvenirDescription h3 {
     margin: 0;
     font-size: 1.5em;
 }
 
-.SouvenirDescription p {
+.OtherSouvenirDescription p {
     margin: 8px 0 0;
     font-size: 1em;
-    color: #666;
+    color: #ffffff;
+    overflow: hidden;
+}
+.OtherSouvenirNav {
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 1), /* Outer glow */
+    0 0 10px rgba(255, 255, 255, 0.8), /* Inner glow */
+    0 0 30px rgba(255, 255, 255, 0.5); /* Additional glow for more intensity */
 }
 
+.OtherSouvenirNav::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #fff; /* Adjust the color as needed */
+    transition: width 0.4s ease, right 0.4s ease;
+}
+
+.OtherSouvenirNav:hover::after {
+    width: 100%;
+    right: 0;
+}
+.dragIcon {
+    margin-left: auto;
+    width: 22px;
+    height: 22px;
+}
+
+.buyButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.buyButton:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}

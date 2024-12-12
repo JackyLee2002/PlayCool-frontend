@@ -84,15 +84,18 @@ const SnapOrder = () => {
                         flexDirection: 'column',
                         alignItems: 'center',
                         padding: '20px',
-                        border: '1px solid lightgray',
+                   
                         borderRadius: '10px',
                         width: '1200px',
                         height: '550px',
-                        margin: 'auto'
+                        margin: 'auto',
+                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.8)',
+                        backgroundColor: 'rgba(50,50, 50, 0.1)',
+
                     }}
                 >
-                    <Typography variant="h3" sx={{marginBottom: '20px'}}>
-                        Share with you friends
+                    <Typography variant="h4" sx={{marginBottom: '20px', color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'}}>
+                        SHARE WITH YOUR FREINDS
                     </Typography>
 
                 {targetDate && (
@@ -131,7 +134,7 @@ const SnapOrder = () => {
                                 marginTop: '10px'
                             }}
                         >
-                            <Typography variant="h5" sx={{ marginRight: '10px' }}>
+                            <Typography variant="h5" sx={{ color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)' , padding: '0px', marginRight: '10px' }}>
                                 Shareable Link:
                             </Typography>
 
@@ -163,8 +166,8 @@ const SnapOrder = () => {
                                     marginLeft: '10px',
                                     padding: '5px 20px',
                                     cursor: 'pointer',
-                                    borderRadius: '20px',
-                                    border: '1px solid lightgray',
+                                    borderRadius: '10px',
+
                                     backgroundColor: '#3337BF',
                                     color: 'white',
                                 }}
@@ -191,8 +194,8 @@ const SnapOrder = () => {
                             marginTop: '20px',
                             padding: '10px 20px',
                             cursor: 'pointer',
-                            borderRadius: '20px',
-                            border: '1px solid lightgray',
+                            borderRadius: '10px',
+
                             backgroundColor: targetDate && currentDate >= targetDate ? '#3337BF' : 'gray',
                             color: 'white',
                             width: '200px',

@@ -43,7 +43,7 @@ const ConcertHomePageSection = () => {
                 ))}
             </div>
             <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={styles.sectionTitle} variant="h4" component="h1" gutterBottom textAlign="center">
-                {isConcertUpcoming ? "LATEST CONCERT ON SALE" : "NO UPCOMING CONCERTS"}
+                {isConcertUpcoming ? "UPCOMING CONCERT ON SALE" : "NO UPCOMING CONCERTS"}
             </Typography>
             {isConcertUpcoming && (
                 <Card
@@ -170,7 +170,7 @@ const ConcertHomePageSection = () => {
                             },
                         }}
                     >
-                        {new Date(latestConcert.dateTime) < new Date() ? "Passed" : "BUY NOW!"}
+                        {new Date(latestConcert.dateTime) < new Date() ? "Passed" : "PRE-SALE!"}
                     </Button>
                 </Card>
             )}
