@@ -50,7 +50,7 @@ const SongRating = () => {
                     gutterBottom
                     align="center"
                     sx={{
-                        color: 'white',
+                        color: '#00008a',
                         fontSize: '50px',
                         fontWeight: 'bold',
                         marginBottom: '30px'
