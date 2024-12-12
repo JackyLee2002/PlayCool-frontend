@@ -20,9 +20,9 @@ const NavBar = ({handleOpen}) => {
             height: '50px',
         }}>
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
-                <Link href="/" passHref>
+                <Link href="/" passHref style={{flexGrow: 1}}>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{ margin: "10px", minHeight: 20, midWidth: 250}}/>
+                           style={{ margin: "10px", minHeight: 20, width: 'auto', maxWidth: '100%'}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
