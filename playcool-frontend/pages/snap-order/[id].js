@@ -92,8 +92,10 @@ const SnapOrder = () => {
                         border: '1px solid lightgray',
                         borderRadius: '10px',
                         width: '1200px',
-                        height: '550px',
-                        margin: 'auto'
+                        height: '635px',
+                        margin: 'auto',
+                        marginTop: '50px',
+                        marginBottom: '50px'
                     }}
                 >
                     <Typography variant="h3" sx={{marginBottom: '20px'}}>
@@ -114,11 +116,13 @@ const SnapOrder = () => {
                 <OrderDetail props={order} />
 
                 <Box
+
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'flex-start',
-                        marginTop: '20px'
+                        marginTop: '20px',
+
                     }}
                 >
                     <Box
