@@ -112,7 +112,7 @@ const SnapHelpOrder = () => {
                 }}
             >
                 <Typography variant="h3" sx={{marginBottom: '20px'}}>
-                    Help Your Friend: <strong>{order.userName}</strong> Snap The Ticket
+                    Help <strong>{order.userName}</strong> Snap The Ticket
                 </Typography>
 
                 {targetDate && (
