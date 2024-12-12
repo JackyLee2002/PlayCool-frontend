@@ -80,24 +80,24 @@ const ConcertDetail = () => {
               sx={{ width: 140 }}
             />
             <CardContent sx={{ textAlign: "center" }}>
-              <Typography
-                variant="h3"
-                component="h2"
-                sx={{ fontWeight: "bold" }}
-              >
+                <Typography
+                    variant="h3"
+                    component="h2"
+                    sx={{ fontWeight: "bold", color: "white" }}
+                >
                 {concert.title}
               </Typography>
-              <Typography variant="body" color="textSecondary" component="p">
+                <Typography variant="body" color="white" component="p">
                 {concert.venue.city +
                   ", " +
                   concert.venue.location +
                   ", " +
                   concert.venue.name}
               </Typography>
-              <Typography variant="body" color="textSecondary" component="p">
+                <Typography variant="body" color="white" component="p">
                 Time: {concert.dateTime}
               </Typography>
-              <Typography variant="body" color="textSecondary" component="p">
+                <Typography variant="body" color="white" component="p">
                 {concert.description}
               </Typography>
             </CardContent>
@@ -121,7 +121,7 @@ const ConcertDetail = () => {
               }}
             >
               <Button
-                sx={{ marginRight: 10, fontSize: "3rem" }}
+                sx={{ marginRight: 10, fontSize: "3rem" ,color:'white'}}
                 variant="text"
                 onClick={() => router.push(`/concert`)}
               >
@@ -141,7 +141,7 @@ const ConcertDetail = () => {
                 }}
               />
               <Button
-                sx={{ marginLeft: "auto", fontSize: "3rem" }}
+                sx={{ marginLeft: 10, fontSize: "3rem" ,color:'white' }}
                 variant="text"
                 onClick={() => {
                   if (selectedAreaId === null) {

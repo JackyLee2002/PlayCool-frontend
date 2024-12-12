@@ -1,9 +1,10 @@
 import StepperBar from "@/src/components/StepperBar";
 import ConfirmOrder from "@/src/components/ConfirmOrder";
 import OrderDetail from "@/src/components/OrderDetail";
-import { useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import { fetchAreaById, fetchConcert } from "@/src/components/api";
+import {AuthContext} from "@/src/context/AuthContext";
 
 const CreateOrder = () => {
   const route = useRouter();
@@ -19,6 +20,7 @@ const CreateOrder = () => {
     concertImage:
       "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp",
   });
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     if (!route.query.id || !router.query.selectedAreaId) {

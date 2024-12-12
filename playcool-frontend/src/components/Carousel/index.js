@@ -5,6 +5,7 @@ import Link from "next/link";
 import Concert from '../../../public/Concert.png'
 import Vote from '../../../public/Vote.png'
 import AlbumsOnSale from '../../../public/AlbumsOnSale.png'
+import MusicOfTheSpheres from '../../../public/MusicOfTheSpheres.jpg'
 
 export default function CarouselUI() {
   const items = [

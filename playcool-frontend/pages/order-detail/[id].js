@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import {Box, CardHeader, Typography} from '@mui/material';
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
+import styles from "./OrderDetail.module.css";
 
 const OrderDetail = () => {
     const router = useRouter();
@@ -63,12 +64,34 @@ const OrderDetail = () => {
         <>
             {order ? (
 
-                <Card sx={{width: 600, margin: '0 auto', padding: '20px'}}>
-                    <CardHeader
-                        title="Order Detail"
-                        // subheader="12排12座 12排13座"
-                        sx={{textAlign: 'center'}}
-                    />
+                <Card sx={{width: 600, margin: '0 auto', padding: '20px', backgroundColor: "transparent"}}>
+
+                    {/*<CardHeader*/}
+                    {/*    // className={styles.moonMusic}*/}
+                    {/*    title="Order Detail"*/}
+                    {/*    // subheader="12排12座 12排13座"*/}
+                    {/*    sx={{*/}
+                    {/*        textAlign: 'center',*/}
+                    {/*        background: "linear-gradient(90deg, #9370DB 0%, #00FFFF 33%, #FFA500 66%, #FFC0CB 100%)",*/}
+                    {/*        WebkitBackgroundClip: "text",*/}
+                    {/*        color: "transparent"*/}
+                    {/*    }}/>*/}
+                    <Box display={"flex"} justifyContent={"center"} sx={{backgroundColor: "transparent"}}>
+                        <svg width="300" height="100">
+                            <defs>
+                                <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#9370DB"/>
+                                    <stop offset="30%" stop-color="#00FFFF"/>
+                                    <stop offset="50%" stop-color="#FFFF00"/>
+                                    <stop offset="60%" stop-color="#FFA500"/>
+                                    <stop offset="80%" stop-color="#FFA500"/>
+                                    <stop offset="100%" stop-color="#8A2BE2"/>
+                                </linearGradient>
+                            </defs>
+                            <text x="10" y="60" font-size="48" fill="url(#textGradient)">Order Detail
+                            </text>
+                        </svg>
+                    </Box>
                     <CardContent>
                         <Box display="flex" flexDirection="column" alignItems="center">
                             {order.concertImage && hostUrl && (
@@ -83,9 +106,10 @@ const OrderDetail = () => {
                             )}
                         </Box>
                         <Box display="flex" flexDirection="column" alignItems="flex-start" marginLeft="100px"
-                             marginTop="20px">
-                            <Typography variant="body1">
-                                <strong>Concert Name:</strong> {order.concertName}
+                             marginTop="20px" sx={{color: 'white'}}>
+
+                            <Typography variant="body1" sx={{color: 'white'}}> <strong>Concert
+                                Name:</strong> {order.concertName}
                             </Typography>
                             <Typography variant="body1">
                                 <strong>Venue Name:</strong> {order.venueName}
