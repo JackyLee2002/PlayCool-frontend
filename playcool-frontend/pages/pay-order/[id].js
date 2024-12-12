@@ -122,8 +122,7 @@ const PayOrder = () => {
                             marginTop: '20px',
                             padding: '10px 20px',
                             cursor: 'pointer',
-                            borderRadius: '20px',
-                            border: '1px solid lightgray',
+                            borderRadius: '10px',
                             backgroundColor: '#3337BF',
                             color: 'white',
                             width: '200px'
@@ -133,7 +132,6 @@ const PayOrder = () => {
                     </button>
                 </Box>
             </Box>
-
         </div>
     );
 };

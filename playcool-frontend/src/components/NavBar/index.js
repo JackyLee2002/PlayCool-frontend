@@ -43,12 +43,24 @@ const NavBar = ({handleOpen}) => {
                 {user ? (
                     <div>
                         <AccountMenu/>
-                    </div>) : (
-
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px"}}>
+                    </div>
+                ) : (
+                    <Button
+                        variant="outlined"
+                        startIcon={<PersonIcon/>}
+                        onClick={handleOpen}
+                        sx={{
+                            marginRight: "25px",
+                            marginLeft: "16px",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            minWidth: "200px"
+                        }}
+                    >
                         Login / Register
-                    </Button>)}
-
+                    </Button>
+                )}
             </Toolbar>
         </AppBar>
     );
