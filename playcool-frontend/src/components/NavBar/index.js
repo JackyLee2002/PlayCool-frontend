@@ -22,7 +22,7 @@ const NavBar = ({handleOpen}) => {
             <Toolbar className={styles.toolbar} style={{padding: '0px'}}>
                 <Link href="/" passHref>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{ margin: "10px", minHeight: 20}}/>
+                           style={{ margin: "10px", minHeight: 20,minWidth: "150px"}}/>
                 </Link>
                 <div className={styles.navItems}>
                     <Link href="/song-list" passHref>
@@ -41,7 +41,7 @@ const NavBar = ({handleOpen}) => {
 
                 </div>
 
-                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{marginRight: "25px", minWidth: "150px"}}>
+                    <Button variant="outlined" startIcon={<PersonIcon/>} onClick={handleOpen} sx={{ minWidth: "150px"}}>
                         Login / Register
                     </Button>
 
