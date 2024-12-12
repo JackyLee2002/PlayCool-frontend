@@ -88,7 +88,7 @@ const SnapOrder = () => {
                         borderRadius: '10px',
                         width: '1200px',
                         height: '550px',
-                        margin: 'auto'
+                        margin: 'auto',
                     }}
                 >
                     <Typography variant="h3" sx={{marginBottom: '20px'}}>

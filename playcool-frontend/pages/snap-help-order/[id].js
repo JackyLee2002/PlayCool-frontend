@@ -1,16 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Typography} from '@mui/material';
+import {Box, Button, Snackbar, Typography} from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
 import {fetchNoAuthOrder, fetchNoAuthSnapTicket} from "@/src/components/api";
 import {useRouter} from "next/router";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
+import SockJS from "sockjs-client";
+import {Stomp} from "@stomp/stompjs";
+import MuiAlert from '@mui/material/Alert';
 
 const SnapHelpOrder = () => {
     const [order, setOrder] = useState({});
     const router = useRouter();
     const [targetDate, setTargetDate] = useState(null);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [seatNumber, setSeatNumber] = useState("");
+    const [open, setOpen] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // 'success' | 'error' | 'info' | 'warning'
+
 
     useEffect(() => {
         if (!router.query.id) {
@@ -26,6 +35,26 @@ const SnapHelpOrder = () => {
         return () => clearInterval(interval);
     }, []);
 
+    useEffect(() => {
+        const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, (frame) => {
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/orders', (message) => {
+                const updatedOrder = JSON.parse(message.body);
+                setSeatNumber(updatedOrder.seatNumber);
+                console.log(updatedOrder);
+            }, (error) => {
+                console.error('WebSocket connection error: ', error);
+            });
+        });
+
+        return () => {
+            stompClient.disconnect();
+        };
+    }, []);
+
     const fetchOrderData = async (id) => {
         if (id) {
             const response = await fetchNoAuthOrder(id);
@@ -39,14 +68,31 @@ const SnapHelpOrder = () => {
     };
 
     const snapTicket = async () => {
-        const response = await fetchNoAuthSnapTicket(router.query.id)
-        setOrder(response);
+        try {
+            const response = await fetchNoAuthSnapTicket(router.query.id);
+            setOrder(response);
+            setSnackbarMessage('Ticket snapped successfully!');
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+        } catch (error) {
+            setSnackbarMessage('Failed to snap the ticket.');
+            setSnackbarSeverity('error');
+            setSnackbarOpen(true);
+        }
     };
 
-    const success = async () => {
-        await router.push(`/pay-order/${router.query.id}`);
-    }
+    const success = () => {
+        setSnackbarMessage('Ticket already snapped.');
+        setSnackbarSeverity('info');
+        setSnackbarOpen(true);
+    };
 
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
     return (
         <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
             <Box
@@ -58,7 +104,11 @@ const SnapHelpOrder = () => {
                     border: '1px solid lightgray',
                     borderRadius: '10px',
                     width: '1200px',
-                    margin: 'auto'
+                    margin: 'auto',
+                    '@media (max-width: 600px)': {
+                        width: '100%',
+                        padding: '10px',
+                    },
                 }}
             >
                 <Typography variant="h3" sx={{marginBottom: '20px'}}>
@@ -93,7 +143,7 @@ const SnapHelpOrder = () => {
                 >
                     <Button
                         onClick={() => {
-                            order.seatNumber === null ? snapTicket() : success()
+                            (order.seatNumber === null && seatNumber === "") ? snapTicket() : success();
                         }}
                         disabled={!targetDate || currentDate < targetDate}
                         style={{
@@ -105,11 +155,20 @@ const SnapHelpOrder = () => {
                             backgroundColor: targetDate && currentDate >= targetDate ? '#3337BF' : 'gray',
                             color: 'white',
                             width: '200px',
+                            '@media (max-width: 600px)': {
+                                width: '100%',
+                                padding: '10px',
+                            },
                         }}
                     >
-                        {order.seatNumber === null ? "Snap Ticket" : "Success"}
+                        {(order.seatNumber === null && seatNumber === "") ? "Snap Ticket" : "Snap Success!"}
                     </Button>
                 </Box>
+                <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} >
+                    <MuiAlert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+                        {snackbarMessage}
+                    </MuiAlert>
+                </Snackbar>
             </Box>
         </div>
     );
