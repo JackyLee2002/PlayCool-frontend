@@ -1,23 +1,25 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Box, Button, Typography} from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
+import { Box, Button, Typography, Modal, IconButton } from '@mui/material';
 import OrderDetail from "@/src/components/OrderDetail";
-import {AuthContext} from "@/src/context/AuthContext";
-import {fetchOrder, fetchSnapTicket} from "@/src/components/api";
-import {useRouter} from "next/router";
+import { AuthContext } from "@/src/context/AuthContext";
+import { fetchOrder, fetchSnapTicket } from "@/src/components/api";
+import { useRouter } from "next/router";
 import SockJS from 'sockjs-client';
-import {Stomp} from "@stomp/stompjs";
+import { Stomp } from "@stomp/stompjs";
 import FlipClockCountdown from '@leenguyen/react-flip-clock-countdown';
 import '@leenguyen/react-flip-clock-countdown/dist/index.css';
+import QRCode from 'react-qr-code';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 const SnapOrder = () => {
-        const [url, setURL] = useState("");
-        const {token} = useContext(AuthContext);
-        const [order, setOrder] = useState({});
-        const route = useRouter();
-        const router = useRouter();
-        const [seatNumber, setSeatNumber] = useState("");
-        const [targetDate, setTargetDate] = useState(null);
-        const [currentDate, setCurrentDate] = useState(new Date());
+    const [url, setURL] = useState("");
+    const { token } = useContext(AuthContext);
+    const [order, setOrder] = useState({});
+    const router = useRouter();
+    const [seatNumber, setSeatNumber] = useState("");
+    const [targetDate, setTargetDate] = useState(null);
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if (!router.query.id) {
@@ -47,6 +49,7 @@ const SnapOrder = () => {
             }
         }
     };
+
     useEffect(() => {
         const socket = new SockJS(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ws`);
         const stompClient = Stomp.over(socket);
@@ -68,32 +71,35 @@ const SnapOrder = () => {
     }, []);
 
     const snapTicket = async () => {
-        const response = await fetchSnapTicket(router.query.id,token);
+        const response = await fetchSnapTicket(router.query.id, token);
         setOrder(response);
     };
 
     const success = async () => {
         await router.push(`/pay-order/${router.query.id}`);
-    }
+    };
 
-        return (
-            <div style={{minHeight: '77vh', display: 'flex', flexDirection: 'column'}}>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        padding: '20px',
-                        border: '1px solid lightgray',
-                        borderRadius: '10px',
-                        width: '1200px',
-                        height: '550px',
-                        margin: 'auto'
-                    }}
-                >
-                    <Typography variant="h3" sx={{marginBottom: '20px'}}>
-                        Share with you friends
-                    </Typography>
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return (
+        <div className={"bg-gradient-to-tr from-indigo-100 via-blue-250 via-20% to-blue-500"} style={{ minHeight: '77vh', display: 'flex', flexDirection: 'column' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: '20px',
+                    border: '1px solid lightgray',
+                    borderRadius: '10px',
+                    width: '1200px',
+                    height: '550px',
+                    margin: 'auto'
+                }}
+            >
+                <Typography variant="h3" sx={{ marginBottom: '20px' }}>
+                    Share with you friends
+                </Typography>
 
                 {targetDate && (
                     <FlipClockCountdown
@@ -171,6 +177,20 @@ const SnapOrder = () => {
                             >
                                 Copy
                             </button>
+                            <IconButton
+                                onClick={handleOpen}
+                                sx={{
+                                    marginLeft: '10px',
+                                    padding: '5px',
+                                    cursor: 'pointer',
+                                    borderRadius: '20px',
+                                    border: '1px solid lightgray',
+                                    backgroundColor: '#3337BF',
+                                    color: 'white',
+                                }}
+                            >
+                                <QrCodeIcon />
+                            </IconButton>
                         </Box>
                     </Box>
                 </Box>
@@ -202,6 +222,45 @@ const SnapOrder = () => {
                     </Button>
                 </Box>
             </Box>
+
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="qr-code-modal"
+                aria-describedby="qr-code-modal-description"
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backdropFilter: 'blur(px)',
+                }}
+            >
+                <Box
+                    className={"bg-gradient-to-tr from-indigo-100 via-blue-250 via-20% to-blue-500"}
+                    sx={{
+                        position: 'relative',
+                        width: 330,
+                        bgcolor: 'background.paper',
+                        border: '2px solid #000',
+                        boxShadow: 24,
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '12px',
+                        animation: 'fadeIn 5s',
+                    //     use the same gradient color as the background
+                    }}
+                >
+                    <Typography id="qr-code-modal" variant="h6" component="h2" sx={{ mb: 2 }}>
+                        Scan to help Snap up Ticket
+                    </Typography>
+                    <QRCode value={url} size={150}  />
+                    <Button onClick={handleClose} sx={{ mt: 2 }}>
+                        Close
+                    </Button>
+                </Box>
+            </Modal>
         </div>
     );
 };
