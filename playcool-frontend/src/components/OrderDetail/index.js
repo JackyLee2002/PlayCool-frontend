@@ -30,8 +30,12 @@ const OrderDetail = ({ props }) => {
         sx={{
           display: "flex",
           alignItems: "center",
+            flexDirection : 'row',
           justifyContent: "center",
           width: "100%",
+            marginTop : '30px',
+
+
         }}
       >
         <CardMedia
@@ -45,7 +49,7 @@ const OrderDetail = ({ props }) => {
           title="Concert"
           sx={{ width: 150 }}
         />
-        <CardContent sx={{ textAlign: "center" }}>
+        <CardContent sx={{ textAlign: "center",  marginLeft: "120px", padding: '0px' }}>
           <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
             {props.concertName}
           </Typography>
@@ -68,7 +72,7 @@ const OrderDetail = ({ props }) => {
         <Typography
           variant="body2"
           component="p"
-          sx={{ fontSize: "16px", paddingBottom: "3px" }}
+          sx={{ fontSize: "16px"}}
         >
           <strong>Time:</strong> {props.concertDate}
         </Typography>

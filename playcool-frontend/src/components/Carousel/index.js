@@ -12,8 +12,8 @@ export default function CarouselUI() {
       <Image
         src={Vote}
         alt="image song"
-        width={700}
-        height={400}
+        width={800}
+        height={470}
         link={"https://usstore.coldplay.com/collections/cd"}
       />
     </Link>,
@@ -25,8 +25,8 @@ export default function CarouselUI() {
       <Image
         src={AlbumsOnSale}
         alt="cd image"
-        width={700}
-        height={400}
+        width={800}
+        height={470}
         link={"https://usstore.coldplay.com/collections/cd"}
       />
     </a>,
@@ -34,8 +34,8 @@ export default function CarouselUI() {
       <Image
         src={Concert}
         alt="concert image"
-        width={700}
-        height={400}
+        width={800}
+        height={470}
         link={"https://usstore.coldplay.com/collections/cd"}
       />
     </Link>,
@@ -50,16 +50,16 @@ export default function CarouselUI() {
       }
     >
       <Carousel
-        width={"700px"}
-        height={"400px"}
+        width={"800px"}
+        height={"470px"}
         align="center"
         containerPadding="4rem"
         perspectiveOrigin="center"
         perspective={"1000px"}
         defaultOption={{
-          angleFactor: -0.8,
-          widthFactor: 1,
-          depthFactor: 1,
+          angleFactor: -0.65,
+          widthFactor: 1.6,
+          depthFactor: 1.2,
           heightFactor: 1,
           numOfSlides: 3,
         }}

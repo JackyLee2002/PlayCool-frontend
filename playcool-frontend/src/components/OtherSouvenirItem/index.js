@@ -1,32 +1,28 @@
 import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { useGLTF, OrbitControls } from '@react-three/drei';
-import styles from './SouvenirItem.module.css';
+import { IconButton } from '@mui/material';
+import styles from './OtherSouvenirItem.module.css';
 
-const Model = ({ gltfPath }) => {
-    const { scene } = useGLTF(gltfPath);
-    return <primitive object={scene} />;
-};
+const OtherSouvenirItem = ({ imagePath }) => {
+    const handleBuyClick = () => {
+        window.location.href = 'https://usstore.coldplay.com/products/coldplay-heart-logo-hat';
+    };
 
-const SouvenirItem = ({ gltfPath }) => {
     return (
-        <div className={styles.SouvenirItem}>
-            <div className={styles.SouvenirCanvas} style={{ width: '600px', height: '400px' }}>
-                <Canvas camera={{ position: [0, 0, 1.4] }}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[10, 10, 5]} intensity={1} />
-                    <Suspense fallback={null}>
-                        <Model gltfPath={gltfPath} />
-                    </Suspense>
-                    <OrbitControls enablePan={false} enableZoom={true} />
-                </Canvas>
+        <div className={styles.OtherSouvenirItem}>
+            <img
+                src="/drag-right-white.gif"
+                alt="Drag Right"
+                className={styles.dragIcon}
+            />
+            <div className={styles.OtherSouvenirCanvas} style={{ width: '600px', height: '300px' }} onClick={handleBuyClick}>
+                <img src={imagePath} alt="Souvenir" style={{ maxWidth: '80%', height: '80%' }} />
             </div>
-            <div className={styles.SouvenirDescription}>
-                <h3>Check out more of Coldplay Souvenirs!</h3>
-                <p>A perfect souvenir for fans to be worn by Coldplay during their concerts.</p>
+            <div className={styles.OtherSouvenirDescription}>
+                <h3 className={styles.OtherSouvenirNav} onClick={handleBuyClick}>Click to check it out !</h3>
+                <p>Perfect souvenir for fans to be worn by Coldplay during their concerts.</p>
             </div>
         </div>
     );
 };
 
-export default SouvenirItem;
+export default OtherSouvenirItem;
