@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './ConfirmOrder.module.css';
 import {Box, Button, Modal} from '@mui/material';
 import Divider from "@mui/material/Divider";
@@ -12,6 +12,13 @@ const ConfirmOrder = ({props}) => {
     const {createOrder} = useContext(AuthContext);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
     const {user} = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (token) {
+            setIsLoginOpen(false);
+        }
+    }, [token]);
 
     const getVenueId = (concertId) => {
         fetchConcert(concertId).then((data) => {

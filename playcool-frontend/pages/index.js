@@ -4,24 +4,25 @@ import { Box, Modal } from "@mui/material";
 import NavBar from "../src/components/NavBar";
 import Banner from "../src/components/Banner";
 import VideoMediaGroup from '../src/components/VideoMediaGroup';
+import SouvenirItem from "../src/components/SouvenirItem";
 import SouvenirSection from "../src/components/SouvenirSection";
+import OrderDetail from "@/src/components/OrderDetail";
 import CarouselUI from "@/src/components/Carousel";
 import SongRating from "@/src/components/SongRating";
 
 export default function MainPage() {
-    const [open, setOpen] = useState(false);
-    const { loginOpen, openLogin } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
+  const { loginOpen, openLogin } = useContext(AuthContext);
 
-    const handleOpen = () => {
-        setOpen(true);
-        openLogin();
-    };
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+    openLogin();
+  };
+  const handleClose = () => setOpen(false);
 
     return (
         <div>
             <CarouselUI />
-            <Banner />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', height: '100vh', padding: 2 }}>
                 <VideoMediaGroup />
                 <SongRating />

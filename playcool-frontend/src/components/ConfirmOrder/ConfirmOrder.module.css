@@ -2,6 +2,8 @@
     margin: 20px 500px;
     padding: 40px 50px;
     border-radius: 5px;
+    background-color: transparent;
+    color:white;
 }
 
 .orderSummaryTitle {

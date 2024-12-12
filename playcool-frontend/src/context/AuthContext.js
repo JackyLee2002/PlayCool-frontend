@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Alert, Snackbar } from "@mui/material";
+import { jwtDecode } from "jwt-decode";
+
 const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
@@ -17,10 +19,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
-      setToken(savedToken);
-      fetchUserInfo(savedToken);
-      setLoading(false);
+      const decodedToken = jwtDecode(savedToken);
+      const currentTime = Date.now() / 1000;
+
+      if (decodedToken.exp < currentTime) {
+        localStorage.removeItem("token");
+      } else {
+        setToken(savedToken);
+        fetchUserInfo(savedToken);
+      }
     }
+    setLoading(false);
   }, []);
 
 
@@ -29,12 +38,12 @@ const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
       );
       if (!response.ok) {
         setToken(null);
@@ -59,15 +68,15 @@ const AuthProvider = ({ children }) => {
   const createOrder = async (orderDetails) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/order`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(orderDetails),
-        }
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/order`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(orderDetails),
+          }
       );
 
       if (!response.ok) {
@@ -86,14 +95,14 @@ const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          }
       );
       setLoginOpen(false);
       if (!response.ok) {
@@ -114,14 +123,14 @@ const AuthProvider = ({ children }) => {
   const register = async (username, email, password) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password, email }),
-        }
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/register`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password, email }),
+          }
       );
       setLoginOpen(false);
       if (!response.ok) {
@@ -147,27 +156,27 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        token,
-        error,
-        login,
-        register,
-        logout,
-        loginOpen,
-        openLogin,
-        createOrder,
-        loading,
-      }}
-    >
-      {children}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {error}
-        </Alert>
-      </Snackbar>
-    </AuthContext.Provider>
+      <AuthContext.Provider
+          value={{
+            user,
+            token,
+            error,
+            login,
+            register,
+            logout,
+            loginOpen,
+            openLogin,
+            createOrder,
+            loading,
+          }}
+      >
+        {children}
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      </AuthContext.Provider>
   );
 };
 
