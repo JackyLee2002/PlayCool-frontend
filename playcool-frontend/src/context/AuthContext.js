@@ -14,6 +14,8 @@ const AuthProvider = ({ children }) => {
   const [loginOpen, setLoginOpen] = useState(false);
   const router = useRouter();
 
+
+
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
@@ -29,6 +31,8 @@ const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+
+
 
   const fetchUserInfo = async (token) => {
     try {
