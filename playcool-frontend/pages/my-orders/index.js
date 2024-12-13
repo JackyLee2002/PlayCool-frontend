@@ -11,6 +11,7 @@ import {
     Pagination,
     Box,
 } from "@mui/material";
+import AlarmIcon from '@mui/icons-material/Alarm';
 
 export default function MyOrders() {
     const {user, token, loading} = useContext(AuthContext);
@@ -77,9 +78,9 @@ export default function MyOrders() {
                                 </Typography>
                                 <Typography
                                     variant="body2"
-                                    color={order.finished ? "error.main" : "primary.main"}
+                                    color={new Date() > new Date(order.concertDate) ? "error.main" : "primary.main"}
                                 >
-                                    Status: {order.finished ? "Finished" : "Upcoming"}
+                                    Status: {new Date() > new Date(order.concertDate) ? "Finished" : "Upcoming"}
                                 </Typography>
                                 <Typography
                                     variant="body2"
@@ -98,24 +99,52 @@ export default function MyOrders() {
                                     Paid Time: {new Date(order.updatedAt).toLocaleString()}
                                 </Typography> }
                             </CardContent>
-                            <Button
-                                variant="outlined"
-                                sx={{
-                                    marginLeft: "auto",
-                                    alignSelf: "flex-end",
-                                    backgroundColor: "#3337BF",
-                                    color: "deepblue",
-                                    fontSize: "1rem",
-                                    padding: "10px 20px",
-                                    borderRadius: "12px",
-                                }}
-                            onClick={() => {order.paymentStatus === "COMPLETED" ? router.push(`/order-detail/${order.orderId}`) : router.push(`/pay-order/${order.orderId}`)}}
+                            {
+                                !(new Date() > new Date(order.concertDate) && order.seatNumber === null) ?
+                                <Button
+                                    variant="outlined"
+                                    sx={{
+                                        marginLeft: "auto",
+                                        alignSelf: "flex-end",
+                                        backgroundColor: "#3337BF",
+                                        color: "deepblue",
+                                        fontSize: "1rem",
+                                        padding: "10px 20px",
+                                        borderRadius: "12px",
+                                    }}
+                                    disabled={new Date() > new Date(order.concertDate) && order.seatNumber === null}
+                                    hidden={new Date() > new Date(order.concertDate) && order.seatNumber === null}
+                                    onClick={() => {
+                                        if(order.paymentStatus === "COMPLETED"){
+                                            router.push(`/order-detail/${order.orderId}`)
+                                        }else {
+                                            if(order.paymentStatus === "NONPAYMENT" && new Date() > new Date(order.concertDate).setDate(new Date(order.concertDate).getDate() - 30)){
+                                                router.push(`/pay-order/${order.orderId}`)
+                                            }else{
+                                                router.push(`/snap-order/${order.orderId}`)
+                                            }
+                                        }
 
-                            >
-                                <Typography sx={{color: "white"}}>
-                                    {order.paymentStatus === "COMPLETED" ? "View Ticket" : "Pay"} &rarr;
-                                </Typography>
-                            </Button>
+                                    }}
+
+                                >
+                                    <Typography sx={{color: "white"}}>
+                                        {
+                                            order.paymentStatus === "COMPLETED" ? <>View Ticket &rarr;</>  : order.paymentStatus === "NONPAYMENT" ? <>Pay &rarr;</> :  new Date() > new Date(order.concertDate).setDate(new Date(order.concertDate).getDate() - 30) ? <>Snap <AlarmIcon /></> :  <>Snap &rarr;</>
+                                        }
+
+                                    </Typography>
+                                </Button> :
+                                    <Typography  sx={{
+                                        marginLeft: "auto",
+                                        alignSelf: "flex-end",
+                                        color: "red",
+                                        fontSize: "1rem",
+                                    }}>
+                                        No Ticket
+                                    </Typography>
+                            }
+
                         </CardContent>
                     </Card>
                 ))}

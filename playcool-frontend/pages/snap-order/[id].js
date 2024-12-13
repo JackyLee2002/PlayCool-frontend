@@ -102,6 +102,18 @@ const SnapOrder = () => {
                     <Typography variant="h4" sx={{marginBottom: '20px', color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'}}>
                         SHARE WITH YOUR FREINDS
                     </Typography>
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            marginBottom: '20px',
+                            color: new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'orange' : 'white',
+                            fontWeight: 'bold',
+                            fontSize: '28px',
+                            textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'
+                        }}
+                    >
+                        {new Date(targetDate) - new Date() <= 24 * 60 * 60 * 1000 ? 'START SNAPPING!' : 'Ticket Snappable in:'}
+                    </Typography>
 
                 {targetDate && (
                     <FlipClockCountdown

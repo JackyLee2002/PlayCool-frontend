@@ -212,7 +212,7 @@ const ConcertDetail = () => {
                             area.availableSeatsCount < 100 ? "red" : "green",
                         }}
                       >
-                          <ConfirmationNumberIcon sx={{ marginRight: 1 }} />{area.availableSeatsCount}
+                          Seat{area.availableSeatsCount  > 1 &&  "s"}: {area.availableSeatsCount}
                       </Typography>
                     </CardContent>
                   </Card>
