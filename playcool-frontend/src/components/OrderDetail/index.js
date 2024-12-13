@@ -71,6 +71,7 @@ const OrderDetail = ({ props }) => {
                         alignItems: { xs: "center", md: "flex-start" },
                         width: "100%",
                         p: 3,
+                        mb: "20px",
                         ml: { xs: "0", md: "20px" },
                     }}
                 >
