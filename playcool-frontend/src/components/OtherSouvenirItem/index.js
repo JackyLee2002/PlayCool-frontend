@@ -2,9 +2,9 @@ import React, { Suspense } from 'react';
 import { IconButton } from '@mui/material';
 import styles from './OtherSouvenirItem.module.css';
 
-const OtherSouvenirItem = ({ imagePath }) => {
+const OtherSouvenirItem = ({ imagePath,site }) => {
     const handleBuyClick = () => {
-        window.location.href = 'https://usstore.coldplay.com/products/coldplay-heart-logo-hat';
+        window.location.href = site;
     };
 
     return (
@@ -14,7 +14,7 @@ const OtherSouvenirItem = ({ imagePath }) => {
                 alt="Drag Right"
                 className={styles.dragIcon}
             />
-            <div className={styles.OtherSouvenirCanvas} style={{ width: '600px', height: '300px' }} onClick={handleBuyClick}>
+            <div className={styles.OtherSouvenirCanvas} style={{ width: '600px', height: '300px' }} >
                 <img src={imagePath} alt="Souvenir" style={{ maxWidth: '80%', height: '80%' }} />
             </div>
             <div className={styles.OtherSouvenirDescription}>

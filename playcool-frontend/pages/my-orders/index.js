@@ -36,7 +36,7 @@ export default function MyOrders() {
 
     return (
         <Box sx={{minHeight: "80vh",maxWidth: "60%", marginLeft: "20%", marginTop:1}}>
-            <Typography variant="h5" sx={{textAlign: "center"}}>
+            <Typography variant="h5" sx={{marginTop: "30px", textAlign: "center", color: 'white', fontWeight : 'bold',  textShadow: '0 10px 10px rgba(0, 0, 0, 0.5)'}}>
                 My Orders
             </Typography>
             {orders &&
@@ -113,7 +113,7 @@ export default function MyOrders() {
 
                             >
                                 <Typography sx={{color: "white"}}>
-                                    {order.paymentStatus === "COMPLETED" ? "View Details" : "Pay"} &rarr;
+                                    {order.paymentStatus === "COMPLETED" ? "View Ticket" : "Pay"} &rarr;
                                 </Typography>
                             </Button>
                         </CardContent>

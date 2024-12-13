@@ -17,9 +17,11 @@
 .navItems {
     display: flex;
     gap: 16px;
-    margin-left: 75%;
+    margin-left: 95%;
     min-width: 200px;
     color: white;
+    /*flex-grow: 1;*/
+    /*flex-shrink: 0;*/
 
 }
 
@@ -33,4 +35,5 @@
     color: black;
     text-transform: none;
     border: 1px solid black;
+    min-width: 200px;
 }

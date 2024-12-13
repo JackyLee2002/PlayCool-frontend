@@ -2,106 +2,112 @@ import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const OrderDetail = ({ props }) => {
-  const [hostUrl, setHostUrl] = useState("");
-  useEffect(() => {
-    if (window) {
-      setHostUrl(window.location.protocol + "//" + window.location.host);
+    const [hostUrl, setHostUrl] = useState("");
+    useEffect(() => {
+        if (window) {
+            setHostUrl(window.location.protocol + "//" + window.location.host);
+        }
+    }, []);
+
+    let imageUrl = props?.concertImage;
+    if (imageUrl && !imageUrl.includes("http")) {
+        imageUrl = `${hostUrl}/${imageUrl}`;
     }
-  }, []);
 
-  let imageUrl = props?.concertImage;
-  if (imageUrl && !imageUrl.includes("http")) {
-    imageUrl = `${hostUrl}/${imageUrl}`;
-  }
-
-  return (
-    <Card
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "auto",
-        boxShadow: "0",
-          backgroundColor: "transparent",
-          color: "white",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-            flexDirection : 'row',
-          justifyContent: "center",
-          width: "100%",
-            marginTop : '30px',
-
-
-        }}
-      >
-        <CardMedia
-          component="img"
-          alt="Concert"
-          height="140"
-          image={
-            imageUrl ||
-            "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
-          }
-          title="Concert"
-          sx={{ width: 150 }}
-        />
-        <CardContent sx={{ textAlign: "center",  marginLeft: "120px", padding: '0px' }}>
-          <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
-            {props.concertName}
-          </Typography>
-          <Typography variant="body2" component="p">
-            {props.venueName}
-          </Typography>
-        </CardContent>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          width: "100%",
-
-          p: 3,
-          ml: "1250px",
-        }}
-      >
-        <Typography
-          variant="body2"
-          component="p"
-          sx={{ fontSize: "16px"}}
+    return (
+        <Card
+            sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                alignItems: "center",
+                width: { xs: "100%", md: "700px" },
+                boxShadow: "0",
+                backgroundColor: "transparent",
+                color: "white",
+                height: { xs: "auto", md: "200px" },
+            }}
         >
-          <strong>Time:</strong> {props.concertDate}
-        </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          sx={{ fontSize: "16px", paddingBottom: "3px" }}
-        >
-          <strong>Area:</strong> {props.areaName}
-        </Typography>
-        {props.seatNumber ? (
-          <Typography
-            variant="body2"
-            component="p"
-            sx={{ fontSize: "16px", paddingBottom: "3px" }}
-          >
-            <strong>SeatNumber:</strong> {props.seatNumber}
-          </Typography>
-        ) : null}
-        <Typography
-          variant="body2"
-          component="p"
-          sx={{ fontSize: "16px", paddingBottom: "3px" }}
-        >
-          <strong>Price:</strong> ${props.price}
-        </Typography>
-      </Box>
-    </Card>
-  );
+            <CardMedia
+                component="img"
+                alt="Concert"
+                height="140"
+                image={
+                    imageUrl ||
+                    "https://www.coldplay.com/wp/wp-content/uploads/2024/10/FM.webp"
+                }
+                title="Concert"
+                sx={{ width: { xs: "100%", md: 250 } }}
+            />
+            <Box
+                sx={{
+                    display: "flex",
+                    marginLeft: { xs: "0", md: "90px" },
+                    flexDirection: "column",
+                    width: "100%",
+                    marginTop: { xs: "10px", md: "30px" },
+                }}
+            >
+                <CardContent
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: { xs: "center", md: "flex-start" },
+                        padding: "0px",
+                        marginLeft: { xs: "0", md: "44px" },
+                    }}
+                >
+                    <Typography variant="h4" component="h2" sx={{ fontWeight: "bold" }}>
+                        {props.concertName}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {props.venueName}
+                    </Typography>
+                </CardContent>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: { xs: "center", md: "flex-start" },
+                        width: "100%",
+                        p: 3,
+                        ml: { xs: "0", md: "20px" },
+                    }}
+                >
+                    <Typography
+                        variant="body2"
+                        component="p"
+                        sx={{ fontSize: "16px" }}
+                    >
+                        <strong>Time:</strong> {props.concertDate}
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        component="p"
+                        sx={{ fontSize: "16px", paddingBottom: "3px" }}
+                    >
+                        <strong>Area:</strong> {props.areaName}
+                    </Typography>
+                    {props.seatNumber ? (
+                        <Typography
+                            variant="body2"
+                            component="p"
+                            sx={{ fontSize: "16px", paddingBottom: "3px" }}
+                        >
+                            <strong>SeatNumber:</strong> {props.seatNumber}
+                        </Typography>
+                    ) : null}
+                    <Typography
+                        variant="body2"
+                        component="p"
+                        sx={{ fontSize: "16px", paddingBottom: "3px" }}
+                    >
+                        <strong>Price:</strong> ${props.price}
+                    </Typography>
+                </Box>
+            </Box>
+        </Card>
+    );
 };
 
 export default OrderDetail;

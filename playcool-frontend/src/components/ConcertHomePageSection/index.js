@@ -42,12 +42,12 @@ const ConcertHomePageSection = () => {
                     }}></div>
                 ))}
             </div>
-            <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={styles.sectionTitle} variant="h4" component="h1" gutterBottom textAlign="center">
+            <Typography sx={{mr: isConcertUpcoming ? "5%": "0%", fontSize: "2rem", textShadow: "4px 6px 4px #000"}} className={"sectionTitle"} variant="h4" component="h1" gutterBottom textAlign="center">
                 {isConcertUpcoming ? "UPCOMING CONCERT ON SALE" : "NO UPCOMING CONCERTS"}
             </Typography>
             {isConcertUpcoming && (
                 <Card
-                    className={styles.ConcertHomePageCard}
+                    className={"ConcertHomePageCard"}
                     key={latestConcert.concertId}
                     onClick={() => handleConcertClick(latestConcert)}
                     sx={{

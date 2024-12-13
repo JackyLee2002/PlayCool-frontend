@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { TextField, Button, Typography, Container, Box } from "@mui/material";
+import  styles from "../ConcertHomePageSection/ConcertHomePageSection.module.css";
 
 const Login = () => {
     const { login, register, error } = useContext(AuthContext);
@@ -33,17 +34,19 @@ const Login = () => {
     return (
         <Container maxWidth="sm">
             <Box
+                className={styles.ConcertHomePageSection}
                 sx={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
                     mt: 4,
                     mb: 4,
-                    bgcolor: "background.paper",
                     p: 4,
                     borderRadius: 3,
                     boxShadow: 3,
-                    backgroundImage: "linear-gradient(to right, #ff7e5f, #feb47b)",
+                    position: "relative",
+                    overflow: "hidden",
+                    backgroundColor: "rgb(115,151,232)",
                 }}
             >
                 <Typography variant="h5" gutterBottom>
@@ -101,10 +104,19 @@ const Login = () => {
                         {isRegister ? "Register" : "Login"}
                     </Button>
                 </form>
-                <Button color="secondary" sx={{mt: 2, textTransform: 'none'}}
-                        onClick={() => setIsRegister(!isRegister)}>
-                    {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
-                </Button>
+<Button color="secondary" sx={{mt: 2, textTransform: 'none', color: 'white'}}
+        onClick={() => setIsRegister(!isRegister)}>
+    {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
+</Button>
+                <div className={styles.stars} style={{zIndex: "0", pointerEvents: "none"}}>
+                    {[...Array(900)].map((_, i) => (
+                        <div key={i} className={styles.star} style={{
+                            top: `${Math.random() * 200}%`,
+                            left: `${Math.random() * 200}%`,
+                            animationDuration: `${Math.random() * 2 + 1}s`
+                        }}></div>
+                    ))}
+                </div>
             </Box>
         </Container>
     );
