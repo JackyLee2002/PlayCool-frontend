@@ -26,7 +26,7 @@ const NavBar = ({ handleOpen }) => {
             <Toolbar className={styles.toolbar} style={{ padding: '0px' }}>
                 {!isMobile && <Link href="/" passHref>
                     <Image src={playCoolLogo} alt="PlayCool Logo"
-                           style={{margin: "10px", minHeight: 20, minWidth: isMobile ? "100px" : "150px"}}/>
+                           style={{margin: "10px", minHeight: 20, maxHeight: 30, maxWidth: '100px', minWidth: isMobile ? "100px" : "150px"}}/>
 
                 </Link>}
                 <div className={styles.navItems} style={{ marginLeft: isMobile ? 'auto' : '60%' }}>
