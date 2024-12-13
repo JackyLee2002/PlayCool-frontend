@@ -44,12 +44,10 @@ const ConcertDetail = () => {
   }
 
   return (
-    <div style={{ width: "100%" }}>
+    <div>
       <StepperBar index={1}></StepperBar>
       <div>
         <Card
-
-
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -80,24 +78,24 @@ const ConcertDetail = () => {
               sx={{ width: 140 }}
             />
             <CardContent sx={{ textAlign: "center" }}>
-                <Typography
-                    variant="h3"
-                    component="h2"
-                    sx={{ fontWeight: "bold", color: "white" }}
-                >
+              <Typography
+                variant="h3"
+                component="h2"
+                sx={{ fontWeight: "bold", color: "white" }}
+              >
                 {concert.title}
               </Typography>
-                <Typography variant="body" color="white" component="p">
+              <Typography variant="body" color="white" component="p">
                 {concert.venue.city +
                   ", " +
                   concert.venue.location +
                   ", " +
                   concert.venue.name}
               </Typography>
-                <Typography variant="body" color="white" component="p">
+              <Typography variant="body" color="white" component="p">
                 Time: {concert.dateTime}
               </Typography>
-                <Typography variant="body" color="white" component="p">
+              <Typography variant="body" color="white" component="p">
                 {concert.description}
               </Typography>
             </CardContent>
@@ -121,7 +119,7 @@ const ConcertDetail = () => {
               }}
             >
               <Button
-                sx={{ marginRight: 10, fontSize: "3rem" ,color:'white'}}
+                sx={{ marginRight: 10, fontSize: "3rem", color: "white" }}
                 variant="text"
                 onClick={() => router.push(`/concert`)}
               >
@@ -141,7 +139,7 @@ const ConcertDetail = () => {
                 }}
               />
               <Button
-                sx={{ marginLeft: 10, fontSize: "3rem" ,color:'white' }}
+                sx={{ marginLeft: 10, fontSize: "3rem", color: "white" }}
                 variant="text"
                 onClick={() => {
                   if (selectedAreaId === null) {
@@ -212,7 +210,8 @@ const ConcertDetail = () => {
                             area.availableSeatsCount < 100 ? "red" : "green",
                         }}
                       >
-                          Seat{area.availableSeatsCount  > 1 &&  "s"}: {area.availableSeatsCount}
+                        Seat{area.availableSeatsCount > 1 && "s"}:{" "}
+                        {area.availableSeatsCount}
                       </Typography>
                     </CardContent>
                   </Card>

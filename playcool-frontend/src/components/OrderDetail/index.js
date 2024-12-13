@@ -21,7 +21,7 @@ const OrderDetail = ({ props }) => {
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
-          width: { xs: "100%", md: "fit-content" },
+          width: { xs: "90vw", md: "fit-content" },
           boxShadow: "0",
           backgroundColor: "transparent",
           color: "white",
@@ -61,7 +61,7 @@ const OrderDetail = ({ props }) => {
               noWrap
               variant="h4"
               component="h2"
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold", fontSize: { xs: "18px", md: "30px" } }}
             >
               {props.concertName}
             </Typography>
