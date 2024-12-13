@@ -50,16 +50,22 @@ const SongRating = () => {
                     gutterBottom
                     align="center"
                     sx={{
-                        color: '#00008a',
+                        color: 'white',
                         fontSize: '50px',
                         fontWeight: 'bold',
-                        marginBottom: '30px'
+                        marginBottom: '30px',
+                        textShadow: '4px 6px 4px #000',
                     }}
                 >
                     Top 5 <span style={{color: 'red'}}>Hot</span> Songs
                 </Typography>
                 {songs.map((song, index) => (
-                    <Box key={song.id} sx={{marginBottom: 5, position: 'relative', minHeight: 80}}>
+                    <Box key={song.id} sx={{
+                        marginBottom: 5,
+                        position: 'relative',
+                        minHeight: 80,
+                        boxShadow: `0 4px ${10 - index * 2}px rgba(0, 0, 0, ${1.5 - index * 0.3})`
+                    }}>
                         <LinearProgress
                             variant="determinate"
                             color="warning"
