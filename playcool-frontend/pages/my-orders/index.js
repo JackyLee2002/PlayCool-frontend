@@ -11,6 +11,7 @@ import {
     Pagination,
     Box,
 } from "@mui/material";
+import AlarmIcon from '@mui/icons-material/Alarm';
 
 export default function MyOrders() {
     const {user, token, loading} = useContext(AuthContext);
@@ -109,11 +110,26 @@ export default function MyOrders() {
                                     padding: "10px 20px",
                                     borderRadius: "12px",
                                 }}
-                            onClick={() => {order.paymentStatus === "COMPLETED" ? router.push(`/order-detail/${order.orderId}`) : router.push(`/pay-order/${order.orderId}`)}}
+                            onClick={() => {
+                                // order.paymentStatus === "COMPLETED" ? router.push(`/order-detail/${order.orderId}`) : router.push(`/pay-order/${order.orderId}`)
+                                if(order.paymentStatus === "COMPLETED"){
+                                    router.push(`/order-detail/${order.orderId}`)
+                                }else {
+                                    if(order.paymentStatus === "NONPAYMENT" && new Date() > new Date(order.concertDate).setDate(new Date(order.concertDate).getDate() - 30)){
+                                        router.push(`/pay-order/${order.orderId}`)
+                                    }else{
+                                        router.push(`/snap-order/${order.orderId}`)
+                                    }
+                                }
+
+                            }}
 
                             >
                                 <Typography sx={{color: "white"}}>
-                                    {order.paymentStatus === "COMPLETED" ? "View Ticket" : "Pay"} &rarr;
+                                    {
+                                        order.paymentStatus === "COMPLETED" ? <>View Ticket &rarr;</>  : order.paymentStatus === "NONPAYMENT" ? <>Pay &rarr;</> :  new Date() > new Date(order.concertDate).setDate(new Date(order.concertDate).getDate() - 30) ? <>Snap <AlarmIcon /></> :  <>Snap &rarr;</>
+                                    }
+
                                 </Typography>
                             </Button>
                         </CardContent>
