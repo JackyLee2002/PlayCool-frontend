@@ -59,7 +59,7 @@ const NavBar = ({ handleOpen }) => {
                         onClick={handleOpen}
                         sx={{
                             marginRight: "25px",
-                            marginLeft: "16px",
+                       
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",

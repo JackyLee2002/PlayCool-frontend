@@ -17,11 +17,11 @@
 .navItems {
     display: flex;
     gap: 16px;
-    margin-left: 75%;
+    margin-left: 95%;
     min-width: 200px;
     color: white;
-    flex-grow: 1;
-    flex-shrink: 0;
+    /*flex-grow: 1;*/
+    /*flex-shrink: 0;*/
 
 }
 
